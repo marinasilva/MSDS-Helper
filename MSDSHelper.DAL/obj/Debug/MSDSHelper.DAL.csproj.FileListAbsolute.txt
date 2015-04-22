@@ -1,0 +1,12 @@
+C:\Users\marina.motta\Documents\Visual Studio 2013\Projects\MSDSHelper\MSDSHelper.DAL\obj\Debug\MSDSHelper.DAL.csprojResolveAssemblyReference.cache
+C:\Users\marina.motta\Documents\Visual Studio 2013\Projects\MSDSHelper\MSDSHelper.DAL\bin\Debug\MSDSHelper.DAL.dll.config
+C:\Users\marina.motta\Documents\Visual Studio 2013\Projects\MSDSHelper\MSDSHelper.DAL\bin\Debug\MSDSHelper.DAL.dll
+C:\Users\marina.motta\Documents\Visual Studio 2013\Projects\MSDSHelper\MSDSHelper.DAL\bin\Debug\MSDSHelper.DAL.pdb
+C:\Users\marina.motta\Documents\Visual Studio 2013\Projects\MSDSHelper\MSDSHelper.DAL\bin\Debug\EntityFramework.dll
+C:\Users\marina.motta\Documents\Visual Studio 2013\Projects\MSDSHelper\MSDSHelper.DAL\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\marina.motta\Documents\Visual Studio 2013\Projects\MSDSHelper\MSDSHelper.DAL\bin\Debug\MSDSHelper.Model.dll
+C:\Users\marina.motta\Documents\Visual Studio 2013\Projects\MSDSHelper\MSDSHelper.DAL\bin\Debug\MSDSHelper.Model.pdb
+C:\Users\marina.motta\Documents\Visual Studio 2013\Projects\MSDSHelper\MSDSHelper.DAL\bin\Debug\EntityFramework.xml
+C:\Users\marina.motta\Documents\Visual Studio 2013\Projects\MSDSHelper\MSDSHelper.DAL\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\marina.motta\Documents\Visual Studio 2013\Projects\MSDSHelper\MSDSHelper.DAL\obj\Debug\MSDSHelper.DAL.dll
+C:\Users\marina.motta\Documents\Visual Studio 2013\Projects\MSDSHelper\MSDSHelper.DAL\obj\Debug\MSDSHelper.DAL.pdb

@@ -1,0 +1,5 @@
+C:\Users\marina.motta\Documents\Visual Studio 2013\Projects\MSDSHelper\MSDSHelper.Model\bin\Debug\MSDSHelper.Model.dll
+C:\Users\marina.motta\Documents\Visual Studio 2013\Projects\MSDSHelper\MSDSHelper.Model\bin\Debug\MSDSHelper.Model.pdb
+C:\Users\marina.motta\Documents\Visual Studio 2013\Projects\MSDSHelper\MSDSHelper.Model\obj\Debug\MSDSHelper.Model.csprojResolveAssemblyReference.cache
+C:\Users\marina.motta\Documents\Visual Studio 2013\Projects\MSDSHelper\MSDSHelper.Model\obj\Debug\MSDSHelper.Model.dll
+C:\Users\marina.motta\Documents\Visual Studio 2013\Projects\MSDSHelper\MSDSHelper.Model\obj\Debug\MSDSHelper.Model.pdb
