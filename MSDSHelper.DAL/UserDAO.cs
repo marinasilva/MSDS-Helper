@@ -29,7 +29,7 @@ namespace MSDSHelper.DAL
             command.ExecuteScalar();
         }
 
-        public void Update(int id)
+        public void Update(User obj)
         {
             throw new NotImplementedException();
         }

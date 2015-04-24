@@ -9,9 +9,8 @@ namespace MSDSHelper.BLL
 {
     public class ElementBLL : IBLL<Element>
     {
-        ElementDAO _elementDAO = new ElementDAO();
-        private Element _element = null;
-
+        private ElementDAO _elementDAO = new ElementDAO();
+       
         public void Adicionar(Element element)
         {
          _elementDAO.Adicionar(element);   
@@ -22,11 +21,11 @@ namespace MSDSHelper.BLL
             throw new NotImplementedException();
         }
 
-        public void Update(int id)
+        public void Update(Element element)
         {
-            throw new NotImplementedException();
+            _elementDAO.Update(element);     
         }
-
+       
         public Element SelectByID(int id)
         {
             return _elementDAO.SelectByID(id);
@@ -40,6 +39,16 @@ namespace MSDSHelper.BLL
         public List<Element> SelectByFormula(string formula)
         {
             return _elementDAO.SelectByFormula(formula);
+        }
+
+        public Element SelectLast()
+        {
+            return _elementDAO.SelectLast();
+        }
+
+        public List<Element> SelectByFabricante(string fabricante)
+        {
+            return _elementDAO.SelectByFabricante(fabricante);
         }
     }
 }

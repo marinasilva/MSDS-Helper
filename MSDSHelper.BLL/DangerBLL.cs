@@ -2,13 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using MSDSHelper.DAL;
 using MSDSHelper.Model;
 
 namespace MSDSHelper.BLL
 {
     public class DangerBLL : IBLL<Danger>
     {
-        public void Adicionar()
+        private DangerDAO _danger = new DangerDAO();
+
+        public void Adicionar(Danger obj)
         {
             throw new NotImplementedException();
         }
@@ -18,14 +21,19 @@ namespace MSDSHelper.BLL
             throw new NotImplementedException();
         }
 
-        public void Update(int id)
+        public void Update(Danger danger)
         {
-            throw new NotImplementedException();
+           _danger.Update(danger);
         }
 
         public Danger SelectByID(int id)
         {
             throw new NotImplementedException();
+        }
+
+        public Danger SelectLast()
+        {
+            return _danger.SelectLast();
         }
     }
 }

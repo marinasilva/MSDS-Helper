@@ -13,12 +13,16 @@ namespace MSDSHelper.DAL
         private const string _adicionar = @"INSERT  INTO Element ([NomeProduto],[FormulaMolecular],[PesoMolecular],[Unidade],[Fabricante],[Descricao])
                                                     VALUES
                                                                  (@nomeProduto,@formulaMolecular,@pesoMolecular,@unidade,@fabricante,@descricao)";
-        private const string _delete = @"DELETE FROM ELEMENT WHERE ID = @idElement";
-        private const string _update = @"";
-        private const string _selectByID = @"SELECT * FROM ELEMENT WHERE ID = @idElement";
+        private const string _delete = @"DELETE FROM ELEMENT WHERE IDELEMENT = @idElement";
+        private const string _update = @"UPDATE Element SET [NomeProduto] = @nomeProduto, [FormulaMolecular] = @formulaMolecular, [PesoMolecular] = @pesoMolecular,
+                                                            [Unidade] = @unidade, [Fabricante] = @fabricante, [Descricao] = @descricao
+                                         WHERE idElement = @idElement";
+        private const string _selectByID = @"SELECT * FROM ELEMENT WHERE IDELEMENT = @idElement";
         private const string _selectByName = @"SELECT * FROM ELEMENT WHERE NOMEPRODUTO LIKE '%@nomeProduto%'";
         private const string _selectByFormula = @"SELECT * FROM ELEMENT WHERE FORMULAMOLECULAR LIKE '%@formulaMolecular%'";
-
+        private const string _selectLast = @"SELECT TOP 1 FROM ELEMENT ORDER BY IDELEMENT";
+        private const string _selectByFabricante = @"SELECT * FROM ELEMENT WHERE FABRICANTE LIKE '%@fabricante%'";
+        
 
         public void Adicionar(Element element)
         {
@@ -41,9 +45,11 @@ namespace MSDSHelper.DAL
             command.ExecuteScalar();
         }
 
-        public void Update(int id)
+        public void Update(Element obj)
         {
-            throw new NotImplementedException();
+            SqlConnection connection = ContextFactory.Instancia();
+            SqlCommand command = new SqlCommand(_update, connection);
+
         }
 
         public Element SelectByID(int id)
@@ -139,6 +145,77 @@ namespace MSDSHelper.DAL
                         : Convert.ToInt32(reader["PesoMolecular"]);
                     _element.Unidade = reader["Unidade"] == DBNull.Value ? string.Empty : reader["Unidade"].ToString();
                     _element.Danger.Id = reader["idDanger"] == DBNull.Value ? 0 : Convert.ToInt32(reader["idDanger"]);
+                    elementList.Add(_element);
+                }
+            }
+            return elementList;
+        }
+
+        public Element SelectLast()
+        {
+            SqlConnection connection = ContextFactory.Instancia();
+            SqlCommand command = new SqlCommand(_selectLast, connection);
+            SqlDataReader reader = command.ExecuteReader();
+            Element element = null;
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    element = new Element();
+                    element.Id = Convert.ToInt32(reader["idElement"]);
+                    element.Descricao = reader["Descricao"] == DBNull.Value
+                        ? string.Empty
+                        : reader["Descricao"].ToString();
+                    element.Fabricante = reader["Fabricante"] == DBNull.Value
+                        ? string.Empty
+                        : reader["Fabricante"].ToString();
+                    element.FormulaMolecular = reader["FormulaMolecular"] == DBNull.Value
+                        ? string.Empty
+                        : reader["FormulaMolecular"].ToString();
+                    element.NomeProduto = reader["NomeProduto"] == DBNull.Value
+                        ? string.Empty : reader["NomeProduto"].ToString();
+                    element.PesoMolecular = reader["PesoMolecular"] == DBNull.Value
+                        ? 0
+                        : Convert.ToInt32(reader["PesoMolecular"]);
+                    element.Danger.Id = reader["idDanger"] == DBNull.Value ? 0 : Convert.ToInt32(reader["idDanger"]);
+                    element.Unidade = reader["Unidade"] == DBNull.Value ? string.Empty : reader["Unidade"].ToString();
+                }
+            }
+            return element;
+        }
+
+        public List<Element> SelectByFabricante(string fabricante)
+        {
+            SqlConnection connection = ContextFactory.Instancia();
+            SqlCommand command = new SqlCommand(_selectByFabricante, connection);
+            command.Parameters.AddWithValue("@fabricante", fabricante);
+            SqlDataReader reader = command.ExecuteReader();
+            List<Element> elementList = new List<Element>();
+            Element _element = null;
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    _element = new Element();
+                    _element.Id = Convert.ToInt32(reader["idElement"]);
+                    _element.Descricao = reader["Descricao"] == DBNull.Value
+                        ? string.Empty
+                        : reader["Descricao"].ToString();
+                    _element.Fabricante = reader["Fabricante"] == DBNull.Value
+                        ? string.Empty
+                        : reader["Fabricante"].ToString();
+                    _element.FormulaMolecular = reader["FormulaMolecular"] == DBNull.Value
+                        ? string.Empty
+                        : reader["FormulaMolecular"].ToString();
+                    _element.NomeProduto = reader["NomeProduto"] == DBNull.Value
+                        ? string.Empty
+                        : reader["NomeProduto"].ToString();
+                    _element.PesoMolecular = reader["PesoMolecular"] == DBNull.Value
+                        ? 0
+                        : Convert.ToInt32(reader["PesoMolecular"]);
+                    _element.Unidade = reader["Unidade"] == DBNull.Value ? string.Empty : reader["Unidade"].ToString();
+                    _element.Danger.Id = reader["idDanger"] == DBNull.Value ? 0 : Convert.ToInt32(reader["idDanger"]);
+
                     elementList.Add(_element);
                 }
             }

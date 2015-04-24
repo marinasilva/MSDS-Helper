@@ -53,6 +53,7 @@
     <Compile Include="ElementDAO.cs" />
     <Compile Include="IDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UnitDAO.cs" />
     <Compile Include="UserDAO.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -8,6 +8,7 @@ namespace MSDSHelper.Model
     public class Danger
     {
         private int _id;
+        private string _descricao;
         private string _inalacao;
         private string _contatoOlhos;
         private string _contatoPele;
@@ -48,6 +49,12 @@ namespace MSDSHelper.Model
         {
             get { return _combateIncendio; }
             set { _combateIncendio = value; }
+        }
+
+        public string Descricao
+        {
+            get { return _descricao; }
+            set { _descricao = value; }
         }
     }
 }

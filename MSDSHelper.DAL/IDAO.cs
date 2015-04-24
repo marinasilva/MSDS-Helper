@@ -10,7 +10,7 @@ namespace MSDSHelper.DAL
     {
         void Adicionar(T obj);
         void Delete(int id);
-        void Update(int id);
+        void Update(T obj);
         T SelectByID(int id);
     }
 }
