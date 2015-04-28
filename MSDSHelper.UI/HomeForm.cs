@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using MSDSHelper.BLL;
 
 namespace MSDSHelper.UI
 {
@@ -18,17 +19,7 @@ namespace MSDSHelper.UI
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-           
-        }
 
-        private void btnCadastrar_Click(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void btnConsultar_Click(object sender, EventArgs e)
-        {
-            
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
@@ -52,8 +43,7 @@ namespace MSDSHelper.UI
         {
             if (searchPanel.HasChildren)
                 searchPanel.Controls.Clear();
-            
-            
+
             _login = new LoginForm("create");
             _login.TopLevel = false;
             _login.Parent = searchPanel;
@@ -67,18 +57,23 @@ namespace MSDSHelper.UI
             {
                 if (_login.type == "create")
                 {
-                    FichaForm ficha = new FichaForm("create");
-                    ficha.TopLevel = false;
-                    ficha.Parent = searchPanel;
-                    ficha.Show();
-                    
+                    ElementBLL elementBLL = new ElementBLL();
+                    if (elementBLL.SelectCount() > 0)
+                    {
+                        FichaForm ficha = new FichaForm("create", false);
+                        ficha.TopLevel = false;
+                        ficha.Parent = searchPanel;
+                        ficha.Show();
+                    }
+                    else
+                    {
+                        FichaForm ficha = new FichaForm("create", true);
+                        ficha.TopLevel = false;
+                        ficha.Parent = searchPanel;
+                        ficha.Show();
+                    }
                 }
             }
-        }
-
-        private void HomeForm_Load(object sender, EventArgs e)
-        {
-
         }
 
         private void atualizarFichaToolStripMenuItem_Click(object sender, EventArgs e)

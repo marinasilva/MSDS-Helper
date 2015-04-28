@@ -14,13 +14,16 @@ namespace MSDSHelper.UI
     {
         public bool SucessLogin { get; set; }
         public string type { get; set; }
+        private Point _desiredLocation;
 
         public LoginForm(string _type)
         {
             InitializeComponent();
             lblType.Visible = false;
-            type = _type; 
+            type = _type;
             lblType.Text = _type;
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            _desiredLocation = this.Location;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -47,27 +50,33 @@ namespace MSDSHelper.UI
             }
             else
             {
-               UserBLL _user = new UserBLL();
-                    if (_user.ValidatePassword(txtLogin.Text, txtPass.Text))
-                    {
-                        SucessLogin = true;
-                        Close();
-                        //if (lblType.Text == "create")
-                        //{
-                            
-                        //    SearchForm search = new SearchForm();
-                            
-                        //    search.ShowDialog();
-                        //}
-                        //if (lblType.Text == "update")
-                        //{
-                        //    SearchForm search = new SearchForm();
-                        //    search.ShowDialog();
-                        //}
-                    }
+                UserBLL _user = new UserBLL();
+                if (_user.ValidatePassword(txtLogin.Text, txtPass.Text))
+                {
+                    SucessLogin = true;
+                    Close();
+                    //if (lblType.Text == "create")
+                    //{
+
+                    //    SearchForm search = new SearchForm();
+
+                    //    search.ShowDialog();
+                    //}
+                    //if (lblType.Text == "update")
+                    //{
+                    //    SearchForm search = new SearchForm();
+                    //    search.ShowDialog();
+                    //}
                 }
-               
             }
+
+        }
+
+        private void LoginForm_LocationChanged(object sender, EventArgs e)
+        {
+            if (this.Location != _desiredLocation)
+                this.Location = _desiredLocation;
         }
     }
+}
 

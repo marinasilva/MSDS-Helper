@@ -16,18 +16,28 @@ namespace MSDSHelper.UI
         ElementBLL _elementBLL = new ElementBLL();
         Element element = new Element();
 
-        public FichaForm(string type, int idElement)
+
+        public FichaForm(string type, int idElement, bool first)
         {
             InitializeComponent();
             element = _elementBLL.SelectByID(idElement);
             FormatComponents(type, element);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
         }
 
-        public FichaForm(string type)
+        public FichaForm(string type, bool first)
         {
             InitializeComponent();
-            element = _elementBLL.SelectLast();
+            if (!first)
+                element = _elementBLL.SelectLast();
+            else
+                element.Id = 0;
             FormatComponents(type, element);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
         }
 
         private void FormatComponents(string type, Element element)
@@ -52,7 +62,7 @@ namespace MSDSHelper.UI
                         txtOlhos.Enabled = false;
                         txtPele.Enabled = false;
                         btnCadastrar.Visible = false;
-                        btnUpdate.Visible = false;
+                        //btnUpdate.Visible = false;
 
                         int id = element.Id + 1;
                         txtCod.Text = id.ToString();
@@ -86,7 +96,7 @@ namespace MSDSHelper.UI
                         txtOlhos.Enabled = true;
                         txtPele.Enabled = true;
                         btnCadastrar.Visible = false;
-                        btnUpdate.Visible = true;
+                        //btnUpdate.Visible = true;
 
                         txtDescricao.Text = element.Descricao;
                         txtFabricante.Text = element.Fabricante;
@@ -117,8 +127,10 @@ namespace MSDSHelper.UI
                         txtOlhos.Enabled = true;
                         txtPele.Enabled = true;
                         btnCadastrar.Visible = true;
-                        btnUpdate.Visible = false;
+                        //btnUpdate.Visible = false;
 
+                        int cod = element.Id + 1;
+                        txtCod.Text = cod.ToString();
                         txtDescricao.Text = string.Empty;
                         txtFabricante.Text = string.Empty;
                         txtFormulaMolecular.Text = string.Empty;

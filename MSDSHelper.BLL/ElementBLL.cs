@@ -50,5 +50,10 @@ namespace MSDSHelper.BLL
         {
             return _elementDAO.SelectByFabricante(fabricante);
         }
+
+        public int SelectCount()
+        {
+            return _elementDAO.SelectCount();
+        }
     }
 }

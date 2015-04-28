@@ -208,6 +208,7 @@
             this.gridSearch.Name = "gridSearch";
             this.gridSearch.Size = new System.Drawing.Size(425, 175);
             this.gridSearch.TabIndex = 18;
+            this.gridSearch.SelectionChanged += new System.EventHandler(this.gridSearch_SelectionChanged);
             // 
             // Cód
             // 
@@ -601,7 +602,7 @@
             // 
             // btnCadastrar
             // 
-            this.btnCadastrar.Location = new System.Drawing.Point(672, 653);
+            this.btnCadastrar.Location = new System.Drawing.Point(753, 653);
             this.btnCadastrar.Name = "btnCadastrar";
             this.btnCadastrar.Size = new System.Drawing.Size(75, 23);
             this.btnCadastrar.TabIndex = 21;
@@ -636,9 +637,11 @@
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "SearchForm";
-            this.Text = "SearchForm";
-            this.Load += new System.EventHandler(this.SearchForm_Load);
+            this.Text = "MSDS Helper - Pesquisa de Fichas de Segurança";
+            this.LocationChanged += new System.EventHandler(this.SearchForm_LocationChanged);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridSearch)).EndInit();

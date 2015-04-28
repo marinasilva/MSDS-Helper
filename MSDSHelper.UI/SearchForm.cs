@@ -13,11 +13,18 @@ namespace MSDSHelper.UI
 {
     public partial class SearchForm : Form
     {
+        CombateIncendioBLL _combateIncendioBLL = new CombateIncendioBLL();
+        ElementBLL _elementBLL = new ElementBLL();
+        DangerBLL _dangerBLL = new DangerBLL();
+        private Point _desiredLocation;
+
         public SearchForm(string type)
         {
             InitializeComponent();
             FormatComponents(type);
             DisableComponents();
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            _desiredLocation = this.Location;
         }
 
         private void FormatComponents(string type)
@@ -190,6 +197,7 @@ namespace MSDSHelper.UI
 
             bindingSource.DataSource = elementList;
             gridSearch.DataSource = bindingSource;
+            btnVisualizar.Enabled = true;
         }
 
         private List<string> ValidateItems()
@@ -325,29 +333,98 @@ namespace MSDSHelper.UI
             }
         }
 
-      
-
-        private void SearchForm_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnCadastrar_Click(object sender, EventArgs e)
         {
+            CombateIncendio _combateIncendio = PopulateCombateIncendio();
+            Danger _danger = PopulateDanger(_combateIncendio);
+            Element _element = PopulateElement(_danger);
 
+            try
+            {
+                _combateIncendioBLL.Adicionar(_combateIncendio);
+                _dangerBLL.Adicionar(_danger);
+                _elementBLL.Adicionar(_element);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Falha ao adicionar nova ficha de segurança: " + ex.Message);
+            }
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
+            CombateIncendio _combateIncendio = PopulateCombateIncendio();
+            Danger _danger = PopulateDanger(_combateIncendio);
+            Element _element = PopulateElement(_danger);
 
+            try
+            {
+                _combateIncendioBLL.Update(_combateIncendio);
+                _dangerBLL.Update(_danger);
+                _elementBLL.Update(_element);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Falha ao atualizar ficha de segurança: " + ex.Message);
+            }
+
+        }
+
+        private CombateIncendio PopulateCombateIncendio()
+        {
+            CombateIncendio _combateIncendio = new CombateIncendio();
+            _combateIncendio.Id = lblIncendio.Text != string.Empty
+                ? Convert.ToInt32(lblIncendio.Text)
+                : _combateIncendioBLL.SelectLast().Id + 1;
+            _combateIncendio.MeioApropriado = txtMeioApropriado.Text;
+            _combateIncendio.PerigoEspecifico = txtPerigoEspecifico.Text;
+            return _combateIncendio;
+        }
+
+        private Danger PopulateDanger(CombateIncendio combateIncendio)
+        {
+            Danger _danger = new Danger();
+            _danger.Id = lblPerigo.Text != string.Empty
+                ? Convert.ToInt32(lblPerigo.Text)
+                : _dangerBLL.SelectLast().Id + 1;
+            _danger.ContatoOlhos = txtOlhos.Text;
+            _danger.ContatoPele = txtPele.Text;
+            _danger.Descricao = txtIDPerigo.Text;
+            _danger.Inalacao = txtInalacao.Text;
+            _danger.Ingestao = txtIngestao.Text;
+            _danger.Incendio.Id = combateIncendio.Id;
+            return _danger;
+        }
+
+        private Element PopulateElement(Danger danger)
+        {
+            Element _element = new Element();
+            _element.Id = Convert.ToInt32(txtCod.Text);
+            _element.Descricao = txtDescricao.Text;
+            _element.Fabricante = txtFabricante.Text;
+            _element.FormulaMolecular = txtFormulaMolecular.Text;
+            _element.NomeProduto = txtNomeProduto.Text;
+            _element.PesoMolecular = Convert.ToInt32(txtPeso.Text);
+            _element.Unidade = cmbUnidade.SelectedItem.ToString();
+            _element.Danger.Id = danger.Id;
+            return _element;
         }
 
         private void btnOk_Click(object sender, EventArgs e)
         {
+            this.Close();
+        }
 
+        private void gridSearch_SelectionChanged(object sender, EventArgs e)
+        {
+            btnVisualizar.Enabled = true;
+        }
+
+        private void SearchForm_LocationChanged(object sender, EventArgs e)
+        {
+            if (this.Location != _desiredLocation)
+                this.Location = _desiredLocation;
         }
     }
-
-
 }
 

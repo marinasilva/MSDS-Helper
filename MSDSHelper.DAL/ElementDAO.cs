@@ -22,6 +22,7 @@ namespace MSDSHelper.DAL
         private const string _selectByFormula = @"SELECT * FROM ELEMENT WHERE FORMULAMOLECULAR LIKE '%@formulaMolecular%'";
         private const string _selectLast = @"SELECT TOP 1 FROM ELEMENT ORDER BY IDELEMENT";
         private const string _selectByFabricante = @"SELECT * FROM ELEMENT WHERE FABRICANTE LIKE '%@fabricante%'";
+        private const string _selectCount = @"SELECT COUNT(IDELEMENT) FROM ELEMENT";
         
 
         public void Adicionar(Element element)
@@ -220,6 +221,13 @@ namespace MSDSHelper.DAL
                 }
             }
             return elementList;
+        }
+
+        public int SelectCount()
+        {
+            SqlConnection connection = ContextFactory.Instancia();
+            SqlCommand command = new SqlCommand(_selectCount, connection);
+            return Convert.ToInt32(command.ExecuteNonQuery());
         }
     }
 }
