@@ -16,10 +16,9 @@ namespace MSDSHelper.UI
         public HomeForm()
         {
             InitializeComponent();
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
-
+            FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
+            MinimizeBox = false;
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
@@ -85,6 +84,28 @@ namespace MSDSHelper.UI
             search.TopLevel = false;
             search.Parent = searchPanel;
             search.Show();
+        }
+
+        private void atualizarUsuárioToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (userPanel.HasChildren)
+                userPanel.Controls.Clear();
+
+            UserForm user = new UserForm("update");
+            user.TopLevel = false;
+            user.Parent = userPanel;
+            user.Show();
+        }
+
+        private void cadastrarUsuárioToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (userPanel.HasChildren)
+                userPanel.Controls.Clear();
+
+            UserForm user = new UserForm("create");
+            user.TopLevel = false;
+            user.Parent = userPanel;
+            user.Show();
         }
     }
 }

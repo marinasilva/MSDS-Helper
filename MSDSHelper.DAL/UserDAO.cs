@@ -9,16 +9,22 @@ namespace MSDSHelper.DAL
 {
     public class UserDAO : IDAO<User>
     {
-        private const string _adicionar = @"";
+        private const string _adicionar = @"INSERT INTO TbUser ([Nome],[Login],[Password],[Permissao])  VALUES  (@Nome, @Login, @Password)";
         private const string _delete = @"DELETE FROM USER WHERE ID = @idUser";
-        private const string _update = @"";
-        private const string _selectByID = @"SELECT * FROM USER WHERE ID = @idUser";
+        private const string _update = @"UPDATE TbUser  SET [Nome] = @Nome, [Login] = @Login, [Password] = @Password WHERE idUser = @idUser";
+        private const string _selectByID = @"SELECT * FROM USER WHERE IDUSER = @idUser";
         private const string _validePass = @"SELECT PASSWORD FROM TBUSER WHERE LOGIN = @login";
-        private const string _getPermission = @"SELECT PERMISSAO FROM TBUSER WHERE LOGIN = @login";
+        private const string _selectByName = @"SELECT * FROM USER WHERE NOME LIKE '%@Nome%'";
+        private const string _selectByLogin = @"SELECT * FROM USER WHERE LOGIN LIKE '%@Login%'";
 
-        public void Adicionar(User missing_name)
+        public void Adicionar(User user)
         {
-            throw new NotImplementedException();
+            SqlConnection connection = ContextFactory.Instancia();
+            SqlCommand command = new SqlCommand(_adicionar, connection);
+            command.Parameters.AddWithValue("@Nome", user.Nome);
+            command.Parameters.AddWithValue("@Login", user.Login);
+            command.Parameters.AddWithValue("@Password", user.Password);
+            command.ExecuteNonQuery();
         }
 
         public void Delete(int id)
@@ -29,9 +35,15 @@ namespace MSDSHelper.DAL
             command.ExecuteScalar();
         }
 
-        public void Update(User obj)
+        public void Update(User user)
         {
-            throw new NotImplementedException();
+            SqlConnection connection = ContextFactory.Instancia();
+            SqlCommand command = new SqlCommand(_update, connection);
+            command.Parameters.AddWithValue("@Nome", user.Nome);
+            command.Parameters.AddWithValue("@Login", user.Login);
+            command.Parameters.AddWithValue("@Password", user.Password);
+            command.Parameters.AddWithValue("@idUser", user.Id);
+            command.ExecuteNonQuery();
         }
 
         public User SelectByID(int id)
@@ -67,17 +79,48 @@ namespace MSDSHelper.DAL
             reader.Close();return password;
         }
 
-        public int GetPermission(string login)
+        public List<User> SelectByName(string name)
         {
             SqlConnection connection = ContextFactory.Instancia();
-            SqlCommand command = new SqlCommand(_getPermission, connection);
-            command.Parameters.AddWithValue("@login", login);
+            SqlCommand command = new SqlCommand(_selectByName, connection);
+            command.Parameters.AddWithValue("@Nome", name);
             SqlDataReader reader = command.ExecuteReader();
-            int permission = 2;
-            while (reader.Read())
-                permission = Convert.ToInt32(reader["Permissao"]);
-            reader.Close();
-            return permission;
+            List<User> userList = new List<User>();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    User _user = new User();
+                    _user.Id = Convert.ToInt32(reader["idUser"]);
+                    _user.Nome = reader["Nome"] == DBNull.Value ? string.Empty : reader["Nome"].ToString();
+                    _user.Login = reader["Login"] == DBNull.Value ? string.Empty : reader["Login"].ToString();
+                    _user.Password = reader["Password"] == DBNull.Value ? string.Empty : reader["Password"].ToString();
+                    userList.Add(_user);
+                }
+            }
+            return userList;
+        }
+
+        public List<User> SelectByLogin(string login)
+        {
+            SqlConnection connection = ContextFactory.Instancia();
+            SqlCommand command = new SqlCommand(_selectByLogin, connection);
+            command.Parameters.AddWithValue("@Login", login);
+            SqlDataReader reader = command.ExecuteReader();
+            List<User> userList = new List<User>();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    User _user = new User();
+                    _user.Id = Convert.ToInt32(reader["idUser"]);
+                    _user.Nome = reader["Nome"] == DBNull.Value ? string.Empty : reader["Nome"].ToString();
+                    _user.Login = reader["Login"] == DBNull.Value ? string.Empty : reader["Login"].ToString();
+                    _user.Password = reader["Password"] == DBNull.Value ? string.Empty : reader["Password"].ToString();
+                    userList.Add(_user);
+                }
+            }
+            return userList;
         }
     }
 }

@@ -1,10 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using MSDSHelper.BLL;
 using MSDSHelper.Model;
@@ -158,7 +153,7 @@ namespace MSDSHelper.UI
 
         private void btnCadastrar_Click(object sender, EventArgs e)
         {
-            if (ValidateItems().Count == 0)
+            if (ValidateItems().Count > 0)
             {
                 Element _element = PopulateElement();
                 Danger _danger = PopulateDanger();
@@ -186,31 +181,31 @@ namespace MSDSHelper.UI
         private List<string> ValidateItems()
         {
             List<string> emptyItems = new List<string>();
-            if (cmbUnidade.SelectedIndex == -1)
+            if (cmbUnidade.SelectedIndex != -1)
                 emptyItems.Add("Unidade");
-            if (txtDescricao.Text == string.Empty)
+            if (txtDescricao.Text != string.Empty)
                 emptyItems.Add("Descrição");
-            if (txtNomeProduto.Text == string.Empty)
+            if (txtNomeProduto.Text != string.Empty)
                 emptyItems.Add("Nome Produto");
-            if (txtFormulaMolecular.Text == string.Empty)
+            if (txtFormulaMolecular.Text != string.Empty)
                 emptyItems.Add("Fórmula Molecular");
-            if (txtPeso.Text == string.Empty)
+            if (txtPeso.Text != string.Empty)
                 emptyItems.Add("Peso Molecular");
-            if (txtFabricante.Text == string.Empty)
+            if (txtFabricante.Text != string.Empty)
                 emptyItems.Add("Fabricante");
-            if (txtIDPerigo.Text == string.Empty)
+            if (txtIDPerigo.Text != string.Empty)
                 emptyItems.Add("Perigo");
-            if (txtInalacao.Text == string.Empty)
+            if (txtInalacao.Text != string.Empty)
                 emptyItems.Add("Inalação");
-            if (txtOlhos.Text == string.Empty)
+            if (txtOlhos.Text != string.Empty)
                 emptyItems.Add("Contato com os Olhos");
-            if (txtPele.Text == string.Empty)
+            if (txtPele.Text != string.Empty)
                 emptyItems.Add("Contato com a Pele");
-            if (txtIngestao.Text == string.Empty)
+            if (txtIngestao.Text != string.Empty)
                 emptyItems.Add("Ingestão");
-            if (txtMeioApropriado.Text == string.Empty)
+            if (txtMeioApropriado.Text != string.Empty)
                 emptyItems.Add("Meio Apropriado");
-            if (txtPerigoEspecifico.Text == string.Empty)
+            if (txtPerigoEspecifico.Text != string.Empty)
                 emptyItems.Add("Perigo Específico");
             return emptyItems;
         }

@@ -165,7 +165,6 @@ namespace MSDSHelper.UI
                     {
                         search = item.Replace("NomeProduto ", "");
                         elementList = _elementBLL.SelectByName(search);
-                        goto x;
                     }
 
                 x:

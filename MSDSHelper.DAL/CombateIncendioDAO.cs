@@ -14,7 +14,9 @@ namespace MSDSHelper.DAL
         private const string _selectLast = @"SELECT TOP 1 FROM COMBATEINCENDIO ORDER BY idIncendio";
 
         private const string _update = @"UPDATE CombateIncendio SET [MeioApropriado] = @meioApropriado, [PerigoEspecifico] = @perigoEspecifico WHERE idIncendio = @idIncendio";
-        
+
+        private const string _delete = @"DELETE FROM COMBATEINCENDIO WHERE IDINCENDIO = @idIncendio";
+
         public void Adicionar(CombateIncendio combateIncendio)
         {
             SqlConnection connection = ContextFactory.Instancia();
@@ -45,7 +47,10 @@ namespace MSDSHelper.DAL
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            SqlConnection connection = ContextFactory.Instancia();
+            SqlCommand command = new SqlCommand(_delete, connection);
+            command.Parameters.AddWithValue("@idIncendio", id);
+            command.ExecuteNonQuery();
         }
 
         public void Update(CombateIncendio _combate)

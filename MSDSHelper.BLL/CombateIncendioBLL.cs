@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using MSDSHelper.DAL;
 using MSDSHelper.Model;
 
@@ -11,14 +8,14 @@ namespace MSDSHelper.BLL
     {
         CombateIncendioDAO _combate = new CombateIncendioDAO();
         
-        public void Adicionar(CombateIncendio obj)
+        public void Adicionar(CombateIncendio combateIncendio)
         {
-            throw new NotImplementedException();
+            _combate.Adicionar(combateIncendio);
         }
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+           _combate.Delete(id);
         }
 
         public void Update(CombateIncendio combateIncendio)
@@ -28,7 +25,7 @@ namespace MSDSHelper.BLL
 
         public CombateIncendio SelectByID(int id)
         {
-            throw new NotImplementedException();
+            return _combate.SelectByID(id);
         }
 
         public CombateIncendio SelectLast()

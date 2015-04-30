@@ -13,6 +13,7 @@ namespace MSDSHelper.DAL
         private const string _delete = @"DELETE FROM UNIT WHERE IDUNIDADE = @idUnidade";
         private const string _update = @"UPDATE Unit SET [Unidade] = @unidade, [Sigla] = @sigla WHERE idUnidade = @idUnidade";
         private const string _selectByID = @"SELECT * FROM UNIT WHERE IDUNIDADE = @idUnidade";
+        private const string _selectAll = @"SELECT * FROM UNIT";
 
         public void Adicionar(Unit unit)
         {
@@ -59,6 +60,27 @@ namespace MSDSHelper.DAL
                 }   
             }
             return unit;
+        }
+
+        public List<Unit> SelectAll()
+        {
+            SqlConnection connection = ContextFactory.Instancia();
+            SqlCommand command = new SqlCommand(_selectAll, connection);
+            SqlDataReader reader = command.ExecuteReader();
+            List<Unit> _unitList = new List<Unit>();
+            Unit _unit = null;
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    _unit = new Unit();
+                    _unit.Id = Convert.ToInt32(reader["idUnidade"]);
+                    _unit.Unidade = reader["Unidade"] == DBNull.Value ? string.Empty : reader["Unidade"].ToString();
+                    _unit.Sigla = reader["Sigla"] == DBNull.Value ? string.Empty : reader["Sigla"].ToString();
+                    _unitList.Add(_unit);
+                }
+            }
+            return _unitList;
         }
     }
 }

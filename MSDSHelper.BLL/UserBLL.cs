@@ -18,9 +18,19 @@ namespace MSDSHelper.BLL
             return false;
         }
 
-        public int GetPermission(string login)
+        public User SelectByID(int id)
         {
-            return _userDAO.GetPermission(login);
+            return _userDAO.SelectByID(id);
+        }
+
+        public List<User> SelectByName(string name)
+        {
+            return _userDAO.SelectByName(name);
+        }
+
+        public List<User> SelectByLogin(string login)
+        {
+            return _userDAO.SelectByLogin(login);
         }
 
     }
