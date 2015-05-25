@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
 using MSDSHelper.Model;
 
 namespace MSDSHelper.DAL
@@ -16,6 +14,7 @@ namespace MSDSHelper.DAL
         private const string _validePass = @"SELECT PASSWORD FROM TBUSER WHERE LOGIN = @login";
         private const string _selectByName = @"SELECT * FROM USER WHERE NOME LIKE '%@Nome%'";
         private const string _selectByLogin = @"SELECT * FROM USER WHERE LOGIN LIKE '%@Login%'";
+        private const string _selectLast = @"SELECT TOP 1 FROM TbUser ORDER BY idUser";
 
         public void Adicionar(User user)
         {
@@ -121,6 +120,26 @@ namespace MSDSHelper.DAL
                 }
             }
             return userList;
+        }
+
+        public User SelectLast()
+        {
+            SqlConnection connection = ContextFactory.Instancia();
+            SqlCommand command = new SqlCommand(_selectLast, connection);
+            SqlDataReader reader = command.ExecuteReader();
+            User user = null;
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    user = new User();
+                    user.Id = Convert.ToInt32(reader["idUser"]);
+                    user.Nome = reader["Nome"] == DBNull.Value ? string.Empty : reader["Nome"].ToString();
+                    user.Login = reader["Login"] == DBNull.Value ? string.Empty : reader["Login"].ToString();
+                    user.Password = reader["Password"] == DBNull.Value ? string.Empty : reader["Passwrod"].ToString();
+                }
+            }
+            return user;
         }
     }
 }

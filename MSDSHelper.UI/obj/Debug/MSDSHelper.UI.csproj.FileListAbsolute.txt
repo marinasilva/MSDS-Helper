@@ -16,3 +16,4 @@ C:\Users\marina.motta\Documents\GitHub\MSDS-Helper\MSDSHelper.UI\obj\Debug\MSDSH
 C:\Users\marina.motta\Documents\GitHub\MSDS-Helper\MSDSHelper.UI\obj\Debug\MSDSHelper.UI.pdb
 C:\Users\marina.motta\Documents\GitHub\MSDS-Helper\MSDSHelper.UI\obj\Debug\MSDSHelper.UI.SearchForm.resources
 C:\Users\marina.motta\Documents\GitHub\MSDS-Helper\MSDSHelper.UI\obj\Debug\MSDSHelper.UI.UserForm.resources
+C:\Users\marina.motta\Documents\GitHub\MSDS-Helper\MSDSHelper.UI\obj\Debug\MSDSHelper.UI.UnitForm.resources

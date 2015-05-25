@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using MSDSHelper.DAL;
 using MSDSHelper.Model;
 
@@ -31,6 +28,11 @@ namespace MSDSHelper.BLL
         public List<User> SelectByLogin(string login)
         {
             return _userDAO.SelectByLogin(login);
+        }
+
+        public User SelectLast()
+        {
+            return _userDAO.SelectLast();
         }
 
     }

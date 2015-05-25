@@ -34,6 +34,8 @@ namespace MSDSHelper.UI
                 {
                     groupBox1.Enabled = false;
                     groupBox2.Enabled = true;
+                    UserBLL _userBLL = new UserBLL();
+                    LoadComponents("create", _userBLL.SelectLast());
                     break;
                 }
             }
@@ -149,7 +151,10 @@ namespace MSDSHelper.UI
                     btnCreate.Visible = false;
                     btnUpdate.Visible = true;
 
-                    txtcod2.Text = user.Id.ToString();
+                    if (user.Id <= 0 || user.Id == null)
+                        txtcod2.Text = "1";
+                    else
+                        txtcod2.Text = user.Id.ToString();
                     txtnome2.Text = user.Nome;
                     txtlogin2.Text = user.Login;
                     txtsenha.Text = user.Password;
