@@ -18,7 +18,7 @@ namespace MSDSHelper.DAL
         {
             lock (Sentinel)
             {
-                string connectionString = @"Server=HNT-127\SQLEXPRESS; Database=MSDSHelper; User=sql; Password=se4rf";
+                string connectionString = @"Data Source=HNT-120\SQLEXPRESS;Initial Catalog=MSDSHelper;Integrated Security=True";
                 if (_connection != null && _connection.ConnectionString != String.Empty) return _connection;
                 _connection = new SqlConnection(connectionString);
                 if (_connection.State == ConnectionState.Closed)

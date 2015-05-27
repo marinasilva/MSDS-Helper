@@ -33,6 +33,9 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnOK = new System.Windows.Forms.Button();
             this.gridUsers = new System.Windows.Forms.DataGridView();
+            this.Cod = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Nome = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Login = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnClean = new System.Windows.Forms.Button();
             this.btnSearch = new System.Windows.Forms.Button();
             this.txtlogin = new System.Windows.Forms.TextBox();
@@ -54,9 +57,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.btnCancel = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
-            this.Cod = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Nome = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Login = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lblmsgm = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridUsers)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -119,6 +120,24 @@
             this.gridUsers.Size = new System.Drawing.Size(355, 150);
             this.gridUsers.TabIndex = 8;
             // 
+            // Cod
+            // 
+            this.Cod.HeaderText = "Cód.";
+            this.Cod.Name = "Cod";
+            this.Cod.ReadOnly = true;
+            // 
+            // Nome
+            // 
+            this.Nome.HeaderText = "Nome";
+            this.Nome.Name = "Nome";
+            this.Nome.ReadOnly = true;
+            // 
+            // Login
+            // 
+            this.Login.HeaderText = "Login";
+            this.Login.Name = "Login";
+            this.Login.ReadOnly = true;
+            // 
             // btnClean
             // 
             this.btnClean.Location = new System.Drawing.Point(381, 60);
@@ -173,6 +192,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.lblmsgm);
             this.groupBox2.Controls.Add(this.btnUpdate);
             this.groupBox2.Controls.Add(this.btnCreate);
             this.groupBox2.Controls.Add(this.txtlogin2);
@@ -209,6 +229,7 @@
             this.btnCreate.TabIndex = 10;
             this.btnCreate.Text = "Cadastrar";
             this.btnCreate.UseVisualStyleBackColor = true;
+            this.btnCreate.Click += new System.EventHandler(this.btnCreate_Click);
             // 
             // txtlogin2
             // 
@@ -221,6 +242,7 @@
             // 
             this.txtsenha.Location = new System.Drawing.Point(126, 113);
             this.txtsenha.Name = "txtsenha";
+            this.txtsenha.PasswordChar = '*';
             this.txtsenha.Size = new System.Drawing.Size(156, 20);
             this.txtsenha.TabIndex = 18;
             // 
@@ -262,6 +284,7 @@
             // 
             this.txtsenha2.Location = new System.Drawing.Point(126, 145);
             this.txtsenha2.Name = "txtsenha2";
+            this.txtsenha2.PasswordChar = '*';
             this.txtsenha2.Size = new System.Drawing.Size(156, 20);
             this.txtsenha2.TabIndex = 15;
             // 
@@ -310,23 +333,15 @@
             this.label9.TabIndex = 10;
             this.label9.Text = "Usuários";
             // 
-            // Cod
+            // lblmsgm
             // 
-            this.Cod.HeaderText = "Cód.";
-            this.Cod.Name = "Cod";
-            this.Cod.ReadOnly = true;
-            // 
-            // Nome
-            // 
-            this.Nome.HeaderText = "Nome";
-            this.Nome.Name = "Nome";
-            this.Nome.ReadOnly = true;
-            // 
-            // Login
-            // 
-            this.Login.HeaderText = "Login";
-            this.Login.Name = "Login";
-            this.Login.ReadOnly = true;
+            this.lblmsgm.AutoSize = true;
+            this.lblmsgm.Location = new System.Drawing.Point(33, 191);
+            this.lblmsgm.Name = "lblmsgm";
+            this.lblmsgm.Size = new System.Drawing.Size(42, 13);
+            this.lblmsgm.TabIndex = 10;
+            this.lblmsgm.Text = "{msgm}";
+            this.lblmsgm.Visible = false;
             // 
             // UserForm
             // 
@@ -382,5 +397,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Cod;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nome;
         private System.Windows.Forms.DataGridViewTextBoxColumn Login;
+        private System.Windows.Forms.Label lblmsgm;
     }
 }

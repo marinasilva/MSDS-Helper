@@ -14,7 +14,7 @@ namespace MSDSHelper.DAL
         private const string _validePass = @"SELECT PASSWORD FROM TBUSER WHERE LOGIN = @login";
         private const string _selectByName = @"SELECT * FROM USER WHERE NOME LIKE '%@Nome%'";
         private const string _selectByLogin = @"SELECT * FROM USER WHERE LOGIN LIKE '%@Login%'";
-        private const string _selectLast = @"SELECT TOP 1 FROM TbUser ORDER BY idUser";
+        private const string _selectLast = @"SELECT TOP 1 * FROM TbUser ORDER BY idUser";
 
         public void Adicionar(User user)
         {
@@ -69,13 +69,13 @@ namespace MSDSHelper.DAL
         public string ValidePass(string login)
         {
             SqlConnection connection = ContextFactory.Instancia();
-            SqlCommand command = new SqlCommand( _validePass, connection);
+            SqlCommand command = new SqlCommand(_validePass, connection);
             command.Parameters.AddWithValue("@login", login);
             SqlDataReader reader = command.ExecuteReader();
             string password = string.Empty;//new string();
             while (reader.Read())
                 password = reader["Password"].ToString();
-            reader.Close();return password;
+            reader.Close(); return password;
         }
 
         public List<User> SelectByName(string name)

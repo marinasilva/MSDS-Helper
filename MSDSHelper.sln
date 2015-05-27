@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MSDSHelper.BLL", "MSDSHelpe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MSDSHelper.UI", "MSDSHelper.UI\MSDSHelper.UI.csproj", "{48D58EA6-9ED0-42FF-8BCC-FFD02408E4EA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MSDSHelper.Test", "MSDSHelper.Test\MSDSHelper.Test.csproj", "{8F8F9C06-2687-4269-93CB-28A032468E0A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{48D58EA6-9ED0-42FF-8BCC-FFD02408E4EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{48D58EA6-9ED0-42FF-8BCC-FFD02408E4EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{48D58EA6-9ED0-42FF-8BCC-FFD02408E4EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F8F9C06-2687-4269-93CB-28A032468E0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F8F9C06-2687-4269-93CB-28A032468E0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F8F9C06-2687-4269-93CB-28A032468E0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F8F9C06-2687-4269-93CB-28A032468E0A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
