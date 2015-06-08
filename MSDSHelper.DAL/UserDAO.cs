@@ -8,12 +8,12 @@ namespace MSDSHelper.DAL
     public class UserDAO : IDAO<User>
     {
         private const string _adicionar = @"INSERT INTO TbUser ([Nome],[Login],[Password])  VALUES  (@Nome, @Login, @Password)";
-        private const string _delete = @"DELETE FROM USER WHERE ID = @idUser";
+        private const string _delete = @"DELETE FROM TbUser WHERE ID = @idUser";
         private const string _update = @"UPDATE TbUser  SET [Nome] = @Nome, [Login] = @Login, [Password] = @Password WHERE idUser = @idUser";
-        private const string _selectByID = @"SELECT * FROM USER WHERE IDUSER = @idUser";
+        private const string _selectByID = @"SELECT * FROM TbUser WHERE IDUSER = @idUser";
         private const string _validePass = @"SELECT PASSWORD FROM TBUSER WHERE LOGIN = @login";
-        private const string _selectByName = @"SELECT * FROM USER WHERE NOME LIKE '%@Nome%'";
-        private const string _selectByLogin = @"SELECT * FROM USER WHERE LOGIN LIKE '%@Login%'";
+        private const string _selectByName = @"SELECT * FROM TbUser WHERE NOME LIKE '%@Nome%'";
+        private const string _selectByLogin = @"SELECT * FROM TbUser WHERE LOGIN LIKE '%@Login%'";
         private const string _selectLast = @"SELECT TOP 1 * FROM TbUser ORDER BY idUser";
         private const string _selectIdentCurrent = @"SELECT IDENT_CURRENT('TbUser') + IDENT_INCR('TbUser') AS ID";
 
@@ -70,7 +70,7 @@ namespace MSDSHelper.DAL
                             user.Id = id;
                             user.Nome = reader["Nome"] == DBNull.Value ? string.Empty : reader["Nome"].ToString();
                             user.Login = reader["Login"] == DBNull.Value ? string.Empty : reader["Login"].ToString();
-                            user.Password = reader["Password"] == DBNull.Value ? string.Empty : reader["Passwrod"].ToString();
+                            //user.Password = reader["Password"] == DBNull.Value ? string.Empty : reader["Passwrod"].ToString();
                         }
                     }
                 }

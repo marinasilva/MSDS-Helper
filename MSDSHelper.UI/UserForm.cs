@@ -131,6 +131,7 @@ namespace MSDSHelper.UI
                 DataGridViewRow row = gridUsers.SelectedRows[0];
                 UserBLL _userBLL = new UserBLL();
                 LoadComponents("update", _userBLL.SelectByID(Convert.ToInt32(row.Cells["Cod"].Value)));
+                groupBox2.Enabled = true;
             }
             if (gridUsers.SelectedRows.Count == 0)
                 MessageBox.Show("É necessário selecionar um usuário para visualizar.");
@@ -188,8 +189,12 @@ namespace MSDSHelper.UI
             //if (txtsenha.Text != txtsenha2.Text)
             //{
             //    txtsenha2.BackColor = Color.FromArgb(240, 36, 77);
-
             //}
+            if (txtNome2.Text == string.Empty || txtLogin2.Text == String.Empty || txtsenha.Text == String.Empty)
+            {
+                MessageBox.Show("Preencha os dados corretamente para adicionar um usuário!");
+                return;
+            }
             User user = new User();
             user.Nome = txtNome2.Text;
             user.Login = txtLogin2.Text;
