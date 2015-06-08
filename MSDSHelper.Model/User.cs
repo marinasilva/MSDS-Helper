@@ -1,5 +1,8 @@
 ﻿
 
+using System;
+using System.Globalization;
+
 namespace MSDSHelper.Model
 {
     public class User
@@ -31,6 +34,23 @@ namespace MSDSHelper.Model
         {
             get { return _password; }
             set { _password = value; }
+        }
+
+        /// <summary>
+        /// Método responsavel por validar password do usuario com pelo menos 
+        /// </summary>
+        /// <returns></returns>
+        public bool IsValidPassword(out string msgm)
+        {
+            if (Password == string.Empty)
+                throw new Exception("Propriedade Password não foi inicializada.");
+            if (Password.Length < 6)
+            {
+                msgm = "A senha não pode ser menor que 6 caracteres.";
+                return false;
+            }
+            msgm = string.Empty;
+            return true;
         }
     }
 }

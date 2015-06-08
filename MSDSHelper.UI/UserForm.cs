@@ -25,19 +25,19 @@ namespace MSDSHelper.UI
             switch (type)
             {
                 case "update":
-                {
-                    groupBox1.Enabled = true;
-                    groupBox2.Enabled = false;
-                    break;
-                }
+                    {
+                        groupBox1.Enabled = true;
+                        groupBox2.Enabled = false;
+                        break;
+                    }
                 case "create":
-                {
-                    groupBox1.Enabled = false;
-                    groupBox2.Enabled = true;
-                    UserBLL _userBLL = new UserBLL();
-                    LoadComponents("create", _userBLL.SelectLast());
-                    break;
-                }
+                    {
+                        groupBox1.Enabled = false;
+                        groupBox2.Enabled = true;
+                        UserBLL _userBLL = new UserBLL();
+                        LoadComponents("create", _userBLL.SelectLast());
+                        break;
+                    }
             }
         }
 
@@ -81,7 +81,7 @@ namespace MSDSHelper.UI
                         search = item.Replace("Login ", "");
                         userList = _userBLL.SelectByLogin(search);
                     }
-                    x:
+                x:
                     if (userList.Count > 0)
                     {
                         LoadGrid(userList);
@@ -142,44 +142,57 @@ namespace MSDSHelper.UI
             switch (type)
             {
                 case "update":
-                {
-                    txtcod2.Enabled = false;
-                    txtnome2.Enabled = true;
-                    txtlogin2.Enabled = true;
-                    txtsenha.Enabled = true;
-                    txtsenha2.Enabled = true;
-                    btnCreate.Visible = false;
-                    btnUpdate.Visible = true;
+                    {
+                        txtcod2.Enabled = false;
+                        txtnome2.Enabled = true;
+                        txtlogin2.Enabled = true;
+                        txtsenha.Enabled = true;
+                        txtsenha2.Enabled = true;
+                        btnCreate.Visible = false;
+                        btnUpdate.Visible = true;
 
-                    if (user.Id <= 0 || user.Id == null)
-                        txtcod2.Text = "1";
-                    else
-                        txtcod2.Text = user.Id.ToString();
-                    txtnome2.Text = user.Nome;
-                    txtlogin2.Text = user.Login;
-                    txtsenha.Text = user.Password;
-                    txtsenha2.Text = user.Password;
-                    break;
-                }
+                        if (user.Id <= 0 || user.Id == null)
+                            txtcod2.Text = "1";
+                        else
+                            txtcod2.Text = user.Id.ToString();
+                        txtnome2.Text = user.Nome;
+                        txtlogin2.Text = user.Login;
+                        txtsenha.Text = user.Password;
+                        txtsenha2.Text = user.Password;
+                        break;
+                    }
                 case "create":
-                {
-                    txtcod2.Enabled = false;
-                    txtnome2.Enabled = true;
-                    txtlogin2.Enabled = true;
-                    txtsenha.Enabled = true;
-                    txtsenha2.Enabled = true;
-                    btnCreate.Visible = true;
-                    btnUpdate.Visible = false;
+                    {
+                        txtcod2.Enabled = false;
+                        txtnome2.Enabled = true;
+                        txtlogin2.Enabled = true;
+                        txtsenha.Enabled = true;
+                        txtsenha2.Enabled = true;
+                        btnCreate.Visible = true;
+                        btnUpdate.Visible = false;
 
-                    int cod = user.Id + 1;
-                    txtcod2.Text = cod.ToString();
-                    txtnome2.Text = string.Empty;
-                    txtlogin2.Text = string.Empty;
-                    txtsenha.Text = string.Empty;
-                    txtsenha2.Text = string.Empty;
-                    break;
-                }
+                        int cod = user == null ? 0 : user.Id + 1;
+                        txtcod2.Text = cod.ToString();
+                        txtnome2.Text = string.Empty;
+                        txtlogin2.Text = string.Empty;
+                        txtsenha.Text = string.Empty;
+                        txtsenha2.Text = string.Empty;
+                        break;
+                    }
             }
+        }
+
+        private void btnCreate_Click(object sender, EventArgs e)
+        {
+            if (txtsenha.Text == txtsenha2.Text)
+            {
+                txtsenha2.BackColor = Color.FromArgb(240, 36, 77);
+
+            }
+            User user = new User();
+            user.Nome = txtNome.Text;
+            user.Login = txtlogin.Text;
+            user.Password = txtsenha.Text;
         }
     }
 }

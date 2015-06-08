@@ -22,3 +22,15 @@ C:\Users\marina.motta\Documents\GitHub\MSDS-Helper\MSDSHelper.DAL\bin\Debug\Enti
 C:\Users\marina.motta\Documents\GitHub\MSDS-Helper\MSDSHelper.DAL\obj\Debug\MSDSHelper.DAL.csprojResolveAssemblyReference.cache
 C:\Users\marina.motta\Documents\GitHub\MSDS-Helper\MSDSHelper.DAL\obj\Debug\MSDSHelper.DAL.dll
 C:\Users\marina.motta\Documents\GitHub\MSDS-Helper\MSDSHelper.DAL\obj\Debug\MSDSHelper.DAL.pdb
+C:\Users\luis.moraes\Documents\GitHub\MSDS-Helper\MSDSHelper.DAL\bin\Debug\MSDSHelper.DAL.dll.config
+C:\Users\luis.moraes\Documents\GitHub\MSDS-Helper\MSDSHelper.DAL\bin\Debug\MSDSHelper.DAL.dll
+C:\Users\luis.moraes\Documents\GitHub\MSDS-Helper\MSDSHelper.DAL\bin\Debug\MSDSHelper.DAL.pdb
+C:\Users\luis.moraes\Documents\GitHub\MSDS-Helper\MSDSHelper.DAL\bin\Debug\EntityFramework.dll
+C:\Users\luis.moraes\Documents\GitHub\MSDS-Helper\MSDSHelper.DAL\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\luis.moraes\Documents\GitHub\MSDS-Helper\MSDSHelper.DAL\bin\Debug\MSDSHelper.Model.dll
+C:\Users\luis.moraes\Documents\GitHub\MSDS-Helper\MSDSHelper.DAL\bin\Debug\MSDSHelper.Model.pdb
+C:\Users\luis.moraes\Documents\GitHub\MSDS-Helper\MSDSHelper.DAL\bin\Debug\EntityFramework.xml
+C:\Users\luis.moraes\Documents\GitHub\MSDS-Helper\MSDSHelper.DAL\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\luis.moraes\Documents\GitHub\MSDS-Helper\MSDSHelper.DAL\obj\Debug\MSDSHelper.DAL.csprojResolveAssemblyReference.cache
+C:\Users\luis.moraes\Documents\GitHub\MSDS-Helper\MSDSHelper.DAL\obj\Debug\MSDSHelper.DAL.dll
+C:\Users\luis.moraes\Documents\GitHub\MSDS-Helper\MSDSHelper.DAL\obj\Debug\MSDSHelper.DAL.pdb
