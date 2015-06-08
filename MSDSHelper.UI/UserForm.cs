@@ -10,6 +10,9 @@ namespace MSDSHelper.UI
 {
     public partial class UserForm : Form
     {
+        User user = new User();
+        UserBLL userBLL = new UserBLL();
+
         public UserForm(string type)
         {
             InitializeComponent();
@@ -30,8 +33,10 @@ namespace MSDSHelper.UI
                     {
                         groupBox1.Enabled = false;
                         groupBox2.Enabled = true;
-                        UserBLL _userBLL = new UserBLL();
-                        LoadComponents("create", _userBLL.SelectLast());
+
+                        user.Id = userBLL.SelectIdentCurrent();
+                        
+                        LoadComponents("create", user);
                         break;
                     }
             }
@@ -140,8 +145,8 @@ namespace MSDSHelper.UI
                 case "update":
                     {
                         txtcod2.Enabled = false;
-                        txtnome2.Enabled = true;
-                        txtlogin2.Enabled = true;
+                        txtNome2.Enabled = true;
+                        txtLogin2.Enabled = true;
                         txtsenha.Enabled = true;
                         txtsenha2.Enabled = true;
                         btnCreate.Visible = false;
@@ -151,8 +156,8 @@ namespace MSDSHelper.UI
                             txtcod2.Text = "1";
                         else
                             txtcod2.Text = user.Id.ToString();
-                        txtnome2.Text = user.Nome;
-                        txtlogin2.Text = user.Login;
+                        txtNome2.Text = user.Nome;
+                        txtLogin2.Text = user.Login;
                         txtsenha.Text = user.Password;
                         txtsenha2.Text = user.Password;
                         break;
@@ -160,17 +165,17 @@ namespace MSDSHelper.UI
                 case "create":
                     {
                         txtcod2.Enabled = false;
-                        txtnome2.Enabled = true;
-                        txtlogin2.Enabled = true;
+                        txtNome2.Enabled = true;
+                        txtLogin2.Enabled = true;
                         txtsenha.Enabled = true;
                         txtsenha2.Enabled = true;
                         btnCreate.Visible = true;
                         btnUpdate.Visible = false;
 
-                        int cod = user == null ? 0 : user.Id + 1;
+                        int cod = user == null ? 0 : user.Id;
                         txtcod2.Text = cod.ToString();
-                        txtnome2.Text = string.Empty;
-                        txtlogin2.Text = string.Empty;
+                        txtNome2.Text = string.Empty;
+                        txtLogin2.Text = string.Empty;
                         txtsenha.Text = string.Empty;
                         txtsenha2.Text = string.Empty;
                         break;
@@ -180,15 +185,25 @@ namespace MSDSHelper.UI
 
         private void btnCreate_Click(object sender, EventArgs e)
         {
-            if (txtsenha.Text == txtsenha2.Text)
-            {
-                txtsenha2.BackColor = Color.FromArgb(240, 36, 77);
+            //if (txtsenha.Text != txtsenha2.Text)
+            //{
+            //    txtsenha2.BackColor = Color.FromArgb(240, 36, 77);
 
-            }
+            //}
             User user = new User();
-            user.Nome = txtNome.Text;
-            user.Login = txtlogin.Text;
+            user.Nome = txtNome2.Text;
+            user.Login = txtLogin2.Text;
             user.Password = txtsenha.Text;
+            UserBLL userBLL = new UserBLL();
+            try
+            {
+                userBLL.Adicionar(user);
+                MessageBox.Show("Usuário adicionado com sucesso!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Falha ao adicionar usuário: " + ex.Message);
+            }
         }
     }
 }

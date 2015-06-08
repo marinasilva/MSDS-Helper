@@ -43,9 +43,10 @@
             this.txtNome = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.lblmsgm = new System.Windows.Forms.Label();
             this.btnUpdate = new System.Windows.Forms.Button();
             this.btnCreate = new System.Windows.Forms.Button();
-            this.txtlogin2 = new System.Windows.Forms.TextBox();
+            this.txtLogin2 = new System.Windows.Forms.TextBox();
             this.txtsenha = new System.Windows.Forms.TextBox();
             this.txtcod2 = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -53,11 +54,10 @@
             this.label7 = new System.Windows.Forms.Label();
             this.txtsenha2 = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.txtnome2 = new System.Windows.Forms.TextBox();
+            this.txtNome2 = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.btnCancel = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
-            this.lblmsgm = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridUsers)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -195,7 +195,7 @@
             this.groupBox2.Controls.Add(this.lblmsgm);
             this.groupBox2.Controls.Add(this.btnUpdate);
             this.groupBox2.Controls.Add(this.btnCreate);
-            this.groupBox2.Controls.Add(this.txtlogin2);
+            this.groupBox2.Controls.Add(this.txtLogin2);
             this.groupBox2.Controls.Add(this.txtsenha);
             this.groupBox2.Controls.Add(this.txtcod2);
             this.groupBox2.Controls.Add(this.label6);
@@ -203,7 +203,7 @@
             this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Controls.Add(this.txtsenha2);
             this.groupBox2.Controls.Add(this.label4);
-            this.groupBox2.Controls.Add(this.txtnome2);
+            this.groupBox2.Controls.Add(this.txtNome2);
             this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Location = new System.Drawing.Point(29, 385);
             this.groupBox2.Name = "groupBox2";
@@ -211,6 +211,16 @@
             this.groupBox2.TabIndex = 3;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Informações do Usuário";
+            // 
+            // lblmsgm
+            // 
+            this.lblmsgm.AutoSize = true;
+            this.lblmsgm.Location = new System.Drawing.Point(33, 191);
+            this.lblmsgm.Name = "lblmsgm";
+            this.lblmsgm.Size = new System.Drawing.Size(42, 13);
+            this.lblmsgm.TabIndex = 10;
+            this.lblmsgm.Text = "{msgm}";
+            this.lblmsgm.Visible = false;
             // 
             // btnUpdate
             // 
@@ -231,12 +241,12 @@
             this.btnCreate.UseVisualStyleBackColor = true;
             this.btnCreate.Click += new System.EventHandler(this.btnCreate_Click);
             // 
-            // txtlogin2
+            // txtLogin2
             // 
-            this.txtlogin2.Location = new System.Drawing.Point(126, 83);
-            this.txtlogin2.Name = "txtlogin2";
-            this.txtlogin2.Size = new System.Drawing.Size(156, 20);
-            this.txtlogin2.TabIndex = 19;
+            this.txtLogin2.Location = new System.Drawing.Point(126, 83);
+            this.txtLogin2.Name = "txtLogin2";
+            this.txtLogin2.Size = new System.Drawing.Size(156, 20);
+            this.txtLogin2.TabIndex = 19;
             // 
             // txtsenha
             // 
@@ -297,12 +307,12 @@
             this.label4.TabIndex = 14;
             this.label4.Text = "Login:";
             // 
-            // txtnome2
+            // txtNome2
             // 
-            this.txtnome2.Location = new System.Drawing.Point(126, 57);
-            this.txtnome2.Name = "txtnome2";
-            this.txtnome2.Size = new System.Drawing.Size(156, 20);
-            this.txtnome2.TabIndex = 13;
+            this.txtNome2.Location = new System.Drawing.Point(126, 57);
+            this.txtNome2.Name = "txtNome2";
+            this.txtNome2.Size = new System.Drawing.Size(156, 20);
+            this.txtNome2.TabIndex = 13;
             // 
             // label5
             // 
@@ -332,16 +342,6 @@
             this.label9.Size = new System.Drawing.Size(96, 33);
             this.label9.TabIndex = 10;
             this.label9.Text = "Usuários";
-            // 
-            // lblmsgm
-            // 
-            this.lblmsgm.AutoSize = true;
-            this.lblmsgm.Location = new System.Drawing.Point(33, 191);
-            this.lblmsgm.Name = "lblmsgm";
-            this.lblmsgm.Size = new System.Drawing.Size(42, 13);
-            this.lblmsgm.TabIndex = 10;
-            this.lblmsgm.Text = "{msgm}";
-            this.lblmsgm.Visible = false;
             // 
             // UserForm
             // 
@@ -382,7 +382,7 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button btnUpdate;
         private System.Windows.Forms.Button btnCreate;
-        private System.Windows.Forms.TextBox txtlogin2;
+        private System.Windows.Forms.TextBox txtLogin2;
         private System.Windows.Forms.TextBox txtsenha;
         private System.Windows.Forms.TextBox txtcod2;
         private System.Windows.Forms.Label label6;
@@ -390,7 +390,7 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox txtsenha2;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox txtnome2;
+        private System.Windows.Forms.TextBox txtNome2;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Label label9;

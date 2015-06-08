@@ -35,5 +35,14 @@ namespace MSDSHelper.BLL
             return _userDAO.SelectLast();
         }
 
+        public void Adicionar(User user)
+        {
+            _userDAO.Adicionar(user);
+        }
+
+        public int SelectIdentCurrent()
+        {
+            return _userDAO.SelectIdentCurrent();
+        }
     }
 }

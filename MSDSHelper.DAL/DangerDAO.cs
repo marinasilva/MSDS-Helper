@@ -20,33 +20,40 @@ namespace MSDSHelper.DAL
         public void Adicionar(Danger danger)
         {
             SqlConnection connection = ContextFactory.Instancia();
-            SqlCommand command = new SqlCommand(_adicionar, connection);
-            command.Parameters.AddWithValue("@inalacao", danger.Inalacao);
-            command.Parameters.AddWithValue("@olhos", danger.ContatoOlhos);
-            command.Parameters.AddWithValue("@pele", danger.ContatoPele);
-            command.Parameters.AddWithValue("@ingestao", danger.Ingestao);
-            command.Parameters.AddWithValue("@descricao", danger.Descricao);
-            command.ExecuteNonQuery();
+            using (SqlCommand command = new SqlCommand(_adicionar, connection))
+            {
+                command.Parameters.AddWithValue("@inalacao", danger.Inalacao);
+                command.Parameters.AddWithValue("@olhos", danger.ContatoOlhos);
+                command.Parameters.AddWithValue("@pele", danger.ContatoPele);
+                command.Parameters.AddWithValue("@ingestao", danger.Ingestao);
+                command.Parameters.AddWithValue("@descricao", danger.Descricao);
+                command.ExecuteNonQuery();
+            }
         }
 
         public Danger SelectLast()
         {
             SqlConnection connection = ContextFactory.Instancia();
-            SqlCommand command = new SqlCommand(_selectLast, connection);
-            SqlDataReader reader = command.ExecuteReader();
-            Danger _danger = null;
-            if (reader.HasRows)
+            Danger _danger;
+            using (SqlCommand command = new SqlCommand(_selectLast, connection))
             {
-                while (reader.Read())
+                using (SqlDataReader reader = command.ExecuteReader())
                 {
-                    _danger = new Danger();
-                    _danger.Id = Convert.ToInt32(reader["idDanger"]);
-                    _danger.ContatoOlhos = reader["ContatoOlhos"].ToString();
-                    _danger.ContatoPele = reader["ContatoPele"].ToString();
-                    _danger.Inalacao = reader["Inalacao"].ToString();
-                    _danger.Ingestao = reader["Ingestao"].ToString();
-                    _danger.Incendio.Id = Convert.ToInt32(reader["idIncendio"]);
-                    _danger.Descricao = reader["Descricao"].ToString();
+                    _danger = null;
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            _danger = new Danger();
+                            _danger.Id = Convert.ToInt32(reader["idDanger"]);
+                            _danger.ContatoOlhos = reader["ContatoOlhos"].ToString();
+                            _danger.ContatoPele = reader["ContatoPele"].ToString();
+                            _danger.Inalacao = reader["Inalacao"].ToString();
+                            _danger.Ingestao = reader["Ingestao"].ToString();
+                            _danger.Incendio.Id = Convert.ToInt32(reader["idIncendio"]);
+                            _danger.Descricao = reader["Descricao"].ToString();
+                        }
+                    }
                 }
             }
             return _danger;
@@ -55,48 +62,57 @@ namespace MSDSHelper.DAL
         public void Delete(int id)
         {
             SqlConnection connection = ContextFactory.Instancia();
-            SqlCommand command = new SqlCommand(_delete, connection);
-            command.Parameters.AddWithValue("@idDanger", id);
-            command.ExecuteNonQuery();
+            using (SqlCommand command = new SqlCommand(_delete, connection))
+            {
+                command.Parameters.AddWithValue("@idDanger", id);
+                command.ExecuteNonQuery();
+            }
         }
 
         public void Update(Danger _danger)
         {
             SqlConnection connection = ContextFactory.Instancia();
-            SqlCommand command = new SqlCommand(_update, connection);
-            command.Parameters.AddWithValue("@idDanger", _danger.Id);
-            command.Parameters.AddWithValue("@inalacao", _danger.Inalacao);
-            command.Parameters.AddWithValue("@olhos", _danger.ContatoOlhos);
-            command.Parameters.AddWithValue("@pele", _danger.ContatoPele);
-            command.Parameters.AddWithValue("@ingestao", _danger.Ingestao);
-            command.Parameters.AddWithValue("@descricao", _danger.Descricao);
-            command.ExecuteNonQuery();
+            using (SqlCommand command = new SqlCommand(_update, connection))
+            {
+                command.Parameters.AddWithValue("@idDanger", _danger.Id);
+                command.Parameters.AddWithValue("@inalacao", _danger.Inalacao);
+                command.Parameters.AddWithValue("@olhos", _danger.ContatoOlhos);
+                command.Parameters.AddWithValue("@pele", _danger.ContatoPele);
+                command.Parameters.AddWithValue("@ingestao", _danger.Ingestao);
+                command.Parameters.AddWithValue("@descricao", _danger.Descricao);
+                command.ExecuteNonQuery();
+            }
         }
 
         public Danger SelectByID(int id)
         {
             SqlConnection connection = ContextFactory.Instancia();
-            SqlCommand command = new SqlCommand(_selectByID, connection);
-            command.Parameters.AddWithValue("@idDanger", id);
-            SqlDataReader reader = command.ExecuteReader();
-            Danger _danger = null;
-            if (reader.HasRows)
+            Danger _danger;
+            using (SqlCommand command = new SqlCommand(_selectByID, connection))
             {
-                while (reader.Read())
+                command.Parameters.AddWithValue("@idDanger", id);
+                using (SqlDataReader reader = command.ExecuteReader())
                 {
-                    _danger = new Danger();
-                    _danger.Id = Convert.ToInt32(reader["idDanger"]);
-                    _danger.ContatoOlhos = reader["ContatoOlhos"] == DBNull.Value
-                        ? string.Empty
-                        : reader["ContatoOlhos"].ToString();
-                    _danger.ContatoPele = reader["ContatoPele"] == DBNull.Value
-                        ? string.Empty
-                        : reader["ContatoPele"].ToString();
-                    _danger.Inalacao = reader["Inalacao"] == DBNull.Value ? string.Empty : reader["Inalacao"].ToString();
-                    _danger.Incendio.Id = reader["idIncendio"] == DBNull.Value
-                        ? 0
-                        : Convert.ToInt32(reader["idIncendio"]);
-                    _danger.Ingestao = reader["Ingestao"] == DBNull.Value ? string.Empty : reader["Ingestao"].ToString();
+                    _danger = null;
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            _danger = new Danger();
+                            _danger.Id = Convert.ToInt32(reader["idDanger"]);
+                            _danger.ContatoOlhos = reader["ContatoOlhos"] == DBNull.Value
+                                ? string.Empty
+                                : reader["ContatoOlhos"].ToString();
+                            _danger.ContatoPele = reader["ContatoPele"] == DBNull.Value
+                                ? string.Empty
+                                : reader["ContatoPele"].ToString();
+                            _danger.Inalacao = reader["Inalacao"] == DBNull.Value ? string.Empty : reader["Inalacao"].ToString();
+                            _danger.Incendio.Id = reader["idIncendio"] == DBNull.Value
+                                ? 0
+                                : Convert.ToInt32(reader["idIncendio"]);
+                            _danger.Ingestao = reader["Ingestao"] == DBNull.Value ? string.Empty : reader["Ingestao"].ToString();
+                        }
+                    }
                 }
             }
             return _danger;  

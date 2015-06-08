@@ -18,46 +18,57 @@ namespace MSDSHelper.DAL
         public void Adicionar(Unit unit)
         {
             SqlConnection connection = ContextFactory.Instancia();
-            SqlCommand command = new SqlCommand(_adicionar, connection);
-            command.Parameters.AddWithValue("@unidade", unit.Unidade);
-            command.Parameters.AddWithValue("@sigla", unit.Sigla);
-            command.ExecuteNonQuery();
+            using (SqlCommand command = new SqlCommand(_adicionar, connection))
+            {
+                command.Parameters.AddWithValue("@unidade", unit.Unidade);
+                command.Parameters.AddWithValue("@sigla", unit.Sigla);
+                command.ExecuteNonQuery();
+            }
         }
 
         public void Delete(int id)
         {
             SqlConnection connection = ContextFactory.Instancia();
-            SqlCommand command = new SqlCommand(_delete, connection);
-            command.Parameters.AddWithValue("idUnidade", id);
-            command.ExecuteNonQuery();
+            using (SqlCommand command = new SqlCommand(_delete, connection))
+            {
+                command.Parameters.AddWithValue("idUnidade", id);
+                command.ExecuteNonQuery();
+            }
         }
 
         public void Update(Unit unit)
         {
             SqlConnection connection = ContextFactory.Instancia();
-            SqlCommand command = new SqlCommand(_update, connection);
-            command.Parameters.AddWithValue("@unidade", unit.Unidade);
-            command.Parameters.AddWithValue("@sigla", unit.Sigla);
-            command.Parameters.AddWithValue("@idUnidade", unit.Id);
-            command.ExecuteNonQuery();
+            using (SqlCommand command = new SqlCommand(_update, connection))
+            {
+                command.Parameters.AddWithValue("@unidade", unit.Unidade);
+                command.Parameters.AddWithValue("@sigla", unit.Sigla);
+                command.Parameters.AddWithValue("@idUnidade", unit.Id);
+                command.ExecuteNonQuery();
+            }
         }
 
         public Unit SelectByID(int id)
         {
             SqlConnection connection = ContextFactory.Instancia();
-            SqlCommand command = new SqlCommand(_selectByID, connection);
-            command.Parameters.AddWithValue("@idUnidade", id);
-            SqlDataReader reader = command.ExecuteReader();
-            Unit unit = null;
-            if (reader.HasRows)
+            Unit unit;
+            using (SqlCommand command = new SqlCommand(_selectByID, connection))
             {
-                while (reader.Read())
+                command.Parameters.AddWithValue("@idUnidade", id);
+                using (SqlDataReader reader = command.ExecuteReader())
                 {
-                    unit = new Unit();
-                    unit.Id = Convert.ToInt32(reader["idUnidade"]);
-                    unit.Unidade = reader["Unidade"] == DBNull.Value ? string.Empty : reader["Unidade"].ToString();
-                    unit.Sigla = reader["Sigla"] == DBNull.Value ? string.Empty : reader["Sigla"].ToString();
-                }   
+                    unit = null;
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            unit = new Unit();
+                            unit.Id = Convert.ToInt32(reader["idUnidade"]);
+                            unit.Unidade = reader["Unidade"] == DBNull.Value ? string.Empty : reader["Unidade"].ToString();
+                            unit.Sigla = reader["Sigla"] == DBNull.Value ? string.Empty : reader["Sigla"].ToString();
+                        }   
+                    }
+                }
             }
             return unit;
         }
@@ -65,19 +76,24 @@ namespace MSDSHelper.DAL
         public List<Unit> SelectAll()
         {
             SqlConnection connection = ContextFactory.Instancia();
-            SqlCommand command = new SqlCommand(_selectAll, connection);
-            SqlDataReader reader = command.ExecuteReader();
-            List<Unit> _unitList = new List<Unit>();
-            Unit _unit = null;
-            if (reader.HasRows)
+            List<Unit> _unitList;
+            using (SqlCommand command = new SqlCommand(_selectAll, connection))
             {
-                while (reader.Read())
+                using (SqlDataReader reader = command.ExecuteReader())
                 {
-                    _unit = new Unit();
-                    _unit.Id = Convert.ToInt32(reader["idUnidade"]);
-                    _unit.Unidade = reader["Unidade"] == DBNull.Value ? string.Empty : reader["Unidade"].ToString();
-                    _unit.Sigla = reader["Sigla"] == DBNull.Value ? string.Empty : reader["Sigla"].ToString();
-                    _unitList.Add(_unit);
+                    _unitList = new List<Unit>();
+                    Unit _unit = null;
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            _unit = new Unit();
+                            _unit.Id = Convert.ToInt32(reader["idUnidade"]);
+                            _unit.Unidade = reader["Unidade"] == DBNull.Value ? string.Empty : reader["Unidade"].ToString();
+                            _unit.Sigla = reader["Sigla"] == DBNull.Value ? string.Empty : reader["Sigla"].ToString();
+                            _unitList.Add(_unit);
+                        }
+                    }
                 }
             }
             return _unitList;

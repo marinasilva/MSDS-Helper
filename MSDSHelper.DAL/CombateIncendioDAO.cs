@@ -20,26 +20,33 @@ namespace MSDSHelper.DAL
         public void Adicionar(CombateIncendio combateIncendio)
         {
             SqlConnection connection = ContextFactory.Instancia();
-            SqlCommand command = new SqlCommand(_adicionar, connection);
-            command.Parameters.AddWithValue("@meioApropriado", combateIncendio.MeioApropriado);
-            command.Parameters.AddWithValue("@perigoEspecifico", combateIncendio.PerigoEspecifico);
-            command.ExecuteNonQuery();
+            using (SqlCommand command = new SqlCommand(_adicionar, connection))
+            {
+                command.Parameters.AddWithValue("@meioApropriado", combateIncendio.MeioApropriado);
+                command.Parameters.AddWithValue("@perigoEspecifico", combateIncendio.PerigoEspecifico);
+                command.ExecuteNonQuery();
+            }
         }
 
         public CombateIncendio SelectLast()
         {
             SqlConnection connection = ContextFactory.Instancia();
-            SqlCommand command = new SqlCommand(_selectLast, connection);
-            SqlDataReader reader = command.ExecuteReader();
-            CombateIncendio _combate = null;
-            if (reader.HasRows)
+            CombateIncendio _combate;
+            using (SqlCommand command = new SqlCommand(_selectLast, connection))
             {
-                while (reader.Read())
+                using (SqlDataReader reader = command.ExecuteReader())
                 {
-                    _combate = new CombateIncendio();
-                    _combate.Id = Convert.ToInt32(reader["idIncendio"]);
-                    _combate.MeioApropriado = reader["MeioApropriado"].ToString();
-                    _combate.PerigoEspecifico = reader["PerigoEspecifico"].ToString();
+                    _combate = null;
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            _combate = new CombateIncendio();
+                            _combate.Id = Convert.ToInt32(reader["idIncendio"]);
+                            _combate.MeioApropriado = reader["MeioApropriado"].ToString();
+                            _combate.PerigoEspecifico = reader["PerigoEspecifico"].ToString();
+                        }
+                    }
                 }
             }
             return _combate;
@@ -48,19 +55,23 @@ namespace MSDSHelper.DAL
         public void Delete(int id)
         {
             SqlConnection connection = ContextFactory.Instancia();
-            SqlCommand command = new SqlCommand(_delete, connection);
-            command.Parameters.AddWithValue("@idIncendio", id);
-            command.ExecuteNonQuery();
+            using (SqlCommand command = new SqlCommand(_delete, connection))
+            {
+                command.Parameters.AddWithValue("@idIncendio", id);
+                command.ExecuteNonQuery();
+            }
         }
 
         public void Update(CombateIncendio _combate)
         {
             SqlConnection connection = ContextFactory.Instancia();
-            SqlCommand command = new SqlCommand(_update, connection);
-            command.Parameters.AddWithValue("@meioApropriado", _combate.MeioApropriado);
-            command.Parameters.AddWithValue("@perigoEspecifico", _combate.PerigoEspecifico);
-            command.Parameters.AddWithValue("@idIncendio", _combate.Id);
-            command.ExecuteNonQuery();
+            using (SqlCommand command = new SqlCommand(_update, connection))
+            {
+                command.Parameters.AddWithValue("@meioApropriado", _combate.MeioApropriado);
+                command.Parameters.AddWithValue("@perigoEspecifico", _combate.PerigoEspecifico);
+                command.Parameters.AddWithValue("@idIncendio", _combate.Id);
+                command.ExecuteNonQuery();
+            }
         }
 
         public CombateIncendio SelectByID(int id)
