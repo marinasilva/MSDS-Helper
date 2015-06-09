@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Windows.Forms;
 using MSDSHelper.BLL;
 using MSDSHelper.Model;
@@ -132,6 +131,7 @@ namespace MSDSHelper.UI
                 UserBLL _userBLL = new UserBLL();
                 LoadComponents("update", _userBLL.SelectByID(Convert.ToInt32(row.Cells["Cod"].Value)));
                 groupBox2.Enabled = true;
+                btnUpdate.Enabled = true;
             }
             if (gridUsers.SelectedRows.Count == 0)
                 MessageBox.Show("É necessário selecionar um usuário para visualizar.");
@@ -208,6 +208,34 @@ namespace MSDSHelper.UI
             catch (Exception ex)
             {
                 MessageBox.Show("Falha ao adicionar usuário: " + ex.Message);
+            }
+        }
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            if (txtNome2.Text == string.Empty || txtLogin2.Text == String.Empty || txtsenha.Text == String.Empty)
+            {
+                MessageBox.Show("Preencha os dados corretamente para atualizar o usuário!");
+                return;
+            }
+            User user = new User();
+            user.Nome = txtNome2.Text;
+            user.Login = txtLogin2.Text;
+            user.Password = txtsenha.Text;
+            UserBLL userBLL = new UserBLL();
+            try
+            {
+                userBLL.Update(user);
+                MessageBox.Show("Usuário atualizado com sucesso!");
+                txtNome2.Text = string.Empty;
+                txtLogin2.Text = string.Empty;
+                txtsenha.Text = string.Empty;
+                txtsenha2.Text = string.Empty;
+                btnUpdate.Enabled = false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Falha ao atualizar usuário: " + ex.Message);
             }
         }
     }

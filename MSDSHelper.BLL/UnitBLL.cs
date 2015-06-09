@@ -35,5 +35,10 @@ namespace MSDSHelper.BLL
         {
             return _unitDAO.SelectAll();
         }
+
+        public Unit SelectByName(string unit)
+        {
+            return _unitDAO.SelectByName(unit);
+        }
     }
 }

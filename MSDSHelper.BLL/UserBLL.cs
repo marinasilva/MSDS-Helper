@@ -44,5 +44,10 @@ namespace MSDSHelper.BLL
         {
             return _userDAO.SelectIdentCurrent();
         }
+
+        public void Update(User user)
+        {
+            _userDAO.Update(user);
+        }
     }
 }

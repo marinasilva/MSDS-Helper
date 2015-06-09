@@ -106,6 +106,7 @@
             this.cmbUnit.Name = "cmbUnit";
             this.cmbUnit.Size = new System.Drawing.Size(100, 21);
             this.cmbUnit.TabIndex = 7;
+            this.cmbUnit.SelectedIndexChanged += new System.EventHandler(this.cmbUnit_SelectedIndexChanged);
             // 
             // UnitForm
             // 

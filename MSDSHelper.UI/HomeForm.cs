@@ -43,7 +43,7 @@ namespace MSDSHelper.UI
             if (searchPanel.HasChildren)
                 searchPanel.Controls.Clear();
 
-            _login = new LoginForm("create");
+            _login = new LoginForm("createFicha");
             _login.TopLevel = false;
             _login.Parent = searchPanel;
             _login.Disposed += login_Disposed;
@@ -54,23 +54,53 @@ namespace MSDSHelper.UI
         {
             if (_login.SucessLogin)
             {
-                if (_login.type == "create")
+                switch (_login.type)
                 {
-                    ElementBLL elementBLL = new ElementBLL();
-                    if (elementBLL.SelectCount() > 0)
-                    {
-                        FichaForm ficha = new FichaForm("create", false);
-                        ficha.TopLevel = false;
-                        ficha.Parent = searchPanel;
-                        ficha.Show();
-                    }
-                    else
-                    {
-                        FichaForm ficha = new FichaForm("create", true);
-                        ficha.TopLevel = false;
-                        ficha.Parent = searchPanel;
-                        ficha.Show();
-                    }
+                    case "createFicha":
+                        ElementBLL elementBLL = new ElementBLL();
+                        if (elementBLL.SelectCount() > 0)
+                        {
+                            FichaForm ficha = new FichaForm("create", false);
+                            ficha.TopLevel = false;
+                            ficha.Parent = searchPanel;
+                            ficha.Show();
+                        }
+                        else
+                        {
+                            FichaForm ficha = new FichaForm("create", true);
+                            ficha.TopLevel = false;
+                            ficha.Parent = searchPanel;
+                            ficha.Show();
+                        }
+                        break;
+
+                    case "updateFicha":
+                        SearchForm search = new SearchForm("update");
+                        search.TopLevel = false;
+                        search.Parent = searchPanel;
+                        search.Show();
+                        break;
+
+                    case "updateUser":
+                        UserForm user = new UserForm("update");
+                        user.TopLevel = false;
+                        user.Parent = userPanel;
+                        user.Show();
+                        break;
+
+                    case "createUser":
+                        user = new UserForm("create");
+                        user.TopLevel = false;
+                        user.Parent = userPanel;
+                        user.Show();
+                        break;
+
+                    case "createUnit":
+                        UnitForm unit = new UnitForm();
+                        unit.TopLevel = false;
+                        unit.Parent = userPanel;
+                        unit.Show();
+                        break;
                 }
             }
         }
@@ -80,10 +110,11 @@ namespace MSDSHelper.UI
             if (searchPanel.HasChildren)
                 searchPanel.Controls.Clear();
 
-            SearchForm search = new SearchForm("update");
-            search.TopLevel = false;
-            search.Parent = searchPanel;
-            search.Show();
+            _login = new LoginForm("updateFicha");
+            _login.TopLevel = false;
+            _login.Parent = searchPanel;
+            _login.Disposed += login_Disposed;
+            _login.Show();
         }
 
         private void atualizarUsuárioToolStripMenuItem_Click(object sender, EventArgs e)
@@ -91,10 +122,11 @@ namespace MSDSHelper.UI
             if (userPanel.HasChildren)
                 userPanel.Controls.Clear();
 
-            UserForm user = new UserForm("update");
-            user.TopLevel = false;
-            user.Parent = userPanel;
-            user.Show();
+            _login = new LoginForm("updateUser");
+            _login.TopLevel = false;
+            _login.Parent = userPanel;
+            _login.Disposed += login_Disposed;
+            _login.Show();
         }
 
         private void cadastrarUsuárioToolStripMenuItem_Click(object sender, EventArgs e)
@@ -102,10 +134,23 @@ namespace MSDSHelper.UI
             if (userPanel.HasChildren)
                 userPanel.Controls.Clear();
 
-            UserForm user = new UserForm("create");
-            user.TopLevel = false;
-            user.Parent = userPanel;
-            user.Show();
+            _login = new LoginForm("createUser");
+            _login.TopLevel = false;
+            _login.Parent = userPanel;
+            _login.Disposed += login_Disposed;
+            _login.Show();
+        }
+
+        private void cadastrarUnidadeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (userPanel.HasChildren)
+                userPanel.Controls.Clear();
+
+            _login = new LoginForm("createUnit");
+            _login.TopLevel = false;
+            _login.Parent = userPanel;
+            _login.Disposed += login_Disposed;
+            _login.Show();
         }
     }
 }
