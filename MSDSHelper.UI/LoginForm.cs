@@ -50,7 +50,7 @@ namespace MSDSHelper.UI
             }
             else
             {
-                UserBLL _user = new UserBLL();
+                UserService _user = new UserService();
                 if (_user.ValidatePassword(txtLogin.Text, txtPass.Text))
                 {
                     SucessLogin = true;

@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using MSDSHelper.DAL;
 using MSDSHelper.Model;
 
 namespace MSDSHelper.BLL
 {
-    public class UnitBLL : IBLL<Unit>
+    public class UnitService : IBLL<Unit>
     {
         private UnitDAO _unitDAO = new UnitDAO();
         

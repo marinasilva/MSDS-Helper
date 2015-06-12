@@ -7,7 +7,7 @@ using MSDSHelper.Model;
 
 namespace MSDSHelper.BLL
 {
-    public class DangerBLL : IBLL<Danger>
+    public class DangerService : IBLL<Danger>
     {
         private DangerDAO _danger = new DangerDAO();
 

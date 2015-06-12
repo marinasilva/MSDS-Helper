@@ -10,7 +10,7 @@ namespace MSDSHelper.UI
     public partial class UserForm : Form
     {
         User user = new User();
-        UserBLL userBLL = new UserBLL();
+        UserService userBLL = new UserService();
 
         public UserForm(string type)
         {
@@ -58,7 +58,7 @@ namespace MSDSHelper.UI
             List<string> valide = ValidateData();
             if (valide.Count > 0)
             {
-                UserBLL _userBLL = new UserBLL();
+                UserService _userBLL = new UserService();
                 List<User> userList = new List<User>();
 
                 foreach (string item in valide)
@@ -128,7 +128,7 @@ namespace MSDSHelper.UI
             if (gridUsers.SelectedRows.Count == 1)
             {
                 DataGridViewRow row = gridUsers.SelectedRows[0];
-                UserBLL _userBLL = new UserBLL();
+                UserService _userBLL = new UserService();
                 LoadComponents("update", _userBLL.SelectByID(Convert.ToInt32(row.Cells["Cod"].Value)));
                 groupBox2.Enabled = true;
                 btnUpdate.Enabled = true;
@@ -199,7 +199,7 @@ namespace MSDSHelper.UI
             user.Nome = txtNome2.Text;
             user.Login = txtLogin2.Text;
             user.Password = txtsenha.Text;
-            UserBLL userBLL = new UserBLL();
+            UserService userBLL = new UserService();
             try
             {
                 userBLL.Adicionar(user);
@@ -222,7 +222,7 @@ namespace MSDSHelper.UI
             user.Nome = txtNome2.Text;
             user.Login = txtLogin2.Text;
             user.Password = txtsenha.Text;
-            UserBLL userBLL = new UserBLL();
+            UserService userBLL = new UserService();
             try
             {
                 userBLL.Update(user);

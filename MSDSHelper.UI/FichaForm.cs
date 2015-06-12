@@ -8,7 +8,7 @@ namespace MSDSHelper.UI
 {
     public partial class FichaForm : Form
     {
-        ElementBLL _elementBLL = new ElementBLL();
+        ElementService _elementBLL = new ElementService();
         Element element = new Element();
 
 
@@ -159,9 +159,9 @@ namespace MSDSHelper.UI
                 Danger _danger = PopulateDanger();
                 CombateIncendio _combateIncendio = PopulateCombateIncendio();
 
-                CombateIncendioBLL _combateIncendioBLL = new CombateIncendioBLL();
-                DangerBLL _dangerBLL = new DangerBLL();
-                ElementBLL _elementBLL = new ElementBLL();
+                CombateIncendioService _combateIncendioBLL = new CombateIncendioService();
+                DangerService _dangerBLL = new DangerService();
+                ElementService _elementBLL = new ElementService();
 
                 try
                 {
@@ -218,9 +218,9 @@ namespace MSDSHelper.UI
                 Danger _danger = PopulateDanger();
                 CombateIncendio _combateIncendio = PopulateCombateIncendio();
 
-                CombateIncendioBLL _combateIncendioBLL = new CombateIncendioBLL();
-                DangerBLL _dangerBLL = new DangerBLL();
-                ElementBLL _elementBLL = new ElementBLL();
+                CombateIncendioService _combateIncendioBLL = new CombateIncendioService();
+                DangerService _dangerBLL = new DangerService();
+                ElementService _elementBLL = new ElementService();
 
                 try
                 {

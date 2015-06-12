@@ -1,10 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using MSDSHelper.BLL;
 
@@ -16,15 +10,9 @@ namespace MSDSHelper.UI
         public HomeForm()
         {
             InitializeComponent();
-            FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
             MinimizeBox = false;
-        }
-
-        private void btnUpdate_Click(object sender, EventArgs e)
-        {
-            LoginForm login = new LoginForm("update");
-            login.ShowDialog();
         }
 
         private void pesquisarFichaToolStripMenuItem_Click(object sender, EventArgs e)
@@ -57,7 +45,7 @@ namespace MSDSHelper.UI
                 switch (_login.type)
                 {
                     case "createFicha":
-                        ElementBLL elementBLL = new ElementBLL();
+                        ElementService elementBLL = new ElementService();
                         if (elementBLL.SelectCount() > 0)
                         {
                             FichaForm ficha = new FichaForm("create", false);

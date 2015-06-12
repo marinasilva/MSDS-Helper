@@ -9,7 +9,7 @@ namespace MSDSHelper.UI
     public partial class UnitForm : Form
     {
         private Unit _unit = null;
-        private UnitBLL _unitBLL = null;
+        private UnitService _unitBLL = null;
         public UnitForm()
         {
             InitializeComponent();
@@ -18,7 +18,7 @@ namespace MSDSHelper.UI
 
         private void LoadUnit()
         {
-            _unitBLL = new UnitBLL();
+            _unitBLL = new UnitService();
             List<Unit> unitList = _unitBLL.SelectAll();
             if (unitList.Count == 0) return;
             foreach (Unit unit in unitList)
@@ -37,7 +37,7 @@ namespace MSDSHelper.UI
             ValidateUnit();
             if (_unit != null)
             {
-                _unitBLL = new UnitBLL();
+                _unitBLL = new UnitService();
                 if (cmbUnit.SelectedIndex != -1)
                 {
                     try

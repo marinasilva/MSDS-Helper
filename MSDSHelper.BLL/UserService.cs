@@ -4,7 +4,7 @@ using MSDSHelper.Model;
 
 namespace MSDSHelper.BLL
 {
-    public class UserBLL 
+    public class UserService 
     {
         UserDAO _userDAO = new UserDAO();
         

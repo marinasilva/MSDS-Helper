@@ -13,9 +13,9 @@ namespace MSDSHelper.UI
 {
     public partial class SearchForm : Form
     {
-        CombateIncendioBLL _combateIncendioBLL = new CombateIncendioBLL();
-        ElementBLL _elementBLL = new ElementBLL();
-        DangerBLL _dangerBLL = new DangerBLL();
+        CombateIncendioService _combateIncendioBLL = new CombateIncendioService();
+        ElementService _elementBLL = new ElementService();
+        DangerService _dangerBLL = new DangerService();
         private Point _desiredLocation;
 
         public SearchForm(string type)
@@ -136,7 +136,7 @@ namespace MSDSHelper.UI
             List<string> valide = ValidateItems();
             if (valide.Count > 0)
             {
-                ElementBLL _elementBLL = new ElementBLL();
+                ElementService _elementBLL = new ElementService();
                 Element _element = new Element();
                 List<Element> elementList = new List<Element>();
 
@@ -219,7 +219,7 @@ namespace MSDSHelper.UI
             if (gridSearch.SelectedRows.Count == 1)
             {
                 DataGridViewRow row = gridSearch.SelectedRows[0];
-                ElementBLL _elementBLL = new ElementBLL();
+                ElementService _elementBLL = new ElementService();
                 LoadComponents("view", _elementBLL.SelectByID(Convert.ToInt32(row.Cells["Cod"].Value)));
             }
             if (gridSearch.SelectedRows.Count == 0)

@@ -7,7 +7,7 @@ using MSDSHelper.Model;
 
 namespace MSDSHelper.BLL
 {
-    public class ElementBLL : IBLL<Element>
+    public class ElementService : IBLL<Element>
     {
         private ElementDAO _elementDAO = new ElementDAO();
        

@@ -58,13 +58,13 @@
     <Compile Include="UserDAOTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MSDSHelper.BLL\MSDSHelper.BLL.csproj">
+    <ProjectReference Include="..\MSDSHelper.BLL\MSDSHelper.Service.csproj">
       <Project>{235fa7d3-979f-40de-bf6f-f5280f74cfc7}</Project>
-      <Name>MSDSHelper.BLL</Name>
+      <Name>MSDSHelper.Service</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MSDSHelper.DAL\MSDSHelper.DAL.csproj">
+    <ProjectReference Include="..\MSDSHelper.DAL\MSDSHelper.DataAccess.csproj">
       <Project>{cbe69bd8-c0c2-47a1-95ad-f110c324624c}</Project>
-      <Name>MSDSHelper.DAL</Name>
+      <Name>MSDSHelper.DataAccess</Name>
     </ProjectReference>
     <ProjectReference Include="..\MSDSHelper.Model\MSDSHelper.Model.csproj">
       <Project>{53539709-26DB-40D1-BEDD-501421F08657}</Project>

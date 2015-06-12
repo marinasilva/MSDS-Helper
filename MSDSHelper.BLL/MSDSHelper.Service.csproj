@@ -39,18 +39,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CombateIncendioBLL.cs" />
-    <Compile Include="DangerBLL.cs" />
-    <Compile Include="ElementBLL.cs" />
+    <Compile Include="CombateIncendioService.cs" />
+    <Compile Include="DangerService.cs" />
+    <Compile Include="ElementService.cs" />
     <Compile Include="IBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UnitBLL.cs" />
-    <Compile Include="UserBLL.cs" />
+    <Compile Include="UnitService.cs" />
+    <Compile Include="UserService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MSDSHelper.DAL\MSDSHelper.DAL.csproj">
+    <ProjectReference Include="..\MSDSHelper.DAL\MSDSHelper.DataAccess.csproj">
       <Project>{CBE69BD8-C0C2-47A1-95AD-F110C324624C}</Project>
-      <Name>MSDSHelper.DAL</Name>
+      <Name>MSDSHelper.DataAccess</Name>
     </ProjectReference>
     <ProjectReference Include="..\MSDSHelper.Model\MSDSHelper.Model.csproj">
       <Project>{53539709-26DB-40D1-BEDD-501421F08657}</Project>
