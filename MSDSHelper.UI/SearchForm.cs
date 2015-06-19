@@ -169,10 +169,7 @@ namespace MSDSHelper.UI
 
                 x:
                     if (elementList.Count > 0)
-                    {
-
                         LoadGrid(elementList);
-                    }
                     else
                         MessageBox.Show("Não foi encontrado nenhum registro com os critérios informados!");
                 }
@@ -183,16 +180,18 @@ namespace MSDSHelper.UI
 
         private void LoadGrid(List<Element> elementList)
         {
+            gridSearch.Rows.Clear();
+            gridSearch.Columns.Clear();
             BindingSource bindingSource = new BindingSource();
 
-            gridSearch.Columns[0].Name = "Cod";
+           /* gridSearch.Columns[0].Name = "Cod";
             gridSearch.Columns[0].DataPropertyName = "Id";
             gridSearch.Columns[1].Name = "NomeProduto";
             gridSearch.Columns[1].DataPropertyName = "NomeProduto";
             gridSearch.Columns[2].Name = "Fabricante";
             gridSearch.Columns[2].DataPropertyName = "Fabricante";
             gridSearch.Columns[3].Name = "FormulaMolecular";
-            gridSearch.Columns[3].DataPropertyName = "FormulaMolecular";
+            gridSearch.Columns[3].DataPropertyName = "FormulaMolecular";*/
 
             bindingSource.DataSource = elementList;
             gridSearch.DataSource = bindingSource;
@@ -220,7 +219,7 @@ namespace MSDSHelper.UI
             {
                 DataGridViewRow row = gridSearch.SelectedRows[0];
                 ElementService _elementBLL = new ElementService();
-                LoadComponents("view", _elementBLL.SelectByID(Convert.ToInt32(row.Cells["Cod"].Value)));
+                LoadComponents("view", _elementBLL.SelectByID(Convert.ToInt32(row.Cells["Id"].Value)));
             }
             if (gridSearch.SelectedRows.Count == 0)
                 MessageBox.Show("É necessário selecionar uma ficha para visualizar.");
