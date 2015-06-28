@@ -153,7 +153,7 @@ namespace MSDSHelper.UI
                         btnCreate.Visible = false;
                         btnUpdate.Visible = true;
 
-                        if (user.Id <= 0 || user.Id == null)
+                        if (user.Id <= 0)
                             txtcod2.Text = "1";
                         else
                             txtcod2.Text = user.Id.ToString();
@@ -186,23 +186,17 @@ namespace MSDSHelper.UI
 
         private void btnCreate_Click(object sender, EventArgs e)
         {
-            //if (txtsenha.Text != txtsenha2.Text)
-            //{
-            //    txtsenha2.BackColor = Color.FromArgb(240, 36, 77);
-            //}
+            
             if (txtNome2.Text == string.Empty || txtLogin2.Text == String.Empty || txtsenha.Text == String.Empty)
             {
                 MessageBox.Show("Preencha os dados corretamente para adicionar um usuário!");
                 return;
             }
-            User user = new User();
-            user.Nome = txtNome2.Text;
-            user.Login = txtLogin2.Text;
-            user.Password = txtsenha.Text;
-            UserService userBLL = new UserService();
+            var user1 = new User {Nome = txtNome2.Text, Login = txtLogin2.Text, Password = txtsenha.Text};
+            var userService = new UserService();
             try
             {
-                userBLL.Adicionar(user);
+                userService.Adicionar(user1);
                 MessageBox.Show("Usuário adicionado com sucesso!");
             }
             catch (Exception ex)

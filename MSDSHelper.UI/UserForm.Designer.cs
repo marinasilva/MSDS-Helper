@@ -77,7 +77,7 @@
             this.txtCod.Location = new System.Drawing.Point(52, 25);
             this.txtCod.Name = "txtCod";
             this.txtCod.Size = new System.Drawing.Size(55, 20);
-            this.txtCod.TabIndex = 1;
+            this.txtCod.TabIndex = 0;
             // 
             // groupBox1
             // 
@@ -103,7 +103,7 @@
             this.btnOK.Location = new System.Drawing.Point(381, 256);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(75, 23);
-            this.btnOK.TabIndex = 9;
+            this.btnOK.TabIndex = 5;
             this.btnOK.Text = "OK";
             this.btnOK.UseVisualStyleBackColor = true;
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
@@ -143,7 +143,7 @@
             this.btnClean.Location = new System.Drawing.Point(381, 60);
             this.btnClean.Name = "btnClean";
             this.btnClean.Size = new System.Drawing.Size(75, 23);
-            this.btnClean.TabIndex = 7;
+            this.btnClean.TabIndex = 4;
             this.btnClean.Text = "Limpar";
             this.btnClean.UseVisualStyleBackColor = true;
             this.btnClean.Click += new System.EventHandler(this.btnClean_Click);
@@ -153,7 +153,7 @@
             this.btnSearch.Location = new System.Drawing.Point(300, 60);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(75, 23);
-            this.btnSearch.TabIndex = 6;
+            this.btnSearch.TabIndex = 3;
             this.btnSearch.Text = "Pesquisar";
             this.btnSearch.UseVisualStyleBackColor = true;
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
@@ -163,7 +163,7 @@
             this.txtlogin.Location = new System.Drawing.Point(342, 25);
             this.txtlogin.Name = "txtlogin";
             this.txtlogin.Size = new System.Drawing.Size(114, 20);
-            this.txtlogin.TabIndex = 5;
+            this.txtlogin.TabIndex = 2;
             // 
             // label3
             // 
@@ -179,7 +179,7 @@
             this.txtNome.Location = new System.Drawing.Point(168, 25);
             this.txtNome.Name = "txtNome";
             this.txtNome.Size = new System.Drawing.Size(114, 20);
-            this.txtNome.TabIndex = 3;
+            this.txtNome.TabIndex = 1;
             // 
             // label2
             // 
@@ -227,7 +227,7 @@
             this.btnUpdate.Location = new System.Drawing.Point(303, 186);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(75, 23);
-            this.btnUpdate.TabIndex = 20;
+            this.btnUpdate.TabIndex = 5;
             this.btnUpdate.Text = "Atualizar";
             this.btnUpdate.UseVisualStyleBackColor = true;
             this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
@@ -237,7 +237,7 @@
             this.btnCreate.Location = new System.Drawing.Point(381, 186);
             this.btnCreate.Name = "btnCreate";
             this.btnCreate.Size = new System.Drawing.Size(75, 23);
-            this.btnCreate.TabIndex = 10;
+            this.btnCreate.TabIndex = 6;
             this.btnCreate.Text = "Cadastrar";
             this.btnCreate.UseVisualStyleBackColor = true;
             this.btnCreate.Click += new System.EventHandler(this.btnCreate_Click);
@@ -247,7 +247,7 @@
             this.txtLogin2.Location = new System.Drawing.Point(126, 83);
             this.txtLogin2.Name = "txtLogin2";
             this.txtLogin2.Size = new System.Drawing.Size(156, 20);
-            this.txtLogin2.TabIndex = 19;
+            this.txtLogin2.TabIndex = 2;
             // 
             // txtsenha
             // 
@@ -255,14 +255,14 @@
             this.txtsenha.Name = "txtsenha";
             this.txtsenha.PasswordChar = '*';
             this.txtsenha.Size = new System.Drawing.Size(156, 20);
-            this.txtsenha.TabIndex = 18;
+            this.txtsenha.TabIndex = 3;
             // 
             // txtcod2
             // 
             this.txtcod2.Location = new System.Drawing.Point(126, 31);
             this.txtcod2.Name = "txtcod2";
             this.txtcod2.Size = new System.Drawing.Size(55, 20);
-            this.txtcod2.TabIndex = 11;
+            this.txtcod2.TabIndex = 0;
             // 
             // label6
             // 
@@ -297,7 +297,7 @@
             this.txtsenha2.Name = "txtsenha2";
             this.txtsenha2.PasswordChar = '*';
             this.txtsenha2.Size = new System.Drawing.Size(156, 20);
-            this.txtsenha2.TabIndex = 15;
+            this.txtsenha2.TabIndex = 4;
             // 
             // label4
             // 
@@ -313,7 +313,7 @@
             this.txtNome2.Location = new System.Drawing.Point(126, 57);
             this.txtNome2.Name = "txtNome2";
             this.txtNome2.Size = new System.Drawing.Size(156, 20);
-            this.txtNome2.TabIndex = 13;
+            this.txtNome2.TabIndex = 1;
             // 
             // label5
             // 
@@ -329,7 +329,7 @@
             this.btnCancel.Location = new System.Drawing.Point(425, 606);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 21;
+            this.btnCancel.TabIndex = 0;
             this.btnCancel.Text = "Cancelar";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
