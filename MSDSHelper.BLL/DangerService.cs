@@ -9,7 +9,7 @@ namespace MSDSHelper.BLL
 {
     public class DangerService : IBLL<Danger>
     {
-        private DangerDAO _danger = new DangerDAO();
+        private readonly DangerDao _danger = new DangerDao();
 
         public void Adicionar(Danger obj)
         {

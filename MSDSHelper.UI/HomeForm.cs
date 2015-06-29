@@ -42,7 +42,7 @@ namespace MSDSHelper.UI
         {
             if (_login.SucessLogin)
             {
-                switch (_login.type)
+                switch (_login.Type)
                 {
                     case "createFicha":
                         ElementService elementBLL = new ElementService();

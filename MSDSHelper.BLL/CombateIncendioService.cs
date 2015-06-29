@@ -6,7 +6,7 @@ namespace MSDSHelper.BLL
 {
     public class CombateIncendioService : IBLL<CombateIncendio>
     {
-        CombateIncendioDAO _combate = new CombateIncendioDAO();
+        readonly CombateIncendioDao _combate = new CombateIncendioDao();
         
         public void Adicionar(CombateIncendio combateIncendio)
         {

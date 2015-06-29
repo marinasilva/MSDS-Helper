@@ -7,7 +7,7 @@ using MSDSHelper.Model;
 
 namespace MSDSHelper.DAL
 {
-    public class ElementDAO : IDAO<Element>
+    public class ElementDao : IDao<Element>
     {
 
         private const string _adicionar = @"INSERT  INTO Element ([NomeProduto],[FormulaMolecular],[PesoMolecular],[Unidade],[Fabricante],[Descricao])
@@ -50,7 +50,7 @@ namespace MSDSHelper.DAL
             }
         }
 
-        public void Update(Element obj)
+        public void Update(Element danger)
         {
             SqlConnection connection = ContextFactory.Instancia();
             SqlCommand command = new SqlCommand(_update, connection);
@@ -111,21 +111,21 @@ namespace MSDSHelper.DAL
                     {
                         while (reader.Read())
                         {
-                            Element _element = new Element();
-                            _element.Id = Convert.ToInt32(reader["idElement"]);
-                            _element.NomeProduto = reader["NomeProduto"].ToString();
-                            _element.FormulaMolecular = reader["FormulaMolecular"] == DBNull.Value
+                            Element element = new Element();
+                            element.Id = Convert.ToInt32(reader["idElement"]);
+                            element.NomeProduto = reader["NomeProduto"].ToString();
+                            element.FormulaMolecular = reader["FormulaMolecular"] == DBNull.Value
                                 ? string.Empty
                                 : reader["FormularMolecular"].ToString();
-                            _element.Descricao = reader["Descricao"] == DBNull.Value
+                            element.Descricao = reader["Descricao"] == DBNull.Value
                                 ? string.Empty
                                 : reader["Descricao"].ToString();
-                            _element.PesoMolecular = reader["PesoMolecular"] == DBNull.Value
+                            element.PesoMolecular = reader["PesoMolecular"] == DBNull.Value
                                 ? 0
                                 : Convert.ToInt32(reader["PesoMolecular"]);
-                            _element.Unidade = reader["Unidade"] == DBNull.Value ? string.Empty : reader["Unidade"].ToString();
-                            _element.Danger.Id = reader["idDanger"] == DBNull.Value ? 0 : Convert.ToInt32(reader["idDanger"]);
-                            elementList.Add(_element);
+                            element.Unidade = reader["Unidade"] == DBNull.Value ? string.Empty : reader["Unidade"].ToString();
+                            element.Danger.Id = reader["idDanger"] == DBNull.Value ? 0 : Convert.ToInt32(reader["idDanger"]);
+                            elementList.Add(element);
                         }
                     }
                 }
@@ -147,23 +147,23 @@ namespace MSDSHelper.DAL
                     {
                         while (reader.HasRows)
                         {
-                            Element _element = new Element();
-                            _element.Id = Convert.ToInt32(reader["idElement"]);
-                            _element.NomeProduto = reader["NomeProduto"] == DBNull.Value
+                            Element element = new Element();
+                            element.Id = Convert.ToInt32(reader["idElement"]);
+                            element.NomeProduto = reader["NomeProduto"] == DBNull.Value
                                 ? string.Empty
                                 : reader["NomeProduto"].ToString();
-                            _element.FormulaMolecular = reader["FormulaMolecular"] == DBNull.Value
+                            element.FormulaMolecular = reader["FormulaMolecular"] == DBNull.Value
                                 ? string.Empty
                                 : reader["FormularMolecular"].ToString();
-                            _element.Descricao = reader["Descricao"] == DBNull.Value
+                            element.Descricao = reader["Descricao"] == DBNull.Value
                                 ? string.Empty
                                 : reader["Descricao"].ToString();
-                            _element.PesoMolecular = reader["PesoMolecular"] == DBNull.Value
+                            element.PesoMolecular = reader["PesoMolecular"] == DBNull.Value
                                 ? 0
                                 : Convert.ToInt32(reader["PesoMolecular"]);
-                            _element.Unidade = reader["Unidade"] == DBNull.Value ? string.Empty : reader["Unidade"].ToString();
-                            _element.Danger.Id = reader["idDanger"] == DBNull.Value ? 0 : Convert.ToInt32(reader["idDanger"]);
-                            elementList.Add(_element);
+                            element.Unidade = reader["Unidade"] == DBNull.Value ? string.Empty : reader["Unidade"].ToString();
+                            element.Danger.Id = reader["idDanger"] == DBNull.Value ? 0 : Convert.ToInt32(reader["idDanger"]);
+                            elementList.Add(element);
                         }
                     }
                 }
@@ -219,32 +219,32 @@ namespace MSDSHelper.DAL
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
                     elementList = new List<Element>();
-                    Element _element = null;
+                    Element element = null;
                     if (reader.HasRows)
                     {
                         while (reader.Read())
                         {
-                            _element = new Element();
-                            _element.Id = Convert.ToInt32(reader["idElement"]);
-                            _element.Descricao = reader["Descricao"] == DBNull.Value
+                            element = new Element();
+                            element.Id = Convert.ToInt32(reader["idElement"]);
+                            element.Descricao = reader["Descricao"] == DBNull.Value
                                 ? string.Empty
                                 : reader["Descricao"].ToString();
-                            _element.Fabricante = reader["Fabricante"] == DBNull.Value
+                            element.Fabricante = reader["Fabricante"] == DBNull.Value
                                 ? string.Empty
                                 : reader["Fabricante"].ToString();
-                            _element.FormulaMolecular = reader["FormulaMolecular"] == DBNull.Value
+                            element.FormulaMolecular = reader["FormulaMolecular"] == DBNull.Value
                                 ? string.Empty
                                 : reader["FormulaMolecular"].ToString();
-                            _element.NomeProduto = reader["NomeProduto"] == DBNull.Value
+                            element.NomeProduto = reader["NomeProduto"] == DBNull.Value
                                 ? string.Empty
                                 : reader["NomeProduto"].ToString();
-                            _element.PesoMolecular = reader["PesoMolecular"] == DBNull.Value
+                            element.PesoMolecular = reader["PesoMolecular"] == DBNull.Value
                                 ? 0
                                 : Convert.ToInt32(reader["PesoMolecular"]);
-                            _element.Unidade = reader["Unidade"] == DBNull.Value ? string.Empty : reader["Unidade"].ToString();
-                            _element.Danger.Id = reader["idDanger"] == DBNull.Value ? 0 : Convert.ToInt32(reader["idDanger"]);
+                            element.Unidade = reader["Unidade"] == DBNull.Value ? string.Empty : reader["Unidade"].ToString();
+                            element.Danger.Id = reader["idDanger"] == DBNull.Value ? 0 : Convert.ToInt32(reader["idDanger"]);
 
-                            elementList.Add(_element);
+                            elementList.Add(element);
                         }
                     }
                 }

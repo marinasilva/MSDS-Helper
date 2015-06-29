@@ -6,36 +6,36 @@ namespace MSDSHelper.BLL
 {
     public class UnitService : IBLL<Unit>
     {
-        private UnitDAO _unitDAO = new UnitDAO();
+        private readonly UnitDao _unitDao = new UnitDao();
         
         public void Adicionar(Unit unit)
         {
-            _unitDAO.Adicionar(unit);
+            _unitDao.Adicionar(unit);
         }
 
         public void Delete(int id)
         {
-            _unitDAO.Delete(id);
+            _unitDao.Delete(id);
         }
 
         public void Update(Unit unit)
         {
-            _unitDAO.Update(unit);
+            _unitDao.Update(unit);
         }
 
         public Unit SelectByID(int id)
         {
-            return _unitDAO.SelectByID(id); 
+            return _unitDao.SelectByID(id); 
         }
 
         public List<Unit> SelectAll()
         {
-            return _unitDAO.SelectAll();
+            return _unitDao.SelectAll();
         }
 
         public Unit SelectByName(string unit)
         {
-            return _unitDAO.SelectByName(unit);
+            return _unitDao.SelectByName(unit);
         }
     }
 }

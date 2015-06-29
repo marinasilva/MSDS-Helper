@@ -1,0 +1,10 @@
+Usuário: 
+- Criar rotina de limpar campos depois de adicionar usuario com sucesso
+- Depois de logado, não exibir form de login
+- Retirar password 
+- Adicionar um toLower e um trim na pesquisa por nome e nos outros campos.
+- Corrigir o filtrar usuário por login
+- Definir propriedade do grid pra selectedFullRowMode
+- Ajustar campos de login
+- Adicionar comportamento de login com enter 
+- Ajustar cadastro de unidade para conter apenas o closeBox

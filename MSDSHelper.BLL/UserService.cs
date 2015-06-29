@@ -6,48 +6,48 @@ namespace MSDSHelper.BLL
 {
     public class UserService 
     {
-        UserDAO _userDAO = new UserDAO();
+        readonly UserDao _userDao = new UserDao();
         
         public bool ValidatePassword(string login, string password)
         {
-            if (_userDAO.ValidePass(login) == password)
+            if (_userDao.ValidePass(login) == password)
                 return true;
             return false;
         }
 
         public User SelectByID(int id)
         {
-            return _userDAO.SelectByID(id);
+            return _userDao.SelectByID(id);
         }
 
         public List<User> SelectByName(string name)
         {
-            return _userDAO.SelectByName(name);
+            return _userDao.SelectByName(name);
         }
 
         public List<User> SelectByLogin(string login)
         {
-            return _userDAO.SelectByLogin(login);
+            return _userDao.SelectByLogin(login);
         }
 
         public User SelectLast()
         {
-            return _userDAO.SelectLast();
+            return _userDao.SelectLast();
         }
 
         public void Adicionar(User user)
         {
-            _userDAO.Adicionar(user);
+            _userDao.Adicionar(user);
         }
 
         public int SelectIdentCurrent()
         {
-            return _userDAO.SelectIdentCurrent();
+            return _userDao.SelectIdentCurrent();
         }
 
         public void Update(User user)
         {
-            _userDAO.Update(user);
+            _userDao.Update(user);
         }
     }
 }

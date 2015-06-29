@@ -5,7 +5,7 @@ using MSDSHelper.Model;
 
 namespace MSDSHelper.DAL
 {
-    public class UnitDAO : IDAO<Unit>
+    public class UnitDao : IDao<Unit>
     {
         private const string _adicionar = @"INSERT INTO Unit ([Unidade],[Sigla])   VALUES (@unidade,@sigla)";
         private const string _delete = @"DELETE FROM UNIT WHERE IDUNIDADE = @idUnidade";
@@ -35,14 +35,14 @@ namespace MSDSHelper.DAL
             }
         }
 
-        public void Update(Unit unit)
+        public void Update(Unit danger)
         {
             SqlConnection connection = ContextFactory.Instancia();
             using (SqlCommand command = new SqlCommand(_update, connection))
             {
-                command.Parameters.AddWithValue("@unidade", unit.Unidade);
-                command.Parameters.AddWithValue("@sigla", unit.Sigla);
-                command.Parameters.AddWithValue("@idUnidade", unit.Id);
+                command.Parameters.AddWithValue("@unidade", danger.Unidade);
+                command.Parameters.AddWithValue("@sigla", danger.Sigla);
+                command.Parameters.AddWithValue("@idUnidade", danger.Id);
                 command.ExecuteNonQuery();
             }
         }
@@ -75,27 +75,27 @@ namespace MSDSHelper.DAL
         public List<Unit> SelectAll()
         {
             SqlConnection connection = ContextFactory.Instancia();
-            List<Unit> _unitList;
+            List<Unit> unitList;
             using (SqlCommand command = new SqlCommand(_selectAll, connection))
             {
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
-                    _unitList = new List<Unit>();
-                    Unit _unit = null;
+                    unitList = new List<Unit>();
+                    Unit unit = null;
                     if (reader.HasRows)
                     {
                         while (reader.Read())
                         {
-                            _unit = new Unit();
-                            _unit.Id = Convert.ToInt32(reader["idUnidade"]);
-                            _unit.Unidade = reader["Unidade"] == DBNull.Value ? string.Empty : reader["Unidade"].ToString();
-                            _unit.Sigla = reader["Sigla"] == DBNull.Value ? string.Empty : reader["Sigla"].ToString();
-                            _unitList.Add(_unit);
+                            unit = new Unit();
+                            unit.Id = Convert.ToInt32(reader["idUnidade"]);
+                            unit.Unidade = reader["Unidade"] == DBNull.Value ? string.Empty : reader["Unidade"].ToString();
+                            unit.Sigla = reader["Sigla"] == DBNull.Value ? string.Empty : reader["Sigla"].ToString();
+                            unitList.Add(unit);
                         }
                     }
                 }
             }
-            return _unitList;
+            return unitList;
         }
 
         public Unit SelectByName(string unit)

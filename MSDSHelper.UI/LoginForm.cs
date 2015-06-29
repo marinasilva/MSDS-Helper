@@ -13,14 +13,14 @@ namespace MSDSHelper.UI
     public partial class LoginForm : Form
     {
         public bool SucessLogin { get; set; }
-        public string type { get; set; }
-        private Point _desiredLocation;
+        public string Type { get; set; }
+        private readonly Point _desiredLocation;
 
         public LoginForm(string _type)
         {
             InitializeComponent();
             lblType.Visible = false;
-            type = _type;
+            Type = _type;
             lblType.Text = _type;
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             _desiredLocation = this.Location;
@@ -50,8 +50,8 @@ namespace MSDSHelper.UI
             }
             else
             {
-                UserService _user = new UserService();
-                if (_user.ValidatePassword(txtLogin.Text, txtPass.Text))
+                UserService user = new UserService();
+                if (user.ValidatePassword(txtLogin.Text, txtPass.Text))
                 {
                     SucessLogin = true;
                     Close();

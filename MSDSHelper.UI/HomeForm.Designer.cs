@@ -113,21 +113,21 @@
             // 
             this.pesquisarFichaToolStripMenuItem.Name = "pesquisarFichaToolStripMenuItem";
             this.pesquisarFichaToolStripMenuItem.Size = new System.Drawing.Size(100, 20);
-            this.pesquisarFichaToolStripMenuItem.Text = "Pesquisar Ficha";
+            this.pesquisarFichaToolStripMenuItem.Text = "&Pesquisar Ficha";
             this.pesquisarFichaToolStripMenuItem.Click += new System.EventHandler(this.pesquisarFichaToolStripMenuItem_Click);
             // 
             // cadastrarFichaToolStripMenuItem
             // 
             this.cadastrarFichaToolStripMenuItem.Name = "cadastrarFichaToolStripMenuItem";
             this.cadastrarFichaToolStripMenuItem.Size = new System.Drawing.Size(100, 20);
-            this.cadastrarFichaToolStripMenuItem.Text = "Cadastrar Ficha";
+            this.cadastrarFichaToolStripMenuItem.Text = "&Cadastrar Ficha";
             this.cadastrarFichaToolStripMenuItem.Click += new System.EventHandler(this.cadastrarFichaToolStripMenuItem_Click);
             // 
             // atualizarFichaToolStripMenuItem
             // 
             this.atualizarFichaToolStripMenuItem.Name = "atualizarFichaToolStripMenuItem";
             this.atualizarFichaToolStripMenuItem.Size = new System.Drawing.Size(96, 20);
-            this.atualizarFichaToolStripMenuItem.Text = "Atualizar Ficha";
+            this.atualizarFichaToolStripMenuItem.Text = "&Atualizar Ficha";
             this.atualizarFichaToolStripMenuItem.Click += new System.EventHandler(this.atualizarFichaToolStripMenuItem_Click);
             // 
             // tabPage2
@@ -211,7 +211,7 @@
             this.AutoScrollMinSize = new System.Drawing.Size(5, 5);
             this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ClientSize = new System.Drawing.Size(976, 828);
+            this.ClientSize = new System.Drawing.Size(976, 733);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.tabControl1);

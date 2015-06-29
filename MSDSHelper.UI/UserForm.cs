@@ -9,8 +9,8 @@ namespace MSDSHelper.UI
 {
     public partial class UserForm : Form
     {
-        User user = new User();
-        UserService userBLL = new UserService();
+        readonly User _user = new User();
+        readonly UserService _userBLL = new UserService();
 
         public UserForm(string type)
         {
@@ -33,9 +33,9 @@ namespace MSDSHelper.UI
                         groupBox1.Enabled = false;
                         groupBox2.Enabled = true;
 
-                        user.Id = userBLL.SelectIdentCurrent();
+                        _user.Id = _userBLL.SelectIdentCurrent();
                         
-                        LoadComponents("create", user);
+                        LoadComponents("create", _user);
                         break;
                     }
             }

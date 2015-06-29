@@ -5,7 +5,7 @@ using MSDSHelper.Model;
 
 namespace MSDSHelper.DAL
 {
-    public class UserDAO : IDAO<User>
+    public class UserDao : IDao<User>
     {
         private const string _adicionar = @"INSERT INTO TbUser ([Nome],[Login],[Password])  VALUES  (@Nome, @Login, @Password)";
         private const string _delete = @"DELETE FROM TbUser WHERE ID = @idUser";
@@ -39,15 +39,15 @@ namespace MSDSHelper.DAL
             }
         }
 
-        public void Update(User user)
+        public void Update(User danger)
         {
             SqlConnection connection = ContextFactory.Instancia();
             using (SqlCommand command = new SqlCommand(_update, connection))
             {
-                command.Parameters.AddWithValue("@Nome", user.Nome);
-                command.Parameters.AddWithValue("@Login", user.Login);
-                command.Parameters.AddWithValue("@Password", user.Password);
-                command.Parameters.AddWithValue("@idUser", user.Id);
+                command.Parameters.AddWithValue("@Nome", danger.Nome);
+                command.Parameters.AddWithValue("@Login", danger.Login);
+                command.Parameters.AddWithValue("@Password", danger.Password);
+                command.Parameters.AddWithValue("@idUser", danger.Id);
                 command.ExecuteNonQuery();
             }
         }
@@ -110,12 +110,12 @@ namespace MSDSHelper.DAL
                     {
                         while (reader.Read())
                         {
-                            User _user = new User();
-                            _user.Id = Convert.ToInt32(reader["idUser"]);
-                            _user.Nome = reader["Nome"] == DBNull.Value ? string.Empty : reader["Nome"].ToString();
-                            _user.Login = reader["Login"] == DBNull.Value ? string.Empty : reader["Login"].ToString();
-                            _user.Password = reader["Password"] == DBNull.Value ? string.Empty : reader["Password"].ToString();
-                            userList.Add(_user);
+                            User user = new User();
+                            user.Id = Convert.ToInt32(reader["idUser"]);
+                            user.Nome = reader["Nome"] == DBNull.Value ? string.Empty : reader["Nome"].ToString();
+                            user.Login = reader["Login"] == DBNull.Value ? string.Empty : reader["Login"].ToString();
+                            user.Password = reader["Password"] == DBNull.Value ? string.Empty : reader["Password"].ToString();
+                            userList.Add(user);
                         }
                     }
                 }
@@ -137,12 +137,12 @@ namespace MSDSHelper.DAL
                     {
                         while (reader.Read())
                         {
-                            User _user = new User();
-                            _user.Id = Convert.ToInt32(reader["idUser"]);
-                            _user.Nome = reader["Nome"] == DBNull.Value ? string.Empty : reader["Nome"].ToString();
-                            _user.Login = reader["Login"] == DBNull.Value ? string.Empty : reader["Login"].ToString();
-                            _user.Password = reader["Password"] == DBNull.Value ? string.Empty : reader["Password"].ToString();
-                            userList.Add(_user);
+                            User user = new User();
+                            user.Id = Convert.ToInt32(reader["idUser"]);
+                            user.Nome = reader["Nome"] == DBNull.Value ? string.Empty : reader["Nome"].ToString();
+                            user.Login = reader["Login"] == DBNull.Value ? string.Empty : reader["Login"].ToString();
+                            user.Password = reader["Password"] == DBNull.Value ? string.Empty : reader["Password"].ToString();
+                            userList.Add(user);
                         }
                     }
                 }

@@ -8,15 +8,15 @@ namespace MSDSHelper.UI
 {
     public partial class FichaForm : Form
     {
-        ElementService _elementBLL = new ElementService();
-        Element element = new Element();
+        readonly ElementService _elementBLL = new ElementService();
+        readonly Element _element = new Element();
 
 
         public FichaForm(string type, int idElement, bool first)
         {
             InitializeComponent();
-            element = _elementBLL.SelectByID(idElement);
-            FormatComponents(type, element);
+            _element = _elementBLL.SelectByID(idElement);
+            FormatComponents(type, _element);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -26,10 +26,10 @@ namespace MSDSHelper.UI
         {
             InitializeComponent();
             if (!first)
-                element = _elementBLL.SelectLast();
+                _element = _elementBLL.SelectLast();
             else
-                element.Id = 0;
-            FormatComponents(type, element);
+                _element.Id = 0;
+            FormatComponents(type, _element);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -156,20 +156,20 @@ namespace MSDSHelper.UI
             if (ValidateItems().Count > 0)
             {
                 Element _element = PopulateElement();
-                Danger _danger = PopulateDanger();
-                CombateIncendio _combateIncendio = PopulateCombateIncendio();
+                Danger danger = PopulateDanger();
+                CombateIncendio combateIncendio = PopulateCombateIncendio();
 
-                CombateIncendioService _combateIncendioBLL = new CombateIncendioService();
-                DangerService _dangerBLL = new DangerService();
-                ElementService _elementBLL = new ElementService();
+                CombateIncendioService combateIncendioBLL = new CombateIncendioService();
+                DangerService dangerBLL = new DangerService();
+                ElementService elementBLL = new ElementService();
 
                 try
                 {
-                    _combateIncendioBLL.Adicionar(_combateIncendio);
-                    _danger.Incendio = _combateIncendioBLL.SelectLast();
-                    _dangerBLL.Adicionar(_danger);
-                    _element.Danger = _dangerBLL.SelectLast();
-                    _elementBLL.Adicionar(_element);
+                    combateIncendioBLL.Adicionar(combateIncendio);
+                    danger.Incendio = combateIncendioBLL.SelectLast();
+                    dangerBLL.Adicionar(danger);
+                    _element.Danger = dangerBLL.SelectLast();
+                    elementBLL.Adicionar(_element);
                 }
                 catch (Exception ex)
                 {
@@ -215,18 +215,18 @@ namespace MSDSHelper.UI
             if (ValidateItems().Count == 0)
             {
                 Element _element = PopulateElement();
-                Danger _danger = PopulateDanger();
-                CombateIncendio _combateIncendio = PopulateCombateIncendio();
+                Danger danger = PopulateDanger();
+                CombateIncendio combateIncendio = PopulateCombateIncendio();
 
-                CombateIncendioService _combateIncendioBLL = new CombateIncendioService();
-                DangerService _dangerBLL = new DangerService();
-                ElementService _elementBLL = new ElementService();
+                CombateIncendioService combateIncendioBLL = new CombateIncendioService();
+                DangerService dangerBLL = new DangerService();
+                ElementService elementBLL = new ElementService();
 
                 try
                 {
-                    _combateIncendioBLL.Update(_combateIncendio);
-                    _dangerBLL.Update(_danger);
-                    _elementBLL.Update(_element);
+                    combateIncendioBLL.Update(combateIncendio);
+                    dangerBLL.Update(danger);
+                    elementBLL.Update(_element);
                 }
                 catch (Exception ex)
                 {
@@ -252,27 +252,27 @@ namespace MSDSHelper.UI
 
         private Danger PopulateDanger()
         {
-            Danger _danger = new Danger();
+            Danger danger = new Danger();
 
-            _danger.Id = lblPerigo.Text == string.Empty ? 0 : Convert.ToInt32(lblPerigo.Text);
-            _danger.ContatoOlhos = txtOlhos.Text;
-            _danger.ContatoPele = txtPele.Text;
-            _danger.Inalacao = txtInalacao.Text;
-            _danger.Ingestao = txtIngestao.Text;
-            _danger.Descricao = txtIDPerigo.Text;
+            danger.Id = lblPerigo.Text == string.Empty ? 0 : Convert.ToInt32(lblPerigo.Text);
+            danger.ContatoOlhos = txtOlhos.Text;
+            danger.ContatoPele = txtPele.Text;
+            danger.Inalacao = txtInalacao.Text;
+            danger.Ingestao = txtIngestao.Text;
+            danger.Descricao = txtIDPerigo.Text;
 
-            return _danger;
+            return danger;
         }
 
         private CombateIncendio PopulateCombateIncendio()
         {
-            CombateIncendio _combateIncendio = new CombateIncendio();
+            CombateIncendio combateIncendio = new CombateIncendio();
 
-            _combateIncendio.Id = lblIncendio.Text == string.Empty ? 0 : Convert.ToInt32(lblIncendio.Text);
-            _combateIncendio.MeioApropriado = txtMeioApropriado.Text;
-            _combateIncendio.PerigoEspecifico = txtPerigoEspecifico.Text;
+            combateIncendio.Id = lblIncendio.Text == string.Empty ? 0 : Convert.ToInt32(lblIncendio.Text);
+            combateIncendio.MeioApropriado = txtMeioApropriado.Text;
+            combateIncendio.PerigoEspecifico = txtPerigoEspecifico.Text;
 
-            return _combateIncendio;
+            return combateIncendio;
         }
 
         private void FichaForm_Load(object sender, EventArgs e)
