@@ -116,6 +116,7 @@
     <EmbeddedResource Include="UserForm.resx">
       <DependentUpon>UserForm.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="App.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -127,9 +128,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MSDSHelper.BLL\MSDSHelper.BLL.csproj">
+    <ProjectReference Include="..\MSDSHelper.BLL\MSDSHelper.Service.csproj">
       <Project>{235FA7D3-979F-40DE-BF6F-F5280F74CFC7}</Project>
-      <Name>MSDSHelper.BLL</Name>
+      <Name>MSDSHelper.Service</Name>
     </ProjectReference>
     <ProjectReference Include="..\MSDSHelper.Model\MSDSHelper.Model.csproj">
       <Project>{53539709-26DB-40D1-BEDD-501421F08657}</Project>

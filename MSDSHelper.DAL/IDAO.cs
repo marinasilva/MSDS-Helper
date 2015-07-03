@@ -6,11 +6,11 @@ using System.Text;
 
 namespace MSDSHelper.DAL
 {
-    public interface IDAO<T>
+    public interface IDao<T>
     {
         void Adicionar(T obj);
         void Delete(int id);
-        void Update(T obj);
+        void Update(T danger);
         T SelectByID(int id);
     }
 }

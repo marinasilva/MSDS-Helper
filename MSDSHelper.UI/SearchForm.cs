@@ -13,11 +13,11 @@ namespace MSDSHelper.UI
 {
     public partial class SearchForm : Form
     {
-        CombateIncendioBLL _combateIncendioBLL = new CombateIncendioBLL();
-        ElementBLL _elementBLL = new ElementBLL();
-        DangerBLL _dangerBLL = new DangerBLL();
-        private Point _desiredLocation;
-
+        readonly CombateIncendioService _combateIncendioBLL = new CombateIncendioService();
+        readonly ElementService _elementBLL = new ElementService();
+        readonly DangerService _dangerBLL = new DangerService();
+        private readonly Point _desiredLocation;
+        private const string AppName = "MSDS Helper";
         public SearchForm(string type)
         {
             InitializeComponent();
@@ -133,11 +133,12 @@ namespace MSDSHelper.UI
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
+            //Verifca o campo a ser pesquisado
             List<string> valide = ValidateItems();
             if (valide.Count > 0)
             {
-                ElementBLL _elementBLL = new ElementBLL();
-                Element _element = new Element();
+                ElementService elementBLL = new ElementService();
+                Element element = new Element();
                 List<Element> elementList = new List<Element>();
 
                 foreach (string item in valide)
@@ -146,53 +147,55 @@ namespace MSDSHelper.UI
                     if (item.Contains("Cod"))
                     {
                         search = item.Replace("Cod ", "");
-                        elementList.Add(_elementBLL.SelectByID(Convert.ToInt32(search)));
+                        element = elementBLL.SelectByID(Convert.ToInt32(search));
+                        //Se tiver encontrado alguma coisa adiciona.
+                        if (element != null)
+                            elementList.Add(element);
                         goto x;
                     }
                     if (item.Contains("Fabricante "))
                     {
                         search = item.Replace("Fabricante ", "");
-                        elementList = _elementBLL.SelectByFabricante(search);
+                        elementList = elementBLL.SelectByFabricante(search);
                         goto x;
                     }
                     if (item.Contains("Formula "))
                     {
                         search = item.Replace("Formula ", "");
-                        elementList = _elementBLL.SelectByFormula(search);
+                        elementList = elementBLL.SelectByFormula(search);
                         goto x;
                     }
                     if (item.Contains("NomeProduto "))
                     {
                         search = item.Replace("NomeProduto ", "");
-                        elementList = _elementBLL.SelectByName(search);
+                        elementList = elementBLL.SelectByName(search);
                     }
 
                 x:
                     if (elementList.Count > 0)
-                    {
-
                         LoadGrid(elementList);
-                    }
                     else
-                        MessageBox.Show("Não foi encontrado nenhum registro com os critérios informados!");
+                        MessageBox.Show(@"Não foi encontrado nenhum registro com os critérios informados!",AppName,MessageBoxButtons.OK,MessageBoxIcon.Information);
                 }
             }
             else
-                MessageBox.Show("Favor inserir algum critério de pesquisa!");
+                MessageBox.Show(@"Favor inserir algum critério de pesquisa!",AppName,MessageBoxButtons.OK,MessageBoxIcon.Information);
         }
 
         private void LoadGrid(List<Element> elementList)
         {
+            gridSearch.Rows.Clear();
+            gridSearch.Columns.Clear();
             BindingSource bindingSource = new BindingSource();
 
-            gridSearch.Columns[0].Name = "Cod";
-            gridSearch.Columns[0].DataPropertyName = "Id";
-            gridSearch.Columns[1].Name = "NomeProduto";
-            gridSearch.Columns[1].DataPropertyName = "NomeProduto";
-            gridSearch.Columns[2].Name = "Fabricante";
-            gridSearch.Columns[2].DataPropertyName = "Fabricante";
-            gridSearch.Columns[3].Name = "FormulaMolecular";
-            gridSearch.Columns[3].DataPropertyName = "FormulaMolecular";
+            /* gridSearch.Columns[0].Name = "Cod";
+             gridSearch.Columns[0].DataPropertyName = "Id";
+             gridSearch.Columns[1].Name = "NomeProduto";
+             gridSearch.Columns[1].DataPropertyName = "NomeProduto";
+             gridSearch.Columns[2].Name = "Fabricante";
+             gridSearch.Columns[2].DataPropertyName = "Fabricante";
+             gridSearch.Columns[3].Name = "FormulaMolecular";
+             gridSearch.Columns[3].DataPropertyName = "FormulaMolecular";*/
 
             bindingSource.DataSource = elementList;
             gridSearch.DataSource = bindingSource;
@@ -219,11 +222,11 @@ namespace MSDSHelper.UI
             if (gridSearch.SelectedRows.Count == 1)
             {
                 DataGridViewRow row = gridSearch.SelectedRows[0];
-                ElementBLL _elementBLL = new ElementBLL();
-                LoadComponents("view", _elementBLL.SelectByID(Convert.ToInt32(row.Cells["Cod"].Value)));
+                ElementService elementBLL = new ElementService();
+                LoadComponents("view", elementBLL.SelectByID(Convert.ToInt32(row.Cells["Id"].Value)));
             }
             if (gridSearch.SelectedRows.Count == 0)
-                MessageBox.Show("É necessário selecionar uma ficha para visualizar.");
+                MessageBox.Show("É necessário selecionar uma ficha para visualizar.", "");
             if (gridSearch.SelectedRows.Count > 1)
                 MessageBox.Show("Selecione somente uma ficha!");
         }
@@ -334,15 +337,15 @@ namespace MSDSHelper.UI
 
         private void btnCadastrar_Click(object sender, EventArgs e)
         {
-            CombateIncendio _combateIncendio = PopulateCombateIncendio();
-            Danger _danger = PopulateDanger(_combateIncendio);
-            Element _element = PopulateElement(_danger);
+            CombateIncendio combateIncendio = PopulateCombateIncendio();
+            Danger danger = PopulateDanger(combateIncendio);
+            Element element = PopulateElement(danger);
 
             try
             {
-                _combateIncendioBLL.Adicionar(_combateIncendio);
-                _dangerBLL.Adicionar(_danger);
-                _elementBLL.Adicionar(_element);
+                _combateIncendioBLL.Adicionar(combateIncendio);
+                _dangerBLL.Adicionar(danger);
+                _elementBLL.Adicionar(element);
             }
             catch (Exception ex)
             {
@@ -352,15 +355,15 @@ namespace MSDSHelper.UI
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            CombateIncendio _combateIncendio = PopulateCombateIncendio();
-            Danger _danger = PopulateDanger(_combateIncendio);
-            Element _element = PopulateElement(_danger);
+            CombateIncendio combateIncendio = PopulateCombateIncendio();
+            Danger danger = PopulateDanger(combateIncendio);
+            Element element = PopulateElement(danger);
 
             try
             {
-                _combateIncendioBLL.Update(_combateIncendio);
-                _dangerBLL.Update(_danger);
-                _elementBLL.Update(_element);
+                _combateIncendioBLL.Update(combateIncendio);
+                _dangerBLL.Update(danger);
+                _elementBLL.Update(element);
             }
             catch (Exception ex)
             {
@@ -371,42 +374,42 @@ namespace MSDSHelper.UI
 
         private CombateIncendio PopulateCombateIncendio()
         {
-            CombateIncendio _combateIncendio = new CombateIncendio();
-            _combateIncendio.Id = lblIncendio.Text != string.Empty
+            CombateIncendio combateIncendio = new CombateIncendio();
+            combateIncendio.Id = lblIncendio.Text != string.Empty
                 ? Convert.ToInt32(lblIncendio.Text)
                 : _combateIncendioBLL.SelectLast().Id + 1;
-            _combateIncendio.MeioApropriado = txtMeioApropriado.Text;
-            _combateIncendio.PerigoEspecifico = txtPerigoEspecifico.Text;
-            return _combateIncendio;
+            combateIncendio.MeioApropriado = txtMeioApropriado.Text;
+            combateIncendio.PerigoEspecifico = txtPerigoEspecifico.Text;
+            return combateIncendio;
         }
 
         private Danger PopulateDanger(CombateIncendio combateIncendio)
         {
-            Danger _danger = new Danger();
-            _danger.Id = lblPerigo.Text != string.Empty
+            Danger danger = new Danger();
+            danger.Id = lblPerigo.Text != string.Empty
                 ? Convert.ToInt32(lblPerigo.Text)
                 : _dangerBLL.SelectLast().Id + 1;
-            _danger.ContatoOlhos = txtOlhos.Text;
-            _danger.ContatoPele = txtPele.Text;
-            _danger.Descricao = txtIDPerigo.Text;
-            _danger.Inalacao = txtInalacao.Text;
-            _danger.Ingestao = txtIngestao.Text;
-            _danger.Incendio.Id = combateIncendio.Id;
-            return _danger;
+            danger.ContatoOlhos = txtOlhos.Text;
+            danger.ContatoPele = txtPele.Text;
+            danger.Descricao = txtIDPerigo.Text;
+            danger.Inalacao = txtInalacao.Text;
+            danger.Ingestao = txtIngestao.Text;
+            danger.Incendio.Id = combateIncendio.Id;
+            return danger;
         }
 
         private Element PopulateElement(Danger danger)
         {
-            Element _element = new Element();
-            _element.Id = Convert.ToInt32(txtCod.Text);
-            _element.Descricao = txtDescricao.Text;
-            _element.Fabricante = txtFabricante.Text;
-            _element.FormulaMolecular = txtFormulaMolecular.Text;
-            _element.NomeProduto = txtNomeProduto.Text;
-            _element.PesoMolecular = Convert.ToInt32(txtPeso.Text);
-            _element.Unidade = cmbUnidade.SelectedItem.ToString();
-            _element.Danger.Id = danger.Id;
-            return _element;
+            Element element = new Element();
+            element.Id = Convert.ToInt32(txtCod.Text);
+            element.Descricao = txtDescricao.Text;
+            element.Fabricante = txtFabricante.Text;
+            element.FormulaMolecular = txtFormulaMolecular.Text;
+            element.NomeProduto = txtNomeProduto.Text;
+            element.PesoMolecular = Convert.ToInt32(txtPeso.Text);
+            element.Unidade = cmbUnidade.SelectedItem.ToString();
+            element.Danger.Id = danger.Id;
+            return element;
         }
 
         private void btnOk_Click(object sender, EventArgs e)
@@ -424,6 +427,15 @@ namespace MSDSHelper.UI
             if (this.Location != _desiredLocation)
                 this.Location = _desiredLocation;
         }
+
+        private void txtCod1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
     }
 }
 

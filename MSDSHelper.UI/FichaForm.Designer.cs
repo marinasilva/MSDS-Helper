@@ -323,10 +323,11 @@
             // 
             // cmbUnidade
             // 
+            this.cmbUnidade.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbUnidade.FormattingEnabled = true;
             this.cmbUnidade.Location = new System.Drawing.Point(68, 91);
             this.cmbUnidade.Name = "cmbUnidade";
-            this.cmbUnidade.Size = new System.Drawing.Size(90, 21);
+            this.cmbUnidade.Size = new System.Drawing.Size(132, 21);
             this.cmbUnidade.TabIndex = 11;
             // 
             // txtFabricante

@@ -1,0 +1,5 @@
+Ficha de segurança:
+- Configurar grid para não trazer linha por default
+- Msgm de nada encontrado
+- habilitar enter na tela de login
+- Erro adicionar produto 

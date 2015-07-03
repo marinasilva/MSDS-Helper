@@ -42,9 +42,9 @@
             this.menuStrip2 = new System.Windows.Forms.MenuStrip();
             this.cadastrarUsuárioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.atualizarUsuárioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cadastrarUnidadeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.cadastrarUnidadeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.searchPanel.SuspendLayout();
@@ -98,6 +98,7 @@
             // 
             // menuStrip1
             // 
+            this.menuStrip1.BackColor = System.Drawing.SystemColors.Control;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.pesquisarFichaToolStripMenuItem,
             this.cadastrarFichaToolStripMenuItem,
@@ -112,21 +113,21 @@
             // 
             this.pesquisarFichaToolStripMenuItem.Name = "pesquisarFichaToolStripMenuItem";
             this.pesquisarFichaToolStripMenuItem.Size = new System.Drawing.Size(100, 20);
-            this.pesquisarFichaToolStripMenuItem.Text = "Pesquisar Ficha";
+            this.pesquisarFichaToolStripMenuItem.Text = "&Pesquisar Ficha";
             this.pesquisarFichaToolStripMenuItem.Click += new System.EventHandler(this.pesquisarFichaToolStripMenuItem_Click);
             // 
             // cadastrarFichaToolStripMenuItem
             // 
             this.cadastrarFichaToolStripMenuItem.Name = "cadastrarFichaToolStripMenuItem";
             this.cadastrarFichaToolStripMenuItem.Size = new System.Drawing.Size(100, 20);
-            this.cadastrarFichaToolStripMenuItem.Text = "Cadastrar Ficha";
+            this.cadastrarFichaToolStripMenuItem.Text = "&Cadastrar Ficha";
             this.cadastrarFichaToolStripMenuItem.Click += new System.EventHandler(this.cadastrarFichaToolStripMenuItem_Click);
             // 
             // atualizarFichaToolStripMenuItem
             // 
             this.atualizarFichaToolStripMenuItem.Name = "atualizarFichaToolStripMenuItem";
             this.atualizarFichaToolStripMenuItem.Size = new System.Drawing.Size(96, 20);
-            this.atualizarFichaToolStripMenuItem.Text = "Atualizar Ficha";
+            this.atualizarFichaToolStripMenuItem.Text = "&Atualizar Ficha";
             this.atualizarFichaToolStripMenuItem.Click += new System.EventHandler(this.atualizarFichaToolStripMenuItem_Click);
             // 
             // tabPage2
@@ -150,6 +151,7 @@
             // 
             // menuStrip2
             // 
+            this.menuStrip2.BackColor = System.Drawing.SystemColors.Control;
             this.menuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cadastrarUsuárioToolStripMenuItem,
             this.atualizarUsuárioToolStripMenuItem,
@@ -174,6 +176,13 @@
             this.atualizarUsuárioToolStripMenuItem.Text = "Atualizar Usuário";
             this.atualizarUsuárioToolStripMenuItem.Click += new System.EventHandler(this.atualizarUsuárioToolStripMenuItem_Click);
             // 
+            // cadastrarUnidadeToolStripMenuItem
+            // 
+            this.cadastrarUnidadeToolStripMenuItem.Name = "cadastrarUnidadeToolStripMenuItem";
+            this.cadastrarUnidadeToolStripMenuItem.Size = new System.Drawing.Size(116, 20);
+            this.cadastrarUnidadeToolStripMenuItem.Text = "Cadastrar Unidade";
+            this.cadastrarUnidadeToolStripMenuItem.Click += new System.EventHandler(this.cadastrarUnidadeToolStripMenuItem_Click);
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -194,12 +203,6 @@
             this.label3.TabIndex = 9;
             this.label3.Text = "MSDS Helper";
             // 
-            // cadastrarUnidadeToolStripMenuItem
-            // 
-            this.cadastrarUnidadeToolStripMenuItem.Name = "cadastrarUnidadeToolStripMenuItem";
-            this.cadastrarUnidadeToolStripMenuItem.Size = new System.Drawing.Size(116, 20);
-            this.cadastrarUnidadeToolStripMenuItem.Text = "Cadastrar Unidade";
-            // 
             // HomeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -208,7 +211,7 @@
             this.AutoScrollMinSize = new System.Drawing.Size(5, 5);
             this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ClientSize = new System.Drawing.Size(976, 828);
+            this.ClientSize = new System.Drawing.Size(976, 733);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.tabControl1);

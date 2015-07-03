@@ -18,11 +18,13 @@ namespace MSDSHelper.DAL
         {
             lock (Sentinel)
             {
-                string connectionString = @"Data Source=HNT-120\SQLEXPRESS;Initial Catalog=MSDSHelper;Integrated Security=True";
+
+                string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["noteLuisConnectionstring"].ConnectionString;
                 if (_connection != null && _connection.ConnectionString != String.Empty) return _connection;
                 _connection = new SqlConnection(connectionString);
                 if (_connection.State == ConnectionState.Closed)
-                    _connection.Open();return _connection;
+                    _connection.Open();
+                return _connection;
             }
         }
     }

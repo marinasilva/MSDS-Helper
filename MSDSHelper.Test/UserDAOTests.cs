@@ -10,7 +10,7 @@ using MSDSHelper.Model;
 namespace MSDSHelper.DAL.Tests
 {
     [TestClass()]
-    public class UserDAOTests
+    public class UserDaoTests
     {
         [TestMethod()]
         public void SelectLastTest()
@@ -37,8 +37,8 @@ namespace MSDSHelper.DAL.Tests
             user.Login = "luis.fernando@mail.com";
             user.Nome = "Luís F.";
             user.Password = "123";
-            UserDAO userDAO = new UserDAO();
-            userDAO.Adicionar(user);
+            UserDao userDao = new UserDao();
+            userDao.Adicionar(user);
             Assert.Fail();
         }
 

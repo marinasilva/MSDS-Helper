@@ -108,6 +108,7 @@
             this.txtCod1.Name = "txtCod1";
             this.txtCod1.Size = new System.Drawing.Size(44, 20);
             this.txtCod1.TabIndex = 10;
+            this.txtCod1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCod1_KeyPress);
             // 
             // label4
             // 
@@ -198,6 +199,7 @@
             // 
             // gridSearch
             // 
+            this.gridSearch.AllowUserToAddRows = false;
             this.gridSearch.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gridSearch.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Cód,

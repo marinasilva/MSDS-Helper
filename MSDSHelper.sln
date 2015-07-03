@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MSDSHelper.DAL", "MSDSHelper.DAL\MSDSHelper.DAL.csproj", "{CBE69BD8-C0C2-47A1-95AD-F110C324624C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MSDSHelper.DataAccess", "MSDSHelper.DAL\MSDSHelper.DataAccess.csproj", "{CBE69BD8-C0C2-47A1-95AD-F110C324624C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MSDSHelper.Model", "MSDSHelper.Model\MSDSHelper.Model.csproj", "{53539709-26DB-40D1-BEDD-501421F08657}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MSDSHelper.BLL", "MSDSHelper.BLL\MSDSHelper.BLL.csproj", "{235FA7D3-979F-40DE-BF6F-F5280F74CFC7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MSDSHelper.Service", "MSDSHelper.BLL\MSDSHelper.Service.csproj", "{235FA7D3-979F-40DE-BF6F-F5280F74CFC7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MSDSHelper.UI", "MSDSHelper.UI\MSDSHelper.UI.csproj", "{48D58EA6-9ED0-42FF-8BCC-FFD02408E4EA}"
 EndProject

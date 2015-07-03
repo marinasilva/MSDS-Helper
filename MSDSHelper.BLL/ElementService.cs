@@ -7,13 +7,13 @@ using MSDSHelper.Model;
 
 namespace MSDSHelper.BLL
 {
-    public class ElementBLL : IBLL<Element>
+    public class ElementService : IBLL<Element>
     {
-        private ElementDAO _elementDAO = new ElementDAO();
+        private readonly ElementDao _elementDao = new ElementDao();
        
         public void Adicionar(Element element)
         {
-         _elementDAO.Adicionar(element);   
+         _elementDao.Adicionar(element);   
         }
 
         public void Delete(int id)
@@ -23,37 +23,37 @@ namespace MSDSHelper.BLL
 
         public void Update(Element element)
         {
-            _elementDAO.Update(element);     
+            _elementDao.Update(element);     
         }
        
         public Element SelectByID(int id)
         {
-            return _elementDAO.SelectByID(id);
+            return _elementDao.SelectByID(id);
         }
 
         public List<Element> SelectByName(string name)
         {
-            return _elementDAO.SelectByName(name);
+            return _elementDao.SelectByName(name);
         }
 
         public List<Element> SelectByFormula(string formula)
         {
-            return _elementDAO.SelectByFormula(formula);
+            return _elementDao.SelectByFormula(formula);
         }
 
         public Element SelectLast()
         {
-            return _elementDAO.SelectLast();
+            return _elementDao.SelectLast();
         }
 
         public List<Element> SelectByFabricante(string fabricante)
         {
-            return _elementDAO.SelectByFabricante(fabricante);
+            return _elementDao.SelectByFabricante(fabricante);
         }
 
         public int SelectCount()
         {
-            return _elementDAO.SelectCount();
+            return _elementDao.SelectCount();
         }
     }
 }

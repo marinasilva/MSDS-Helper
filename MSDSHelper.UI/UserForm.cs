@@ -1,10 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using MSDSHelper.BLL;
 using MSDSHelper.Model;
@@ -14,6 +9,9 @@ namespace MSDSHelper.UI
 {
     public partial class UserForm : Form
     {
+        readonly User _user = new User();
+        readonly UserService _userBLL = new UserService();
+
         public UserForm(string type)
         {
             InitializeComponent();
@@ -34,8 +32,10 @@ namespace MSDSHelper.UI
                     {
                         groupBox1.Enabled = false;
                         groupBox2.Enabled = true;
-                        UserBLL _userBLL = new UserBLL();
-                        LoadComponents("create", _userBLL.SelectLast());
+
+                        _user.Id = _userBLL.SelectIdentCurrent();
+                        
+                        LoadComponents("create", _user);
                         break;
                     }
             }
@@ -58,7 +58,7 @@ namespace MSDSHelper.UI
             List<string> valide = ValidateData();
             if (valide.Count > 0)
             {
-                UserBLL _userBLL = new UserBLL();
+                UserService _userBLL = new UserService();
                 List<User> userList = new List<User>();
 
                 foreach (string item in valide)
@@ -128,8 +128,10 @@ namespace MSDSHelper.UI
             if (gridUsers.SelectedRows.Count == 1)
             {
                 DataGridViewRow row = gridUsers.SelectedRows[0];
-                UserBLL _userBLL = new UserBLL();
+                UserService _userBLL = new UserService();
                 LoadComponents("update", _userBLL.SelectByID(Convert.ToInt32(row.Cells["Cod"].Value)));
+                groupBox2.Enabled = true;
+                btnUpdate.Enabled = true;
             }
             if (gridUsers.SelectedRows.Count == 0)
                 MessageBox.Show("É necessário selecionar um usuário para visualizar.");
@@ -144,19 +146,19 @@ namespace MSDSHelper.UI
                 case "update":
                     {
                         txtcod2.Enabled = false;
-                        txtnome2.Enabled = true;
-                        txtlogin2.Enabled = true;
+                        txtNome2.Enabled = true;
+                        txtLogin2.Enabled = true;
                         txtsenha.Enabled = true;
                         txtsenha2.Enabled = true;
                         btnCreate.Visible = false;
                         btnUpdate.Visible = true;
 
-                        if (user.Id <= 0 || user.Id == null)
+                        if (user.Id <= 0)
                             txtcod2.Text = "1";
                         else
                             txtcod2.Text = user.Id.ToString();
-                        txtnome2.Text = user.Nome;
-                        txtlogin2.Text = user.Login;
+                        txtNome2.Text = user.Nome;
+                        txtLogin2.Text = user.Login;
                         txtsenha.Text = user.Password;
                         txtsenha2.Text = user.Password;
                         break;
@@ -164,17 +166,17 @@ namespace MSDSHelper.UI
                 case "create":
                     {
                         txtcod2.Enabled = false;
-                        txtnome2.Enabled = true;
-                        txtlogin2.Enabled = true;
+                        txtNome2.Enabled = true;
+                        txtLogin2.Enabled = true;
                         txtsenha.Enabled = true;
                         txtsenha2.Enabled = true;
                         btnCreate.Visible = true;
                         btnUpdate.Visible = false;
 
-                        int cod = user == null ? 0 : user.Id + 1;
+                        int cod = user == null ? 0 : user.Id;
                         txtcod2.Text = cod.ToString();
-                        txtnome2.Text = string.Empty;
-                        txtlogin2.Text = string.Empty;
+                        txtNome2.Text = string.Empty;
+                        txtLogin2.Text = string.Empty;
                         txtsenha.Text = string.Empty;
                         txtsenha2.Text = string.Empty;
                         break;
@@ -184,15 +186,51 @@ namespace MSDSHelper.UI
 
         private void btnCreate_Click(object sender, EventArgs e)
         {
-            if (txtsenha.Text == txtsenha2.Text)
+            
+            if (txtNome2.Text == string.Empty || txtLogin2.Text == String.Empty || txtsenha.Text == String.Empty)
             {
-                txtsenha2.BackColor = Color.FromArgb(240, 36, 77);
+                MessageBox.Show("Preencha os dados corretamente para adicionar um usuário!");
+                return;
+            }
+            var user1 = new User {Nome = txtNome2.Text, Login = txtLogin2.Text, Password = txtsenha.Text};
+            var userService = new UserService();
+            try
+            {
+                userService.Adicionar(user1);
+                MessageBox.Show("Usuário adicionado com sucesso!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Falha ao adicionar usuário: " + ex.Message);
+            }
+        }
 
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            if (txtNome2.Text == string.Empty || txtLogin2.Text == String.Empty || txtsenha.Text == String.Empty)
+            {
+                MessageBox.Show("Preencha os dados corretamente para atualizar o usuário!");
+                return;
             }
             User user = new User();
-            user.Nome = txtNome.Text;
-            user.Login = txtlogin.Text;
+            user.Nome = txtNome2.Text;
+            user.Login = txtLogin2.Text;
             user.Password = txtsenha.Text;
+            UserService userBLL = new UserService();
+            try
+            {
+                userBLL.Update(user);
+                MessageBox.Show("Usuário atualizado com sucesso!");
+                txtNome2.Text = string.Empty;
+                txtLogin2.Text = string.Empty;
+                txtsenha.Text = string.Empty;
+                txtsenha2.Text = string.Empty;
+                btnUpdate.Enabled = false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Falha ao atualizar usuário: " + ex.Message);
+            }
         }
     }
 }

@@ -7,7 +7,7 @@ using MSDSHelper.Model;
 
 namespace MSDSHelper.DAL
 {
-    public class CombateIncendioDAO : IDAO<CombateIncendio>
+    public class CombateIncendioDao : IDao<CombateIncendio>
     {
         private const string _adicionar = @"INSERT INTO CombateIncendio  ([MeioApropriado],[PerigoEspecifico]) VALUES (@meioApropriado, @perigoEspecifico)";
 
@@ -20,47 +20,58 @@ namespace MSDSHelper.DAL
         public void Adicionar(CombateIncendio combateIncendio)
         {
             SqlConnection connection = ContextFactory.Instancia();
-            SqlCommand command = new SqlCommand(_adicionar, connection);
-            command.Parameters.AddWithValue("@meioApropriado", combateIncendio.MeioApropriado);
-            command.Parameters.AddWithValue("@perigoEspecifico", combateIncendio.PerigoEspecifico);
-            command.ExecuteNonQuery();
+            using (SqlCommand command = new SqlCommand(_adicionar, connection))
+            {
+                command.Parameters.AddWithValue("@meioApropriado", combateIncendio.MeioApropriado);
+                command.Parameters.AddWithValue("@perigoEspecifico", combateIncendio.PerigoEspecifico);
+                command.ExecuteNonQuery();
+            }
         }
 
         public CombateIncendio SelectLast()
         {
             SqlConnection connection = ContextFactory.Instancia();
-            SqlCommand command = new SqlCommand(_selectLast, connection);
-            SqlDataReader reader = command.ExecuteReader();
-            CombateIncendio _combate = null;
-            if (reader.HasRows)
+            CombateIncendio combate;
+            using (SqlCommand command = new SqlCommand(_selectLast, connection))
             {
-                while (reader.Read())
+                using (SqlDataReader reader = command.ExecuteReader())
                 {
-                    _combate = new CombateIncendio();
-                    _combate.Id = Convert.ToInt32(reader["idIncendio"]);
-                    _combate.MeioApropriado = reader["MeioApropriado"].ToString();
-                    _combate.PerigoEspecifico = reader["PerigoEspecifico"].ToString();
+                    combate = null;
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            combate = new CombateIncendio();
+                            combate.Id = Convert.ToInt32(reader["idIncendio"]);
+                            combate.MeioApropriado = reader["MeioApropriado"].ToString();
+                            combate.PerigoEspecifico = reader["PerigoEspecifico"].ToString();
+                        }
+                    }
                 }
             }
-            return _combate;
+            return combate;
         }
 
         public void Delete(int id)
         {
             SqlConnection connection = ContextFactory.Instancia();
-            SqlCommand command = new SqlCommand(_delete, connection);
-            command.Parameters.AddWithValue("@idIncendio", id);
-            command.ExecuteNonQuery();
+            using (SqlCommand command = new SqlCommand(_delete, connection))
+            {
+                command.Parameters.AddWithValue("@idIncendio", id);
+                command.ExecuteNonQuery();
+            }
         }
 
-        public void Update(CombateIncendio _combate)
+        public void Update(CombateIncendio danger)
         {
             SqlConnection connection = ContextFactory.Instancia();
-            SqlCommand command = new SqlCommand(_update, connection);
-            command.Parameters.AddWithValue("@meioApropriado", _combate.MeioApropriado);
-            command.Parameters.AddWithValue("@perigoEspecifico", _combate.PerigoEspecifico);
-            command.Parameters.AddWithValue("@idIncendio", _combate.Id);
-            command.ExecuteNonQuery();
+            using (SqlCommand command = new SqlCommand(_update, connection))
+            {
+                command.Parameters.AddWithValue("@meioApropriado", danger.MeioApropriado);
+                command.Parameters.AddWithValue("@perigoEspecifico", danger.PerigoEspecifico);
+                command.Parameters.AddWithValue("@idIncendio", danger.Id);
+                command.ExecuteNonQuery();
+            }
         }
 
         public CombateIncendio SelectByID(int id)

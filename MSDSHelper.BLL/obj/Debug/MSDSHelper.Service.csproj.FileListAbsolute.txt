@@ -1,0 +1,9 @@
+C:\Users\LuísFernando\Documents\GitHub\MSDS-Helper\MSDSHelper.BLL\bin\Debug\MSDSHelper.BLL.dll
+C:\Users\LuísFernando\Documents\GitHub\MSDS-Helper\MSDSHelper.BLL\bin\Debug\MSDSHelper.BLL.pdb
+C:\Users\LuísFernando\Documents\GitHub\MSDS-Helper\MSDSHelper.BLL\bin\Debug\MSDSHelper.DAL.dll
+C:\Users\LuísFernando\Documents\GitHub\MSDS-Helper\MSDSHelper.BLL\bin\Debug\MSDSHelper.Model.dll
+C:\Users\LuísFernando\Documents\GitHub\MSDS-Helper\MSDSHelper.BLL\bin\Debug\MSDSHelper.DAL.pdb
+C:\Users\LuísFernando\Documents\GitHub\MSDS-Helper\MSDSHelper.BLL\bin\Debug\MSDSHelper.Model.pdb
+C:\Users\LuísFernando\Documents\GitHub\MSDS-Helper\MSDSHelper.BLL\obj\Debug\MSDSHelper.Service.csprojResolveAssemblyReference.cache
+C:\Users\LuísFernando\Documents\GitHub\MSDS-Helper\MSDSHelper.BLL\obj\Debug\MSDSHelper.BLL.dll
+C:\Users\LuísFernando\Documents\GitHub\MSDS-Helper\MSDSHelper.BLL\obj\Debug\MSDSHelper.BLL.pdb

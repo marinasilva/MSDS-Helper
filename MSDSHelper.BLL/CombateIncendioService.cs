@@ -4,9 +4,9 @@ using MSDSHelper.Model;
 
 namespace MSDSHelper.BLL
 {
-    public class CombateIncendioBLL : IBLL<CombateIncendio>
+    public class CombateIncendioService : IBLL<CombateIncendio>
     {
-        CombateIncendioDAO _combate = new CombateIncendioDAO();
+        readonly CombateIncendioDao _combate = new CombateIncendioDao();
         
         public void Adicionar(CombateIncendio combateIncendio)
         {

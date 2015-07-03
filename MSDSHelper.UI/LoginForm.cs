@@ -13,14 +13,19 @@ namespace MSDSHelper.UI
     public partial class LoginForm : Form
     {
         public bool SucessLogin { get; set; }
-        public string type { get; set; }
-        private Point _desiredLocation;
+        public string Type { get; set; }
+
+        //Em alguns momentos o forms secundario deve ser carregado em um panel, e vice-versa.
+        public bool IsLoadToUserPanel { get; set; }
+
+        private readonly Point _desiredLocation;
+        private const string AppName = "MSDS Helper";
 
         public LoginForm(string _type)
         {
             InitializeComponent();
             lblType.Visible = false;
-            type = _type;
+            Type = _type;
             lblType.Text = _type;
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             _desiredLocation = this.Location;
@@ -39,19 +44,19 @@ namespace MSDSHelper.UI
                 {
                     lblLogin.Text = "*";
                     lblLogin.Visible = true;
-                    MessageBox.Show("Favor informar o login!");
+                    MessageBox.Show("Favor informar o login!", AppName, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else if (txtPass.Text == string.Empty)
                 {
                     lblPass.Text = "*";
                     lblPass.Visible = true;
-                    MessageBox.Show("Favor informar a senha!");
+                    MessageBox.Show("Favor informar a senha!", AppName, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             else
             {
-                UserBLL _user = new UserBLL();
-                if (_user.ValidatePassword(txtLogin.Text, txtPass.Text))
+                UserService user = new UserService();
+                if (user.ValidatePassword(txtLogin.Text, txtPass.Text))
                 {
                     SucessLogin = true;
                     Close();
@@ -68,6 +73,8 @@ namespace MSDSHelper.UI
                     //    search.ShowDialog();
                     //}
                 }
+                else
+                    MessageBox.Show("Erro ao efeturar login. Verifique sua senha ou entre em contato com o administrador", AppName, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
         }
@@ -76,6 +83,12 @@ namespace MSDSHelper.UI
         {
             if (this.Location != _desiredLocation)
                 this.Location = _desiredLocation;
+        }
+
+        private void txtPass_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter)
+                btnAcessar_Click(null,null);
         }
     }
 }
