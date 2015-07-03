@@ -51,7 +51,7 @@
             // 
             this.txtUnit.Location = new System.Drawing.Point(113, 57);
             this.txtUnit.Name = "txtUnit";
-            this.txtUnit.Size = new System.Drawing.Size(100, 20);
+            this.txtUnit.Size = new System.Drawing.Size(159, 20);
             this.txtUnit.TabIndex = 1;
             // 
             // btnCancel
@@ -59,7 +59,7 @@
             this.btnCancel.Location = new System.Drawing.Point(197, 130);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 2;
+            this.btnCancel.TabIndex = 4;
             this.btnCancel.Text = "Cancelar";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
@@ -77,15 +77,15 @@
             // 
             this.txtSigla.Location = new System.Drawing.Point(113, 83);
             this.txtSigla.Name = "txtSigla";
-            this.txtSigla.Size = new System.Drawing.Size(100, 20);
-            this.txtSigla.TabIndex = 4;
+            this.txtSigla.Size = new System.Drawing.Size(159, 20);
+            this.txtSigla.TabIndex = 2;
             // 
             // btnCreateUpdate
             // 
             this.btnCreateUpdate.Location = new System.Drawing.Point(79, 130);
             this.btnCreateUpdate.Name = "btnCreateUpdate";
             this.btnCreateUpdate.Size = new System.Drawing.Size(112, 23);
-            this.btnCreateUpdate.TabIndex = 5;
+            this.btnCreateUpdate.TabIndex = 3;
             this.btnCreateUpdate.Text = "Cadastrar/Atualizar";
             this.btnCreateUpdate.UseVisualStyleBackColor = true;
             this.btnCreateUpdate.Click += new System.EventHandler(this.btnCreateUpdate_Click);
@@ -101,18 +101,19 @@
             // 
             // cmbUnit
             // 
+            this.cmbUnit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbUnit.FormattingEnabled = true;
             this.cmbUnit.Location = new System.Drawing.Point(113, 28);
             this.cmbUnit.Name = "cmbUnit";
-            this.cmbUnit.Size = new System.Drawing.Size(100, 21);
-            this.cmbUnit.TabIndex = 7;
+            this.cmbUnit.Size = new System.Drawing.Size(159, 21);
+            this.cmbUnit.TabIndex = 0;
             this.cmbUnit.SelectedIndexChanged += new System.EventHandler(this.cmbUnit_SelectedIndexChanged);
             // 
             // UnitForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 174);
+            this.ClientSize = new System.Drawing.Size(294, 174);
             this.Controls.Add(this.cmbUnit);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.btnCreateUpdate);

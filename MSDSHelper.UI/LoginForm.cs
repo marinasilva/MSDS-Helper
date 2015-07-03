@@ -14,7 +14,12 @@ namespace MSDSHelper.UI
     {
         public bool SucessLogin { get; set; }
         public string Type { get; set; }
+
+        //Em alguns momentos o forms secundario deve ser carregado em um panel, e vice-versa.
+        public bool IsLoadToUserPanel { get; set; }
+
         private readonly Point _desiredLocation;
+        private const string AppName = "MSDS Helper";
 
         public LoginForm(string _type)
         {
@@ -39,13 +44,13 @@ namespace MSDSHelper.UI
                 {
                     lblLogin.Text = "*";
                     lblLogin.Visible = true;
-                    MessageBox.Show("Favor informar o login!");
+                    MessageBox.Show("Favor informar o login!", AppName, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else if (txtPass.Text == string.Empty)
                 {
                     lblPass.Text = "*";
                     lblPass.Visible = true;
-                    MessageBox.Show("Favor informar a senha!");
+                    MessageBox.Show("Favor informar a senha!", AppName, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             else
@@ -68,6 +73,8 @@ namespace MSDSHelper.UI
                     //    search.ShowDialog();
                     //}
                 }
+                else
+                    MessageBox.Show("Erro ao efeturar login. Verifique sua senha ou entre em contato com o administrador", AppName, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
         }
@@ -76,6 +83,12 @@ namespace MSDSHelper.UI
         {
             if (this.Location != _desiredLocation)
                 this.Location = _desiredLocation;
+        }
+
+        private void txtPass_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter)
+                btnAcessar_Click(null,null);
         }
     }
 }

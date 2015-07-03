@@ -7,9 +7,12 @@ namespace MSDSHelper.UI
     public partial class HomeForm : Form
     {
         LoginForm _login;
+        private readonly UnitService _unitService;
+        private const string AppName = "MSDS Helper";
         public HomeForm()
         {
             InitializeComponent();
+            _unitService = new UnitService();
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
             MinimizeBox = false;
@@ -30,7 +33,21 @@ namespace MSDSHelper.UI
         {
             if (searchPanel.HasChildren)
                 searchPanel.Controls.Clear();
+            if (_unitService.SelectAll().Count <= 0)
+            {
+                var result = MessageBox.Show(@"Por favor, tenha pelo menos uma unidade cadastrada no sitema. Deseja cadastrar uma agora?", 
+                    AppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (result == DialogResult.Yes)
+                {
+                    _login = new LoginForm("createUnit");
+                    _login.TopLevel = false;
+                    _login.Parent = searchPanel;
+                    _login.Disposed += login_Disposed;
+                    _login.Show();
+                    return;
+                }
 
+            }
             _login = new LoginForm("createFicha");
             _login.TopLevel = false;
             _login.Parent = searchPanel;
@@ -86,7 +103,7 @@ namespace MSDSHelper.UI
                     case "createUnit":
                         UnitForm unit = new UnitForm();
                         unit.TopLevel = false;
-                        unit.Parent = userPanel;
+                        unit.Parent = _login.IsLoadToUserPanel? userPanel:searchPanel;
                         unit.Show();
                         break;
                 }
@@ -137,6 +154,7 @@ namespace MSDSHelper.UI
             _login = new LoginForm("createUnit");
             _login.TopLevel = false;
             _login.Parent = userPanel;
+            _login.IsLoadToUserPanel = true;
             _login.Disposed += login_Disposed;
             _login.Show();
         }
