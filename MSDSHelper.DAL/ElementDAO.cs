@@ -10,9 +10,10 @@ namespace MSDSHelper.DAL
     public class ElementDao : IDao<Element>
     {
 
-        private const string ADICIONAR = @"INSERT  INTO Element ([NomeProduto],[FormulaMolecular],[PesoMolecular],[Unidade],[Fabricante],[Descricao])
+        private readonly DangerDao DangerDao;
+        private const string ADICIONAR = @"INSERT  INTO Element ([NomeProduto],[FormulaMolecular],[PesoMolecular],[Unidade],[Fabricante],[Descricao],[IdDanger])
                                                     VALUES
-                                                                 (@nomeProduto,@formulaMolecular,@pesoMolecular,@unidade,@fabricante,@descricao)";
+                                                                 (@nomeProduto,@formulaMolecular,@pesoMolecular,@unidade,@fabricante,@descricao,@IdDanger)";
         private const string DELETE = @"DELETE FROM ELEMENT WHERE IDELEMENT = @idElement";
         private const string UPDATE = @"UPDATE Element SET [NomeProduto] = @nomeProduto, [FormulaMolecular] = @formulaMolecular, [PesoMolecular] = @pesoMolecular,
                                                             [Unidade] = @unidade, [Fabricante] = @fabricante, [Descricao] = @descricao
@@ -23,8 +24,11 @@ namespace MSDSHelper.DAL
         private const string SELECT_LAST = @"SELECT TOP 1 FROM ELEMENT ORDER BY IDELEMENT";
         private const string SELECT_BY_FABRICANTE = @"SELECT * FROM ELEMENT WHERE FABRICANTE LIKE '%@fabricante%'";
         private const string SELECT_COUNT = @"SELECT COUNT(IDELEMENT) FROM ELEMENT";
-        
 
+        public ElementDao()
+        {
+            DangerDao = new DangerDao();
+        }
         public void Adicionar(Element element)
         {
             SqlConnection connection = ContextFactory.Instancia();
@@ -36,6 +40,7 @@ namespace MSDSHelper.DAL
                 command.Parameters.AddWithValue("@unidade", element.Unidade);
                 command.Parameters.AddWithValue("@fabricante", element.Fabricante);
                 command.Parameters.AddWithValue("@descricao", element.Descricao);
+                command.Parameters.AddWithValue("@IdDanger", element.Danger.Id);
                 command.ExecuteNonQuery();
             }
         }
@@ -61,6 +66,7 @@ namespace MSDSHelper.DAL
         {
             SqlConnection connection = ContextFactory.Instancia();
             Element element;
+            int idDanger = 0;
             using (SqlCommand command = new SqlCommand(SELECT_BY_ID, connection))
             {
                 command.Parameters.AddWithValue("@idElement", id);
@@ -69,6 +75,7 @@ namespace MSDSHelper.DAL
                     element = null;
                     if (reader.HasRows)
                     {
+                        
                         while (reader.Read())
                         {
                             element = new Element();
@@ -89,11 +96,14 @@ namespace MSDSHelper.DAL
                                 ? 0
                                 : Convert.ToInt32(reader["PesoMolecular"]);
                             element.Unidade = reader["Unidade"] == DBNull.Value ? string.Empty : reader["Unidade"].ToString();
-                            element.Danger.Id = reader["idDanger"] == DBNull.Value ? 0 : Convert.ToInt32(reader["idDanger"]);
+                            idDanger = reader["idDanger"] == DBNull.Value ? 0 : Convert.ToInt32(reader["idDanger"]);
                         }
                     }
                 }
+                
             }
+            if (element != null)
+                element.Danger = DangerDao.SelectByID(idDanger);
             return element;
         }
 

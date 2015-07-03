@@ -28,5 +28,20 @@ namespace MSDSHelper.Model
             get { return _sigla; }
             set { _sigla = value; }
         }
+
+        #region Overrides of Object
+
+        /// <summary>
+        /// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="T:System.String"/> that represents the current <see cref="Unidade"/>.
+        /// </returns>
+        public override string ToString()
+        {
+            return Unidade;
+        }
+
+        #endregion
     }
 }

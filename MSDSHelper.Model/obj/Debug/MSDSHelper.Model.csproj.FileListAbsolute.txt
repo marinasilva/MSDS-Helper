@@ -13,3 +13,8 @@ C:\Users\LuísFernando\Documents\GitHub\MSDS-Helper\MSDSHelper.Model\bin\Debug\M
 C:\Users\LuísFernando\Documents\GitHub\MSDS-Helper\MSDSHelper.Model\obj\Debug\MSDSHelper.Model.csprojResolveAssemblyReference.cache
 C:\Users\LuísFernando\Documents\GitHub\MSDS-Helper\MSDSHelper.Model\obj\Debug\MSDSHelper.Model.dll
 C:\Users\LuísFernando\Documents\GitHub\MSDS-Helper\MSDSHelper.Model\obj\Debug\MSDSHelper.Model.pdb
+C:\Users\luis.moraes\Documents\GitHub\MSDS-Helper\MSDSHelper.Model\bin\Debug\MSDSHelper.Model.dll
+C:\Users\luis.moraes\Documents\GitHub\MSDS-Helper\MSDSHelper.Model\bin\Debug\MSDSHelper.Model.pdb
+C:\Users\luis.moraes\Documents\GitHub\MSDS-Helper\MSDSHelper.Model\obj\Debug\MSDSHelper.Model.csprojResolveAssemblyReference.cache
+C:\Users\luis.moraes\Documents\GitHub\MSDS-Helper\MSDSHelper.Model\obj\Debug\MSDSHelper.Model.dll
+C:\Users\luis.moraes\Documents\GitHub\MSDS-Helper\MSDSHelper.Model\obj\Debug\MSDSHelper.Model.pdb

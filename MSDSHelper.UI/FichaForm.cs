@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 using MSDSHelper.BLL;
 using MSDSHelper.Model;
@@ -10,16 +11,17 @@ namespace MSDSHelper.UI
     {
         readonly ElementService _elementBLL = new ElementService();
         readonly Element _element = new Element();
-
+        readonly UnitService _unitService = new UnitService();
+        private const string APP_NAME = "MSDS Helper";
 
         public FichaForm(string type, int idElement, bool first)
         {
             InitializeComponent();
             _element = _elementBLL.SelectByID(idElement);
             FormatComponents(type, _element);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
+            MinimizeBox = false;
         }
 
         public FichaForm(string type, bool first)
@@ -30,9 +32,9 @@ namespace MSDSHelper.UI
             else
                 _element.Id = 0;
             FormatComponents(type, _element);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
+            MinimizeBox = false;
         }
 
         private void FormatComponents(string type, Element element)
@@ -143,12 +145,13 @@ namespace MSDSHelper.UI
 
         private void LoadUnitCombo()
         {
-
+            cmbUnidade.Items.Clear();
+            _unitService.SelectAll().ForEach(unit => cmbUnidade.Items.Add(unit));
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void btnCadastrar_Click(object sender, EventArgs e)
@@ -172,12 +175,26 @@ namespace MSDSHelper.UI
                     dangerBLL.Adicionar(danger);
                     element.Danger = dangerBLL.SelectLast();
                     elementBLL.Adicionar(element);
+                    MessageBox.Show("Cadastrada com sucesso!", APP_NAME, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LimparCampos();
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Falha ao cadastrar nova ficha: " + ex.Message);
+                    MessageBox.Show("Falha ao cadastrar nova ficha: " + ex.Message, APP_NAME, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
+        }
+
+        private void LimparCampos()
+        {
+            foreach (var gbox in this.Controls.OfType<GroupBox>().ToList())
+            {
+                foreach (var txt in gbox.Controls.OfType<TextBox>().ToList())
+                {
+                    txt.Text = String.Empty;
+                }
+            }
+            cmbUnidade.SelectedIndex = -1;
         }
 
         private List<string> ValidateItems()
@@ -232,7 +249,7 @@ namespace MSDSHelper.UI
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Falha ao atualizar a ficha: " + ex.Message);
+                    MessageBox.Show("Falha ao atualizar a ficha: " + ex.Message, APP_NAME, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
         }

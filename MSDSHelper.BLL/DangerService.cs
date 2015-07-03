@@ -13,7 +13,7 @@ namespace MSDSHelper.BLL
 
         public void Adicionar(Danger obj)
         {
-            throw new NotImplementedException();
+            _danger.Adicionar(obj);
         }
 
         public void Delete(int id)

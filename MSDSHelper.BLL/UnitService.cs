@@ -7,7 +7,7 @@ namespace MSDSHelper.BLL
     public class UnitService : IBLL<Unit>
     {
         private readonly UnitDao _unitDao = new UnitDao();
-        
+
         public void Adicionar(Unit unit)
         {
             _unitDao.Adicionar(unit);
@@ -25,7 +25,7 @@ namespace MSDSHelper.BLL
 
         public Unit SelectByID(int id)
         {
-            return _unitDao.SelectByID(id); 
+            return _unitDao.SelectByID(id);
         }
 
         public List<Unit> SelectAll()

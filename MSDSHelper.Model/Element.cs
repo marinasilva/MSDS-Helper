@@ -16,6 +16,10 @@ namespace MSDSHelper.Model
         private string _descricao;
         private Danger _danger;
 
+        public Element()
+        {
+            Danger = new Danger();
+        }
         public int Id
         {
             get { return _id; }

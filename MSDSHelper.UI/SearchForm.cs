@@ -17,14 +17,17 @@ namespace MSDSHelper.UI
         readonly ElementService _elementBLL = new ElementService();
         readonly DangerService _dangerBLL = new DangerService();
         private readonly Point _desiredLocation;
+        private readonly UnitService _unitService;
         private const string APP_NAME = "MSDS Helper";
         public SearchForm(string type)
         {
             InitializeComponent();
             FormatComponents(type);
             DisableComponents();
-            this.FormBorderStyle = FormBorderStyle.FixedSingle;
-            _desiredLocation = this.Location;
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            _desiredLocation = Location;
+            _unitService = new UnitService();
+            _unitService.SelectAll().ForEach(unit => cmbUnidade.Items.Add(unit));
         }
 
         private void FormatComponents(string type)
@@ -40,7 +43,7 @@ namespace MSDSHelper.UI
                         txtDescricao.Enabled = false;
                         txtFabricante1.Enabled = false;
                         txtFormulaMolecular.Enabled = false;
-                        txtIDPerigo.Enabled = false;
+                        txtDescricaoPerigo.Enabled = false;
                         txtInalacao.Enabled = false;
                         txtIngestao.Enabled = false;
                         txtMeioApropriado.Enabled = false;
@@ -60,7 +63,7 @@ namespace MSDSHelper.UI
                         txtDescricao.Enabled = true;
                         txtFabricante1.Enabled = true;
                         txtFormulaMolecular.Enabled = true;
-                        txtIDPerigo.Enabled = true;
+                        txtDescricaoPerigo.Enabled = true;
                         txtInalacao.Enabled = true;
                         txtIngestao.Enabled = true;
                         txtMeioApropriado.Enabled = true;
@@ -80,7 +83,7 @@ namespace MSDSHelper.UI
                         txtDescricao.Enabled = true;
                         txtFabricante1.Enabled = true;
                         txtFormulaMolecular.Enabled = true;
-                        txtIDPerigo.Enabled = true;
+                        txtDescricaoPerigo.Enabled = true;
                         txtInalacao.Enabled = true;
                         txtIngestao.Enabled = true;
                         txtMeioApropriado.Enabled = true;
@@ -103,7 +106,7 @@ namespace MSDSHelper.UI
             txtDescricao.Enabled = false;
             txtFabricante.Enabled = false;
             txtFormulaMolecular.Enabled = false;
-            txtIDPerigo.Enabled = false;
+            txtDescricaoPerigo.Enabled = false;
             txtInalacao.Enabled = false;
             txtIngestao.Enabled = false;
             txtMeioApropriado.Enabled = false;
@@ -120,7 +123,7 @@ namespace MSDSHelper.UI
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void btnClean_Click(object sender, EventArgs e)
@@ -175,11 +178,11 @@ namespace MSDSHelper.UI
                     if (elementList.Count > 0)
                         LoadGrid(elementList);
                     else
-                        MessageBox.Show(@"Não foi encontrado nenhum registro com os critérios informados!",APP_NAME,MessageBoxButtons.OK,MessageBoxIcon.Information);
+                        MessageBox.Show(@"Não foi encontrado nenhum registro com os critérios informados!", APP_NAME, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             else
-                MessageBox.Show(@"Favor inserir algum critério de pesquisa!",APP_NAME,MessageBoxButtons.OK,MessageBoxIcon.Information);
+                MessageBox.Show(@"Favor inserir algum critério de pesquisa!", APP_NAME, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void LoadGrid(List<Element> elementList)
@@ -223,6 +226,7 @@ namespace MSDSHelper.UI
             {
                 DataGridViewRow row = gridSearch.SelectedRows[0];
                 ElementService elementBLL = new ElementService();
+
                 LoadComponents("view", elementBLL.SelectByID(Convert.ToInt32(row.Cells["Id"].Value)));
             }
             if (gridSearch.SelectedRows.Count == 0)
@@ -245,7 +249,7 @@ namespace MSDSHelper.UI
                         txtDescricao.Enabled = false;
                         txtFabricante1.Enabled = false;
                         txtFormulaMolecular.Enabled = false;
-                        txtIDPerigo.Enabled = false;
+                        txtDescricaoPerigo.Enabled = false;
                         txtInalacao.Enabled = false;
                         txtIngestao.Enabled = false;
                         txtMeioApropriado.Enabled = false;
@@ -255,18 +259,26 @@ namespace MSDSHelper.UI
                         btnCadastrar.Visible = false;
                         btnUpdate.Visible = false;
 
-                        int id = element.Id + 1;
-                        txtCod1.Text = id.ToString();
+                        //int id = element.Id + 1;
+                        txtCod.Text = element.Id.ToString();
+                        txtNomeProduto.Text = element.NomeProduto;
+                        txtPeso.Text = element.PesoMolecular.ToString();
+                        txtFabricante.Text = element.Fabricante;
                         txtDescricao.Text = element.Descricao;
                         txtFabricante1.Text = element.Fabricante;
                         txtFormulaMolecular.Text = element.FormulaMolecular;
-                        txtIDPerigo.Text = element.Danger.Descricao;
+                        txtDescricaoPerigo.Text = element.Danger.Descricao;
+                        txtPele.Text = element.Danger.ContatoPele;
                         txtInalacao.Text = element.Danger.Inalacao;
                         txtIngestao.Text = element.Danger.Ingestao;
                         txtMeioApropriado.Text = element.Danger.Incendio.MeioApropriado;
+                        txtOlhos.Text = element.Danger.ContatoOlhos;
+                        txtPerigoEspecifico.Text = element.Danger.Incendio.PerigoEspecifico;
                         txtNomeProduto1.Text = element.Danger.Incendio.PerigoEspecifico;
                         lblIncendio.Text = element.Danger.Incendio.Id.ToString();
                         lblPerigo.Text = element.Danger.Id.ToString();
+                        if (cmbUnidade.Items.Count > 0)
+                            cmbUnidade.SelectedIndex = 0;
 
                         break;
                     }
@@ -279,7 +291,7 @@ namespace MSDSHelper.UI
                         txtDescricao.Enabled = true;
                         txtFabricante1.Enabled = true;
                         txtFormulaMolecular.Enabled = true;
-                        txtIDPerigo.Enabled = true;
+                        txtDescricaoPerigo.Enabled = true;
                         txtInalacao.Enabled = true;
                         txtIngestao.Enabled = true;
                         txtMeioApropriado.Enabled = true;
@@ -292,7 +304,7 @@ namespace MSDSHelper.UI
                         txtDescricao.Text = element.Descricao;
                         txtFabricante1.Text = element.Fabricante;
                         txtFormulaMolecular.Text = element.FormulaMolecular;
-                        txtIDPerigo.Text = element.Danger.Descricao;
+                        txtDescricaoPerigo.Text = element.Danger.Descricao;
                         txtInalacao.Text = element.Danger.Inalacao;
                         txtIngestao.Text = element.Danger.Ingestao;
                         txtMeioApropriado.Text = element.Danger.Incendio.MeioApropriado;
@@ -310,7 +322,7 @@ namespace MSDSHelper.UI
                         txtDescricao.Enabled = true;
                         txtFabricante1.Enabled = true;
                         txtFormulaMolecular.Enabled = true;
-                        txtIDPerigo.Enabled = true;
+                        txtDescricaoPerigo.Enabled = true;
                         txtInalacao.Enabled = true;
                         txtIngestao.Enabled = true;
                         txtMeioApropriado.Enabled = true;
@@ -323,7 +335,7 @@ namespace MSDSHelper.UI
                         txtDescricao.Text = string.Empty;
                         txtFabricante1.Text = string.Empty;
                         txtFormulaMolecular.Text = string.Empty;
-                        txtIDPerigo.Text = string.Empty;
+                        txtDescricaoPerigo.Text = string.Empty;
                         txtInalacao.Text = string.Empty;
                         txtIngestao.Text = string.Empty;
                         txtMeioApropriado.Text = string.Empty;
@@ -391,7 +403,7 @@ namespace MSDSHelper.UI
                 : _dangerBLL.SelectLast().Id + 1;
             danger.ContatoOlhos = txtOlhos.Text;
             danger.ContatoPele = txtPele.Text;
-            danger.Descricao = txtIDPerigo.Text;
+            danger.Descricao = txtDescricaoPerigo.Text;
             danger.Inalacao = txtInalacao.Text;
             danger.Ingestao = txtIngestao.Text;
             danger.Incendio.Id = combateIncendio.Id;
@@ -414,7 +426,7 @@ namespace MSDSHelper.UI
 
         private void btnOk_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void gridSearch_SelectionChanged(object sender, EventArgs e)
@@ -424,8 +436,8 @@ namespace MSDSHelper.UI
 
         private void SearchForm_LocationChanged(object sender, EventArgs e)
         {
-            if (this.Location != _desiredLocation)
-                this.Location = _desiredLocation;
+            if (Location != _desiredLocation)
+                Location = _desiredLocation;
         }
 
         private void txtCod1_KeyPress(object sender, KeyPressEventArgs e)

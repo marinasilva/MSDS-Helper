@@ -27,13 +27,13 @@ namespace MSDSHelper.UI
             lblType.Visible = false;
             Type = type;
             lblType.Text = type;
-            this.FormBorderStyle = FormBorderStyle.FixedSingle;
-            _desiredLocation = this.Location;
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            _desiredLocation = Location;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void btnAcessar_Click(object sender, EventArgs e)
@@ -81,8 +81,8 @@ namespace MSDSHelper.UI
 
         private void LoginForm_LocationChanged(object sender, EventArgs e)
         {
-            if (this.Location != _desiredLocation)
-                this.Location = _desiredLocation;
+            if (Location != _desiredLocation)
+                Location = _desiredLocation;
         }
 
         private void txtPass_KeyDown(object sender, KeyEventArgs e)

@@ -15,6 +15,10 @@ namespace MSDSHelper.Model
         private string _ingestao;
         private CombateIncendio _combateIncendio;
 
+        public Danger()
+        {
+            _combateIncendio = new CombateIncendio();
+        }
         public int Id
         {
             get { return _id; }

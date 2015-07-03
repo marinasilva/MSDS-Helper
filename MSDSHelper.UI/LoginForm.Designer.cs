@@ -62,7 +62,7 @@
             // 
             this.txtLogin.Location = new System.Drawing.Point(98, 31);
             this.txtLogin.Name = "txtLogin";
-            this.txtLogin.Size = new System.Drawing.Size(100, 20);
+            this.txtLogin.Size = new System.Drawing.Size(142, 20);
             this.txtLogin.TabIndex = 3;
             // 
             // txtPass
@@ -70,12 +70,13 @@
             this.txtPass.Location = new System.Drawing.Point(98, 59);
             this.txtPass.Name = "txtPass";
             this.txtPass.PasswordChar = '*';
-            this.txtPass.Size = new System.Drawing.Size(100, 20);
+            this.txtPass.Size = new System.Drawing.Size(142, 20);
             this.txtPass.TabIndex = 4;
             this.txtPass.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtPass_KeyDown);
             // 
             // btnAcessar
             // 
+            this.btnAcessar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAcessar.Location = new System.Drawing.Point(84, 89);
             this.btnAcessar.Name = "btnAcessar";
             this.btnAcessar.Size = new System.Drawing.Size(75, 23);
@@ -86,6 +87,7 @@
             // 
             // btnCancel
             // 
+            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.Location = new System.Drawing.Point(165, 89);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);

@@ -45,7 +45,7 @@ namespace MSDSHelper.UI
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void btnClean_Click(object sender, EventArgs e)

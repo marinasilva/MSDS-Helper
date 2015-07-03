@@ -51,7 +51,7 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.label9 = new System.Windows.Forms.Label();
             this.txtDescricao = new System.Windows.Forms.TextBox();
-            this.txtIDPerigo = new System.Windows.Forms.TextBox();
+            this.txtDescricaoPerigo = new System.Windows.Forms.TextBox();
             this.cmbUnidade = new System.Windows.Forms.ComboBox();
             this.txtFabricante = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
@@ -208,6 +208,7 @@
             this.FormulaMolecular});
             this.gridSearch.Location = new System.Drawing.Point(6, 19);
             this.gridSearch.Name = "gridSearch";
+            this.gridSearch.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.gridSearch.Size = new System.Drawing.Size(425, 175);
             this.gridSearch.TabIndex = 18;
             this.gridSearch.SelectionChanged += new System.EventHandler(this.gridSearch_SelectionChanged);
@@ -278,7 +279,7 @@
             // 
             this.groupBox3.Controls.Add(this.label9);
             this.groupBox3.Controls.Add(this.txtDescricao);
-            this.groupBox3.Controls.Add(this.txtIDPerigo);
+            this.groupBox3.Controls.Add(this.txtDescricaoPerigo);
             this.groupBox3.Controls.Add(this.cmbUnidade);
             this.groupBox3.Controls.Add(this.txtFabricante);
             this.groupBox3.Controls.Add(this.label8);
@@ -316,13 +317,13 @@
             this.txtDescricao.Size = new System.Drawing.Size(217, 66);
             this.txtDescricao.TabIndex = 13;
             // 
-            // txtIDPerigo
+            // txtDescricaoPerigo
             // 
-            this.txtIDPerigo.Location = new System.Drawing.Point(670, 45);
-            this.txtIDPerigo.Multiline = true;
-            this.txtIDPerigo.Name = "txtIDPerigo";
-            this.txtIDPerigo.Size = new System.Drawing.Size(217, 68);
-            this.txtIDPerigo.TabIndex = 16;
+            this.txtDescricaoPerigo.Location = new System.Drawing.Point(670, 45);
+            this.txtDescricaoPerigo.Multiline = true;
+            this.txtDescricaoPerigo.Name = "txtDescricaoPerigo";
+            this.txtDescricaoPerigo.Size = new System.Drawing.Size(217, 68);
+            this.txtDescricaoPerigo.TabIndex = 16;
             // 
             // cmbUnidade
             // 
@@ -716,6 +717,6 @@
         private System.Windows.Forms.Label lblPerigo;
         private System.Windows.Forms.Button btnCadastrar;
         private System.Windows.Forms.Button btnUpdate;
-        private System.Windows.Forms.TextBox txtIDPerigo;
+        private System.Windows.Forms.TextBox txtDescricaoPerigo;
     }
 }
