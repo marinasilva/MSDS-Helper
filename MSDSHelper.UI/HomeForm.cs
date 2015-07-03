@@ -8,7 +8,7 @@ namespace MSDSHelper.UI
     {
         LoginForm _login;
         private readonly UnitService _unitService;
-        private const string AppName = "MSDS Helper";
+        private const string APP_NAME = "MSDS Helper";
         public HomeForm()
         {
             InitializeComponent();
@@ -36,7 +36,7 @@ namespace MSDSHelper.UI
             if (_unitService.SelectAll().Count <= 0)
             {
                 var result = MessageBox.Show(@"Por favor, tenha pelo menos uma unidade cadastrada no sitema. Deseja cadastrar uma agora?", 
-                    AppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    APP_NAME, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (result == DialogResult.Yes)
                 {
                     _login = new LoginForm("createUnit");

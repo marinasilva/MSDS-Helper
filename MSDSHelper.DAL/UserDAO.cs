@@ -7,21 +7,21 @@ namespace MSDSHelper.DAL
 {
     public class UserDao : IDao<User>
     {
-        private const string _adicionar = @"INSERT INTO TbUser ([Nome],[Login],[Password])  VALUES  (@Nome, @Login, @Password)";
-        private const string _delete = @"DELETE FROM TbUser WHERE ID = @idUser";
-        private const string _update = @"UPDATE TbUser  SET [Nome] = @Nome, [Login] = @Login, [Password] = @Password WHERE idUser = @idUser";
-        private const string _selectByID = @"SELECT * FROM TbUser WHERE IDUSER = @idUser";
-        private const string _validePass = @"SELECT PASSWORD FROM TBUSER WHERE LOGIN = @login";
-        private const string _selectByName = @"SELECT * FROM TbUser WHERE NOME LIKE @Nome";
-        private const string _selectByLogin = @"SELECT * FROM TbUser WHERE LOGIN LIKE @Login";
-        private const string _selectLast = @"SELECT TOP 1 * FROM TbUser ORDER BY idUser";
-        private const string _selectIdentCurrent = @"SELECT IDENT_CURRENT('TbUser') + IDENT_INCR('TbUser') AS ID";
-        private const string _selectAll = "SELECT * FROM TbUser";
+        private const string ADICIONAR = @"INSERT INTO TbUser ([Nome],[Login],[Password])  VALUES  (@Nome, @Login, @Password)";
+        private const string DELETE = @"DELETE FROM TbUser WHERE ID = @idUser";
+        private const string UPDATE = @"UPDATE TbUser  SET [Nome] = @Nome, [Login] = @Login, [Password] = @Password WHERE idUser = @idUser";
+        private const string SELECT_BY_ID = @"SELECT * FROM TbUser WHERE IDUSER = @idUser";
+        private const string VALIDE_PASS = @"SELECT PASSWORD FROM TBUSER WHERE LOGIN = @login";
+        private const string SELECT_BY_NAME = @"SELECT * FROM TbUser WHERE NOME LIKE @Nome";
+        private const string SELECT_BY_LOGIN = @"SELECT * FROM TbUser WHERE LOGIN LIKE @Login";
+        private const string SELECT_LAST = @"SELECT TOP 1 * FROM TbUser ORDER BY idUser";
+        private const string SELECT_IDENT_CURRENT = @"SELECT IDENT_CURRENT('TbUser') + IDENT_INCR('TbUser') AS ID";
+        private const string SELECT_ALL = "SELECT * FROM TbUser";
 
         public void Adicionar(User user)
         {
             SqlConnection connection = ContextFactory.Instancia();
-            using (SqlCommand command = new SqlCommand(_adicionar, connection))
+            using (SqlCommand command = new SqlCommand(ADICIONAR, connection))
             {
                 command.Parameters.AddWithValue("@Nome", user.Nome);
                 command.Parameters.AddWithValue("@Login", user.Login);
@@ -33,7 +33,7 @@ namespace MSDSHelper.DAL
         public void Delete(int id)
         {
             SqlConnection connection = ContextFactory.Instancia();
-            using (SqlCommand command = new SqlCommand(_delete, connection))
+            using (SqlCommand command = new SqlCommand(DELETE, connection))
             {
                 command.Parameters.AddWithValue("@idUser", id);
                 command.ExecuteScalar();
@@ -43,7 +43,7 @@ namespace MSDSHelper.DAL
         public void Update(User danger)
         {
             SqlConnection connection = ContextFactory.Instancia();
-            using (SqlCommand command = new SqlCommand(_update, connection))
+            using (SqlCommand command = new SqlCommand(UPDATE, connection))
             {
                 command.Parameters.AddWithValue("@Nome", danger.Nome);
                 command.Parameters.AddWithValue("@Login", danger.Login);
@@ -57,7 +57,7 @@ namespace MSDSHelper.DAL
         {
             SqlConnection connection = ContextFactory.Instancia();
             User user;
-            using (SqlCommand command = new SqlCommand(_selectByID, connection))
+            using (SqlCommand command = new SqlCommand(SELECT_BY_ID, connection))
             {
                 command.Parameters.AddWithValue("@idUser", id);
                 using (SqlDataReader reader = command.ExecuteReader())
@@ -83,7 +83,7 @@ namespace MSDSHelper.DAL
         {
             SqlConnection connection = ContextFactory.Instancia();
             string password;//new string();
-            using (SqlCommand command = new SqlCommand(_validePass, connection))
+            using (SqlCommand command = new SqlCommand(VALIDE_PASS, connection))
             {
                 command.Parameters.AddWithValue("@login", login);
                 using (SqlDataReader reader = command.ExecuteReader())
@@ -101,7 +101,7 @@ namespace MSDSHelper.DAL
         {
             SqlConnection connection = ContextFactory.Instancia();
             List<User> userList;
-            using (SqlCommand command = new SqlCommand(_selectByName, connection))
+            using (SqlCommand command = new SqlCommand(SELECT_BY_NAME, connection))
             {
                 command.Parameters.AddWithValue("@Nome", "%" + name + "%");
                 using (SqlDataReader reader = command.ExecuteReader())
@@ -128,7 +128,7 @@ namespace MSDSHelper.DAL
         {
             SqlConnection connection = ContextFactory.Instancia();
             List<User> userList;
-            using (SqlCommand command = new SqlCommand(_selectByLogin, connection))
+            using (SqlCommand command = new SqlCommand(SELECT_BY_LOGIN, connection))
             {
                 command.Parameters.AddWithValue("@Login", "%" + login + "%");
                 using (SqlDataReader reader = command.ExecuteReader())
@@ -154,7 +154,7 @@ namespace MSDSHelper.DAL
         public User SelectLast()
         {
             SqlConnection connection = ContextFactory.Instancia();
-            using (SqlCommand command = new SqlCommand(_selectLast, connection))
+            using (SqlCommand command = new SqlCommand(SELECT_LAST, connection))
             {
                 User user;
                 using (var reader = command.ExecuteReader())
@@ -179,7 +179,7 @@ namespace MSDSHelper.DAL
         public int SelectIdentCurrent()
         {
             SqlConnection connection = ContextFactory.Instancia();
-            using (SqlCommand command = new SqlCommand(_selectIdentCurrent, connection))
+            using (SqlCommand command = new SqlCommand(SELECT_IDENT_CURRENT, connection))
             {
                 int nextID = 0;
                 using (SqlDataReader reader = command.ExecuteReader())
@@ -195,7 +195,7 @@ namespace MSDSHelper.DAL
         {
             SqlConnection connection = ContextFactory.Instancia();
             List<User> userList;
-            using (SqlCommand command = new SqlCommand(_selectAll, connection))
+            using (SqlCommand command = new SqlCommand(SELECT_ALL, connection))
             {
                 using (SqlDataReader reader = command.ExecuteReader())
                 {

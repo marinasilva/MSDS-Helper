@@ -17,7 +17,7 @@ namespace MSDSHelper.UI
         readonly ElementService _elementBLL = new ElementService();
         readonly DangerService _dangerBLL = new DangerService();
         private readonly Point _desiredLocation;
-        private const string AppName = "MSDS Helper";
+        private const string APP_NAME = "MSDS Helper";
         public SearchForm(string type)
         {
             InitializeComponent();
@@ -175,11 +175,11 @@ namespace MSDSHelper.UI
                     if (elementList.Count > 0)
                         LoadGrid(elementList);
                     else
-                        MessageBox.Show(@"Não foi encontrado nenhum registro com os critérios informados!",AppName,MessageBoxButtons.OK,MessageBoxIcon.Information);
+                        MessageBox.Show(@"Não foi encontrado nenhum registro com os critérios informados!",APP_NAME,MessageBoxButtons.OK,MessageBoxIcon.Information);
                 }
             }
             else
-                MessageBox.Show(@"Favor inserir algum critério de pesquisa!",AppName,MessageBoxButtons.OK,MessageBoxIcon.Information);
+                MessageBox.Show(@"Favor inserir algum critério de pesquisa!",APP_NAME,MessageBoxButtons.OK,MessageBoxIcon.Information);
         }
 
         private void LoadGrid(List<Element> elementList)

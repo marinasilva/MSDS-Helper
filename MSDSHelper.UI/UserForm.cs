@@ -61,7 +61,7 @@ namespace MSDSHelper.UI
             List<string> valide = ValidateData();
             if (valide.Count > 0)
             {
-                UserService _userBLL = new UserService();
+                UserService userBLL = new UserService();
                 List<User> userList = new List<User>();
 
                 foreach (string item in valide)
@@ -70,19 +70,19 @@ namespace MSDSHelper.UI
                     if (item.Contains("Nome"))
                     {
                         search = item.Replace("Nome ", "");
-                        userList = _userBLL.SelectByName(search);
+                        userList = userBLL.SelectByName(search);
                         goto x;
                     }
                     if (item.Contains("Cod "))
                     {
                         search = item.Replace("Cod ", "");
-                        userList.Add(_userBLL.SelectByID(Convert.ToInt32(search)));
+                        userList.Add(userBLL.SelectByID(Convert.ToInt32(search)));
                         goto x;
                     }
                     if (item.Contains("Login "))
                     {
                         search = item.Replace("Login ", "");
-                        userList = _userBLL.SelectByLogin(search);
+                        userList = userBLL.SelectByLogin(search);
                     }
                 x:
                     if (userList.Count > 0)
@@ -125,8 +125,8 @@ namespace MSDSHelper.UI
             if (gridUsers.SelectedRows.Count == 1)
             {
                 DataGridViewRow row = gridUsers.SelectedRows[0];
-                UserService _userBLL = new UserService();
-                LoadComponents("update", _userBLL.SelectByID(Convert.ToInt32(row.Cells["Cod"].Value)));
+                UserService userBLL = new UserService();
+                LoadComponents("update", userBLL.SelectByID(Convert.ToInt32(row.Cells["Cod"].Value)));
                 groupBox2.Enabled = true;
                 btnUpdate.Enabled = true;
             }

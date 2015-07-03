@@ -9,18 +9,18 @@ namespace MSDSHelper.DAL
 {
     public class DangerDao : IDao<Danger>
     {
-        private const string _adicionar = @"INSERT  INTO Danger ([Inalacao],[ContatoOlhos],[ContatoPele],[Ingestao],[Descricao])
+        private const string ADICIONAR = @"INSERT  INTO Danger ([Inalacao],[ContatoOlhos],[ContatoPele],[Ingestao],[Descricao])
                                                     VALUES      (@inalacao, @olhos, @pele, @ingestao, @descricao)";
-        private const string _selectLast = @"SELECT TOP 1 FROM DANGER ORDER BY IDDANGER";
-        private const string _update = @"UPDATE Danger SET [Inalacao] = @inalacao, [ContatoOlhos] = @olhos, [ContatoPele] = @pele, [Ingestao] = @ingestao, [Descricao] = @descricao
+        private const string SELECT_LAST = @"SELECT TOP 1 FROM DANGER ORDER BY IDDANGER";
+        private const string UPDATE = @"UPDATE Danger SET [Inalacao] = @inalacao, [ContatoOlhos] = @olhos, [ContatoPele] = @pele, [Ingestao] = @ingestao, [Descricao] = @descricao
                                          WHERE idDanger = @idDanger";
-        private const string _selectByID = @"SELECT * FROM DANGER WHERE IDDANGER = @idDanger";
-        private const string _delete = @"DELETE FROM DANGER WHERE IDDANGER = @idDanger";
+        private const string SELECT_BY_ID = @"SELECT * FROM DANGER WHERE IDDANGER = @idDanger";
+        private const string DELETE = @"DELETE FROM DANGER WHERE IDDANGER = @idDanger";
 
         public void Adicionar(Danger danger)
         {
             SqlConnection connection = ContextFactory.Instancia();
-            using (SqlCommand command = new SqlCommand(_adicionar, connection))
+            using (SqlCommand command = new SqlCommand(ADICIONAR, connection))
             {
                 command.Parameters.AddWithValue("@inalacao", danger.Inalacao);
                 command.Parameters.AddWithValue("@olhos", danger.ContatoOlhos);
@@ -35,7 +35,7 @@ namespace MSDSHelper.DAL
         {
             SqlConnection connection = ContextFactory.Instancia();
             Danger danger;
-            using (SqlCommand command = new SqlCommand(_selectLast, connection))
+            using (SqlCommand command = new SqlCommand(SELECT_LAST, connection))
             {
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
@@ -62,7 +62,7 @@ namespace MSDSHelper.DAL
         public void Delete(int id)
         {
             SqlConnection connection = ContextFactory.Instancia();
-            using (SqlCommand command = new SqlCommand(_delete, connection))
+            using (SqlCommand command = new SqlCommand(DELETE, connection))
             {
                 command.Parameters.AddWithValue("@idDanger", id);
                 command.ExecuteNonQuery();
@@ -72,7 +72,7 @@ namespace MSDSHelper.DAL
         public void Update(Danger danger)
         {
             SqlConnection connection = ContextFactory.Instancia();
-            using (SqlCommand command = new SqlCommand(_update, connection))
+            using (SqlCommand command = new SqlCommand(UPDATE, connection))
             {
                 command.Parameters.AddWithValue("@idDanger", danger.Id);
                 command.Parameters.AddWithValue("@inalacao", danger.Inalacao);
@@ -88,7 +88,7 @@ namespace MSDSHelper.DAL
         {
             SqlConnection connection = ContextFactory.Instancia();
             Danger danger;
-            using (SqlCommand command = new SqlCommand(_selectByID, connection))
+            using (SqlCommand command = new SqlCommand(SELECT_BY_ID, connection))
             {
                 command.Parameters.AddWithValue("@idDanger", id);
                 using (SqlDataReader reader = command.ExecuteReader())

@@ -19,14 +19,14 @@ namespace MSDSHelper.UI
         public bool IsLoadToUserPanel { get; set; }
 
         private readonly Point _desiredLocation;
-        private const string AppName = "MSDS Helper";
+        private const string APP_NAME = "MSDS Helper";
 
-        public LoginForm(string _type)
+        public LoginForm(string type)
         {
             InitializeComponent();
             lblType.Visible = false;
-            Type = _type;
-            lblType.Text = _type;
+            Type = type;
+            lblType.Text = type;
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             _desiredLocation = this.Location;
         }
@@ -44,13 +44,13 @@ namespace MSDSHelper.UI
                 {
                     lblLogin.Text = "*";
                     lblLogin.Visible = true;
-                    MessageBox.Show("Favor informar o login!", AppName, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Favor informar o login!", APP_NAME, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else if (txtPass.Text == string.Empty)
                 {
                     lblPass.Text = "*";
                     lblPass.Visible = true;
-                    MessageBox.Show("Favor informar a senha!", AppName, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Favor informar a senha!", APP_NAME, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             else
@@ -74,7 +74,7 @@ namespace MSDSHelper.UI
                     //}
                 }
                 else
-                    MessageBox.Show("Erro ao efeturar login. Verifique sua senha ou entre em contato com o administrador", AppName, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Erro ao efeturar login. Verifique sua senha ou entre em contato com o administrador", APP_NAME, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
         }

@@ -157,7 +157,7 @@ namespace MSDSHelper.UI
             //validar todos os campos para cadastrar
             if (ValidateItems().Count > 0)
             {
-                Element _element = PopulateElement();
+                Element element = PopulateElement();
                 Danger danger = PopulateDanger();
                 CombateIncendio combateIncendio = PopulateCombateIncendio();
 
@@ -170,8 +170,8 @@ namespace MSDSHelper.UI
                     combateIncendioBLL.Adicionar(combateIncendio);
                     danger.Incendio = combateIncendioBLL.SelectLast();
                     dangerBLL.Adicionar(danger);
-                    _element.Danger = dangerBLL.SelectLast();
-                    elementBLL.Adicionar(_element);
+                    element.Danger = dangerBLL.SelectLast();
+                    elementBLL.Adicionar(element);
                 }
                 catch (Exception ex)
                 {
@@ -216,7 +216,7 @@ namespace MSDSHelper.UI
         {
             if (ValidateItems().Count == 0)
             {
-                Element _element = PopulateElement();
+                Element element = PopulateElement();
                 Danger danger = PopulateDanger();
                 CombateIncendio combateIncendio = PopulateCombateIncendio();
 
@@ -228,7 +228,7 @@ namespace MSDSHelper.UI
                 {
                     combateIncendioBLL.Update(combateIncendio);
                     dangerBLL.Update(danger);
-                    elementBLL.Update(_element);
+                    elementBLL.Update(element);
                 }
                 catch (Exception ex)
                 {
@@ -239,17 +239,17 @@ namespace MSDSHelper.UI
 
         private Element PopulateElement()
         {
-            Element _element = new Element();
+            Element element = new Element();
 
-            _element.Id = Convert.ToInt32(txtCod.Text);
-            _element.NomeProduto = txtNomeProduto.Text;
-            _element.FormulaMolecular = txtFormulaMolecular.Text;
-            _element.Fabricante = txtFabricante.Text;
-            _element.Descricao = txtDescricao.Text;
-            _element.PesoMolecular = Convert.ToInt32(txtPeso.Text);
-            _element.Unidade = cmbUnidade.SelectedItem.ToString();
+            element.Id = Convert.ToInt32(txtCod.Text);
+            element.NomeProduto = txtNomeProduto.Text;
+            element.FormulaMolecular = txtFormulaMolecular.Text;
+            element.Fabricante = txtFabricante.Text;
+            element.Descricao = txtDescricao.Text;
+            element.PesoMolecular = Convert.ToInt32(txtPeso.Text);
+            element.Unidade = cmbUnidade.SelectedItem.ToString();
 
-            return _element;
+            return element;
         }
 
         private Danger PopulateDanger()

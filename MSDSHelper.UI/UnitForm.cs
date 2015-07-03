@@ -10,7 +10,7 @@ namespace MSDSHelper.UI
     {
         private Unit _unit = null;
         private UnitService _unitBLL = null;
-        private const string AppName = "MSDS Helper";
+        private const string APP_NAME = "MSDS Helper";
         public UnitForm()
         {
             InitializeComponent();
@@ -51,13 +51,13 @@ namespace MSDSHelper.UI
                         _unit.Unidade = txtUnit.Text;
                         _unit.Sigla = txtSigla.Text;
                         _unitBLL.Update(_unit);
-                        MessageBox.Show(@"Unidade atualizada com sucesso!", AppName, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show(@"Unidade atualizada com sucesso!", APP_NAME, MessageBoxButtons.OK, MessageBoxIcon.Information);
                         ClearFields();
                         LoadUnit();
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show(@"Falha ao atualizar a unidade: " + ex.Message, AppName, MessageBoxButtons.OK, MessageBoxIcon.Information); ;
+                        MessageBox.Show(@"Falha ao atualizar a unidade: " + ex.Message, APP_NAME, MessageBoxButtons.OK, MessageBoxIcon.Information); ;
                         //O correto é não mostrar o detalhe do erro e criar um log pra conter os detalhes da exception.
                     }
                 }
@@ -65,18 +65,18 @@ namespace MSDSHelper.UI
                     try
                     {
                         _unitBLL.Adicionar(_unit);
-                        MessageBox.Show("Unidade adicionada com sucesso!", AppName, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Unidade adicionada com sucesso!", APP_NAME, MessageBoxButtons.OK, MessageBoxIcon.Information);
                         LoadUnit();
                         ClearFields();
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("Falha ao adicionar unidade: " + ex.Message, AppName, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Falha ao adicionar unidade: " + ex.Message, APP_NAME, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
             }
             else
             {
-                MessageBox.Show("Favor preencher os campos para cadastrar uma nova unidade!", AppName, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Favor preencher os campos para cadastrar uma nova unidade!", APP_NAME, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 

@@ -7,17 +7,17 @@ namespace MSDSHelper.DAL
 {
     public class UnitDao : IDao<Unit>
     {
-        private const string _adicionar = @"INSERT INTO Unit ([Unidade],[Sigla])   VALUES (@unidade,@sigla)";
-        private const string _delete = @"DELETE FROM UNIT WHERE IDUNIDADE = @idUnidade";
-        private const string _update = @"UPDATE Unit SET [Unidade] = @unidade, [Sigla] = @sigla WHERE idUnidade = @idUnidade";
-        private const string _selectByID = @"SELECT * FROM UNIT WHERE IDUNIDADE = @idUnidade";
-        private const string _selectAll = @"SELECT * FROM UNIT";
-        private const string _selectByName = @"SELECT * FROM UNIT WHERE UNIDADE = @Unidade";
+        private const string ADICIONAR = @"INSERT INTO Unit ([Unidade],[Sigla])   VALUES (@unidade,@sigla)";
+        private const string DELETE = @"DELETE FROM UNIT WHERE IDUNIDADE = @idUnidade";
+        private const string UPDATE = @"UPDATE Unit SET [Unidade] = @unidade, [Sigla] = @sigla WHERE idUnidade = @idUnidade";
+        private const string SELECT_BY_ID = @"SELECT * FROM UNIT WHERE IDUNIDADE = @idUnidade";
+        private const string SELECT_ALL = @"SELECT * FROM UNIT";
+        private const string SELECT_BY_NAME = @"SELECT * FROM UNIT WHERE UNIDADE = @Unidade";
 
         public void Adicionar(Unit unit)
         {
             SqlConnection connection = ContextFactory.Instancia();
-            using (SqlCommand command = new SqlCommand(_adicionar, connection))
+            using (SqlCommand command = new SqlCommand(ADICIONAR, connection))
             {
                 command.Parameters.AddWithValue("@unidade", unit.Unidade);
                 command.Parameters.AddWithValue("@sigla", unit.Sigla);
@@ -28,7 +28,7 @@ namespace MSDSHelper.DAL
         public void Delete(int id)
         {
             SqlConnection connection = ContextFactory.Instancia();
-            using (SqlCommand command = new SqlCommand(_delete, connection))
+            using (SqlCommand command = new SqlCommand(DELETE, connection))
             {
                 command.Parameters.AddWithValue("idUnidade", id);
                 command.ExecuteNonQuery();
@@ -38,7 +38,7 @@ namespace MSDSHelper.DAL
         public void Update(Unit danger)
         {
             SqlConnection connection = ContextFactory.Instancia();
-            using (SqlCommand command = new SqlCommand(_update, connection))
+            using (SqlCommand command = new SqlCommand(UPDATE, connection))
             {
                 command.Parameters.AddWithValue("@unidade", danger.Unidade);
                 command.Parameters.AddWithValue("@sigla", danger.Sigla);
@@ -51,7 +51,7 @@ namespace MSDSHelper.DAL
         {
             SqlConnection connection = ContextFactory.Instancia();
             Unit unit;
-            using (SqlCommand command = new SqlCommand(_selectByID, connection))
+            using (SqlCommand command = new SqlCommand(SELECT_BY_ID, connection))
             {
                 command.Parameters.AddWithValue("@idUnidade", id);
                 using (SqlDataReader reader = command.ExecuteReader())
@@ -76,7 +76,7 @@ namespace MSDSHelper.DAL
         {
             SqlConnection connection = ContextFactory.Instancia();
             List<Unit> unitList;
-            using (SqlCommand command = new SqlCommand(_selectAll, connection))
+            using (SqlCommand command = new SqlCommand(SELECT_ALL, connection))
             {
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
@@ -102,7 +102,7 @@ namespace MSDSHelper.DAL
         {
             SqlConnection connection = ContextFactory.Instancia();
             Unit _unit = null;
-            using (SqlCommand command = new SqlCommand(_selectByName, connection))
+            using (SqlCommand command = new SqlCommand(SELECT_BY_NAME, connection))
             {
                 command.Parameters.AddWithValue("@Unidade", unit);
                 using (SqlDataReader reader = command.ExecuteReader())

@@ -10,25 +10,25 @@ namespace MSDSHelper.DAL
     public class ElementDao : IDao<Element>
     {
 
-        private const string _adicionar = @"INSERT  INTO Element ([NomeProduto],[FormulaMolecular],[PesoMolecular],[Unidade],[Fabricante],[Descricao])
+        private const string ADICIONAR = @"INSERT  INTO Element ([NomeProduto],[FormulaMolecular],[PesoMolecular],[Unidade],[Fabricante],[Descricao])
                                                     VALUES
                                                                  (@nomeProduto,@formulaMolecular,@pesoMolecular,@unidade,@fabricante,@descricao)";
-        private const string _delete = @"DELETE FROM ELEMENT WHERE IDELEMENT = @idElement";
-        private const string _update = @"UPDATE Element SET [NomeProduto] = @nomeProduto, [FormulaMolecular] = @formulaMolecular, [PesoMolecular] = @pesoMolecular,
+        private const string DELETE = @"DELETE FROM ELEMENT WHERE IDELEMENT = @idElement";
+        private const string UPDATE = @"UPDATE Element SET [NomeProduto] = @nomeProduto, [FormulaMolecular] = @formulaMolecular, [PesoMolecular] = @pesoMolecular,
                                                             [Unidade] = @unidade, [Fabricante] = @fabricante, [Descricao] = @descricao
                                          WHERE idElement = @idElement";
-        private const string _selectByID = @"SELECT * FROM ELEMENT WHERE IDELEMENT = @idElement";
-        private const string _selectByName = @"SELECT * FROM ELEMENT WHERE NOMEPRODUTO LIKE '%@nomeProduto%'";
-        private const string _selectByFormula = @"SELECT * FROM ELEMENT WHERE FORMULAMOLECULAR LIKE '%@formulaMolecular%'";
-        private const string _selectLast = @"SELECT TOP 1 FROM ELEMENT ORDER BY IDELEMENT";
-        private const string _selectByFabricante = @"SELECT * FROM ELEMENT WHERE FABRICANTE LIKE '%@fabricante%'";
-        private const string _selectCount = @"SELECT COUNT(IDELEMENT) FROM ELEMENT";
+        private const string SELECT_BY_ID = @"SELECT * FROM ELEMENT WHERE IDELEMENT = @idElement";
+        private const string SELECT_BY_NAME = @"SELECT * FROM ELEMENT WHERE NOMEPRODUTO LIKE '%@nomeProduto%'";
+        private const string SELECT_BY_FORMULA = @"SELECT * FROM ELEMENT WHERE FORMULAMOLECULAR LIKE '%@formulaMolecular%'";
+        private const string SELECT_LAST = @"SELECT TOP 1 FROM ELEMENT ORDER BY IDELEMENT";
+        private const string SELECT_BY_FABRICANTE = @"SELECT * FROM ELEMENT WHERE FABRICANTE LIKE '%@fabricante%'";
+        private const string SELECT_COUNT = @"SELECT COUNT(IDELEMENT) FROM ELEMENT";
         
 
         public void Adicionar(Element element)
         {
             SqlConnection connection = ContextFactory.Instancia();
-            using (SqlCommand command = new SqlCommand(_adicionar, connection))
+            using (SqlCommand command = new SqlCommand(ADICIONAR, connection))
             {
                 command.Parameters.AddWithValue("@nomeProduto", element.NomeProduto);
                 command.Parameters.AddWithValue("@formulaMolecular", element.FormulaMolecular);
@@ -43,7 +43,7 @@ namespace MSDSHelper.DAL
         public void Delete(int id)
         {
             SqlConnection connection = ContextFactory.Instancia();
-            using (SqlCommand command = new SqlCommand(_delete, connection))
+            using (SqlCommand command = new SqlCommand(DELETE, connection))
             {
                 command.Parameters.AddWithValue("@idElement", id);
                 command.ExecuteScalar();
@@ -53,7 +53,7 @@ namespace MSDSHelper.DAL
         public void Update(Element danger)
         {
             SqlConnection connection = ContextFactory.Instancia();
-            SqlCommand command = new SqlCommand(_update, connection);
+            SqlCommand command = new SqlCommand(UPDATE, connection);
 
         }
 
@@ -61,7 +61,7 @@ namespace MSDSHelper.DAL
         {
             SqlConnection connection = ContextFactory.Instancia();
             Element element;
-            using (SqlCommand command = new SqlCommand(_selectByID, connection))
+            using (SqlCommand command = new SqlCommand(SELECT_BY_ID, connection))
             {
                 command.Parameters.AddWithValue("@idElement", id);
                 using (SqlDataReader reader = command.ExecuteReader())
@@ -101,7 +101,7 @@ namespace MSDSHelper.DAL
         {
             SqlConnection connection = ContextFactory.Instancia();
             List<Element> elementList;
-            using (SqlCommand command = new SqlCommand(_selectByName, connection))
+            using (SqlCommand command = new SqlCommand(SELECT_BY_NAME, connection))
             {
                 command.Parameters.AddWithValue("@nomeProduto", name);
                 using (SqlDataReader reader = command.ExecuteReader())
@@ -137,7 +137,7 @@ namespace MSDSHelper.DAL
         {
             SqlConnection connection = ContextFactory.Instancia();
             List<Element> elementList;
-            using (SqlCommand command = new SqlCommand(_selectByFormula, connection))
+            using (SqlCommand command = new SqlCommand(SELECT_BY_FORMULA, connection))
             {
                 command.Parameters.AddWithValue("@formulaMolecular", formula);
                 using (SqlDataReader reader = command.ExecuteReader())
@@ -175,7 +175,7 @@ namespace MSDSHelper.DAL
         {
             SqlConnection connection = ContextFactory.Instancia();
             Element element;
-            using (SqlCommand command = new SqlCommand(_selectLast, connection))
+            using (SqlCommand command = new SqlCommand(SELECT_LAST, connection))
             {
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
@@ -213,7 +213,7 @@ namespace MSDSHelper.DAL
         {
             SqlConnection connection = ContextFactory.Instancia();
             List<Element> elementList;
-            using (SqlCommand command = new SqlCommand(_selectByFabricante, connection))
+            using (SqlCommand command = new SqlCommand(SELECT_BY_FABRICANTE, connection))
             {
                 command.Parameters.AddWithValue("@fabricante", fabricante);
                 using (SqlDataReader reader = command.ExecuteReader())
@@ -255,7 +255,7 @@ namespace MSDSHelper.DAL
         public int SelectCount()
         {
             SqlConnection connection = ContextFactory.Instancia();
-            using (SqlCommand command = new SqlCommand(_selectCount, connection))
+            using (SqlCommand command = new SqlCommand(SELECT_COUNT, connection))
             {
                 return Convert.ToInt32(command.ExecuteNonQuery());
             }
