@@ -4,10 +4,10 @@ using MSDSHelper.Model;
 
 namespace MSDSHelper.BLL
 {
-    public class UserService 
+    public class UserService
     {
         readonly UserDao _userDao = new UserDao();
-        
+
         public bool ValidatePassword(string login, string password)
         {
             if (_userDao.ValidePass(login) == password)
@@ -22,11 +22,13 @@ namespace MSDSHelper.BLL
 
         public List<User> SelectByName(string name)
         {
+            name = name.Trim();
             return _userDao.SelectByName(name);
         }
 
         public List<User> SelectByLogin(string login)
         {
+            login = login.Trim();
             return _userDao.SelectByLogin(login);
         }
 
@@ -48,6 +50,11 @@ namespace MSDSHelper.BLL
         public void Update(User user)
         {
             _userDao.Update(user);
+        }
+
+        public List<User> SelectAll()
+        {
+            return _userDao.SelectAll();
         }
     }
 }

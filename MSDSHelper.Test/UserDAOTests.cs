@@ -81,9 +81,7 @@ namespace MSDSHelper.DAL.Tests
         [TestMethod()]
         public void SelectLastTest1()
         {
-            UserDAO userDAO = new UserDAO();
-            var selectLast = userDAO.SelectLast();
-            Assert.Fail();
+
         }
 
     }

@@ -19,6 +19,7 @@ namespace MSDSHelper.UI
 
         private void LoadUnit()
         {
+            cmbUnit.Items.Clear();
             _unitBLL = new UnitService();
             List<Unit> unitList = _unitBLL.SelectAll();
             if (unitList.Count == 0) return;
@@ -27,6 +28,7 @@ namespace MSDSHelper.UI
             {
                 cmbUnit.Items.Add(unit.Unidade);
             }
+            cmbUnit.SelectedIndex = 0;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -49,10 +51,9 @@ namespace MSDSHelper.UI
                         _unit.Unidade = txtUnit.Text;
                         _unit.Sigla = txtSigla.Text;
                         _unitBLL.Update(_unit);
-                        MessageBox.Show(@"Unidade atualizada com sucesso!",AppName,MessageBoxButtons.OK,MessageBoxIcon.Information);
-                        txtSigla.Text = String.Empty;
-                        txtUnit.Text = String.Empty;
-                        cmbUnit.SelectedIndex = -1;
+                        MessageBox.Show(@"Unidade atualizada com sucesso!", AppName, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        ClearFields();
+                        LoadUnit();
                     }
                     catch (Exception ex)
                     {
@@ -66,6 +67,7 @@ namespace MSDSHelper.UI
                         _unitBLL.Adicionar(_unit);
                         MessageBox.Show("Unidade adicionada com sucesso!", AppName, MessageBoxButtons.OK, MessageBoxIcon.Information);
                         LoadUnit();
+                        ClearFields();
                     }
                     catch (Exception ex)
                     {
@@ -76,6 +78,13 @@ namespace MSDSHelper.UI
             {
                 MessageBox.Show("Favor preencher os campos para cadastrar uma nova unidade!", AppName, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+        }
+
+        private void ClearFields()
+        {
+            txtSigla.Text = String.Empty;
+            txtUnit.Text = String.Empty;
+            cmbUnit.SelectedIndex = 0;
         }
 
         private Unit ValidateUnit()
@@ -91,6 +100,7 @@ namespace MSDSHelper.UI
 
         private void cmbUnit_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (cmbUnit.SelectedIndex == 0) return;
             string unitName = cmbUnit.SelectedItem.ToString();
             Unit unit = _unitBLL.SelectByName(unitName);
             txtUnit.Text = unit.Unidade;

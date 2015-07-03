@@ -33,9 +33,6 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnOK = new System.Windows.Forms.Button();
             this.gridUsers = new System.Windows.Forms.DataGridView();
-            this.Cod = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Nome = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Login = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnClean = new System.Windows.Forms.Button();
             this.btnSearch = new System.Windows.Forms.Button();
             this.txtlogin = new System.Windows.Forms.TextBox();
@@ -58,6 +55,9 @@
             this.label5 = new System.Windows.Forms.Label();
             this.btnCancel = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
+            this.Cod = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Nome = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Login = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridUsers)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -110,6 +110,7 @@
             // 
             // gridUsers
             // 
+            this.gridUsers.AllowUserToAddRows = false;
             this.gridUsers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gridUsers.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Cod,
@@ -117,26 +118,9 @@
             this.Login});
             this.gridUsers.Location = new System.Drawing.Point(20, 100);
             this.gridUsers.Name = "gridUsers";
-            this.gridUsers.Size = new System.Drawing.Size(355, 150);
+            this.gridUsers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.gridUsers.Size = new System.Drawing.Size(436, 150);
             this.gridUsers.TabIndex = 8;
-            // 
-            // Cod
-            // 
-            this.Cod.HeaderText = "Cód.";
-            this.Cod.Name = "Cod";
-            this.Cod.ReadOnly = true;
-            // 
-            // Nome
-            // 
-            this.Nome.HeaderText = "Nome";
-            this.Nome.Name = "Nome";
-            this.Nome.ReadOnly = true;
-            // 
-            // Login
-            // 
-            this.Login.HeaderText = "Login";
-            this.Login.Name = "Login";
-            this.Login.ReadOnly = true;
             // 
             // btnClean
             // 
@@ -344,6 +328,27 @@
             this.label9.TabIndex = 10;
             this.label9.Text = "Usuários";
             // 
+            // Cod
+            // 
+            this.Cod.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Cod.HeaderText = "Cód.";
+            this.Cod.Name = "Cod";
+            this.Cod.ReadOnly = true;
+            // 
+            // Nome
+            // 
+            this.Nome.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Nome.HeaderText = "Nome";
+            this.Nome.Name = "Nome";
+            this.Nome.ReadOnly = true;
+            // 
+            // Login
+            // 
+            this.Login.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Login.HeaderText = "Login";
+            this.Login.Name = "Login";
+            this.Login.ReadOnly = true;
+            // 
             // UserForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -395,9 +400,9 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label lblmsgm;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cod;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nome;
         private System.Windows.Forms.DataGridViewTextBoxColumn Login;
-        private System.Windows.Forms.Label lblmsgm;
     }
 }

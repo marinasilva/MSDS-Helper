@@ -143,7 +143,7 @@ namespace MSDSHelper.UI
 
         private void LoadUnitCombo()
         {
-            
+
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -153,6 +153,8 @@ namespace MSDSHelper.UI
 
         private void btnCadastrar_Click(object sender, EventArgs e)
         {
+            //mensagem de nao cadastrado
+            //validar todos os campos para cadastrar
             if (ValidateItems().Count > 0)
             {
                 Element _element = PopulateElement();

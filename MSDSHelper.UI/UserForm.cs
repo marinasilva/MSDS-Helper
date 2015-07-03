@@ -11,11 +11,13 @@ namespace MSDSHelper.UI
     {
         readonly User _user = new User();
         readonly UserService _userBLL = new UserService();
+        private const string APP_NAME = "MSDS Helper";
 
         public UserForm(string type)
         {
             InitializeComponent();
             FormatComponents(type);
+            LoadGrid(_userBLL.SelectAll());
         }
 
         private void FormatComponents(string type)
@@ -34,7 +36,7 @@ namespace MSDSHelper.UI
                         groupBox2.Enabled = true;
 
                         _user.Id = _userBLL.SelectIdentCurrent();
-                        
+
                         LoadComponents("create", _user);
                         break;
                     }
@@ -51,6 +53,7 @@ namespace MSDSHelper.UI
             txtCod.Text = string.Empty;
             txtNome.Text = string.Empty;
             txtlogin.Text = string.Empty;
+            LoadGrid(_userBLL.SelectAll());
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
@@ -96,18 +99,12 @@ namespace MSDSHelper.UI
 
         private void LoadGrid(List<User> userList)
         {
-            BindingSource bindingSource = new BindingSource();
-
-            gridUsers.Columns[0].Name = "Cod";
-            gridUsers.Columns[0].DataPropertyName = "Id";
-            gridUsers.Columns[1].Name = "Nome";
-            gridUsers.Columns[1].DataPropertyName = "Nome";
-            gridUsers.Columns[2].Name = "Login";
-            gridUsers.Columns[2].DataPropertyName = "Login";
-
-
-            bindingSource.DataSource = userList;
-            gridUsers.DataSource = bindingSource;
+            gridUsers.Rows.Clear();
+            for (int i = 0; i < userList.Count; i++)
+            {
+                var u = userList[i];
+                gridUsers.Rows.Add(u.Id, u.Nome, u.Login);
+            }
             btnOK.Enabled = true;
         }
 
@@ -172,6 +169,7 @@ namespace MSDSHelper.UI
                         txtsenha2.Enabled = true;
                         btnCreate.Visible = true;
                         btnUpdate.Visible = false;
+                        gridUsers.Enabled = false;
 
                         int cod = user == null ? 0 : user.Id;
                         txtcod2.Text = cod.ToString();
@@ -186,22 +184,27 @@ namespace MSDSHelper.UI
 
         private void btnCreate_Click(object sender, EventArgs e)
         {
-            
+
             if (txtNome2.Text == string.Empty || txtLogin2.Text == String.Empty || txtsenha.Text == String.Empty)
             {
-                MessageBox.Show("Preencha os dados corretamente para adicionar um usuário!");
+                MessageBox.Show("Preencha os dados corretamente para adicionar um usuário!",
+                    APP_NAME, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 return;
             }
-            var user1 = new User {Nome = txtNome2.Text, Login = txtLogin2.Text, Password = txtsenha.Text};
+            var user1 = new User { Nome = txtNome2.Text, Login = txtLogin2.Text, Password = txtsenha.Text };
             var userService = new UserService();
             try
             {
                 userService.Adicionar(user1);
-                MessageBox.Show("Usuário adicionado com sucesso!");
+                MessageBox.Show("Usuário adicionado com sucesso!",
+                    APP_NAME, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                LoadGrid(_userBLL.SelectAll());
+                ClearFields();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Falha ao adicionar usuário: " + ex.Message);
+                MessageBox.Show("Falha ao adicionar usuário: " + ex.Message,
+                    APP_NAME, MessageBoxButtons.YesNo, MessageBoxIcon.Error);
             }
         }
 
@@ -209,10 +212,12 @@ namespace MSDSHelper.UI
         {
             if (txtNome2.Text == string.Empty || txtLogin2.Text == String.Empty || txtsenha.Text == String.Empty)
             {
-                MessageBox.Show("Preencha os dados corretamente para atualizar o usuário!");
+                MessageBox.Show("Preencha os dados corretamente para atualizar o usuário!",
+                    APP_NAME, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 return;
             }
             User user = new User();
+            user.Id = Convert.ToInt32(txtcod2.Text);
             user.Nome = txtNome2.Text;
             user.Login = txtLogin2.Text;
             user.Password = txtsenha.Text;
@@ -220,17 +225,25 @@ namespace MSDSHelper.UI
             try
             {
                 userBLL.Update(user);
-                MessageBox.Show("Usuário atualizado com sucesso!");
-                txtNome2.Text = string.Empty;
-                txtLogin2.Text = string.Empty;
-                txtsenha.Text = string.Empty;
-                txtsenha2.Text = string.Empty;
-                btnUpdate.Enabled = false;
+                MessageBox.Show("Usuário atualizado com sucesso!",
+                    APP_NAME, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                LoadGrid(userBLL.SelectAll());
+                ClearFields();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Falha ao atualizar usuário: " + ex.Message);
+                MessageBox.Show("Falha ao atualizar usuário: " + ex.Message,
+                    APP_NAME, MessageBoxButtons.YesNo, MessageBoxIcon.Error);
             }
+        }
+
+        private void ClearFields()
+        {
+            txtNome2.Text = string.Empty;
+            txtLogin2.Text = string.Empty;
+            txtsenha.Text = string.Empty;
+            txtsenha2.Text = string.Empty;
+            btnUpdate.Enabled = false;
         }
     }
 }

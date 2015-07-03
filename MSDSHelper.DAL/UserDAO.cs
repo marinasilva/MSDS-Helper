@@ -12,10 +12,11 @@ namespace MSDSHelper.DAL
         private const string _update = @"UPDATE TbUser  SET [Nome] = @Nome, [Login] = @Login, [Password] = @Password WHERE idUser = @idUser";
         private const string _selectByID = @"SELECT * FROM TbUser WHERE IDUSER = @idUser";
         private const string _validePass = @"SELECT PASSWORD FROM TBUSER WHERE LOGIN = @login";
-        private const string _selectByName = @"SELECT * FROM TbUser WHERE NOME LIKE '%@Nome%'";
-        private const string _selectByLogin = @"SELECT * FROM TbUser WHERE LOGIN LIKE '%@Login%'";
+        private const string _selectByName = @"SELECT * FROM TbUser WHERE NOME LIKE @Nome";
+        private const string _selectByLogin = @"SELECT * FROM TbUser WHERE LOGIN LIKE @Login";
         private const string _selectLast = @"SELECT TOP 1 * FROM TbUser ORDER BY idUser";
         private const string _selectIdentCurrent = @"SELECT IDENT_CURRENT('TbUser') + IDENT_INCR('TbUser') AS ID";
+        private const string _selectAll = "SELECT * FROM TbUser";
 
         public void Adicionar(User user)
         {
@@ -102,7 +103,7 @@ namespace MSDSHelper.DAL
             List<User> userList;
             using (SqlCommand command = new SqlCommand(_selectByName, connection))
             {
-                command.Parameters.AddWithValue("@Nome", name);
+                command.Parameters.AddWithValue("@Nome", "%" + name + "%");
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
                     userList = new List<User>();
@@ -129,7 +130,7 @@ namespace MSDSHelper.DAL
             List<User> userList;
             using (SqlCommand command = new SqlCommand(_selectByLogin, connection))
             {
-                command.Parameters.AddWithValue("@Login", login);
+                command.Parameters.AddWithValue("@Login", "%" + login + "%");
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
                     userList = new List<User>();
@@ -188,6 +189,32 @@ namespace MSDSHelper.DAL
                 }
                 return nextID;
             }
+        }
+
+        public List<User> SelectAll()
+        {
+            SqlConnection connection = ContextFactory.Instancia();
+            List<User> userList;
+            using (SqlCommand command = new SqlCommand(_selectAll, connection))
+            {
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    userList = new List<User>();
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            User user = new User();
+                            user.Id = Convert.ToInt32(reader["idUser"]);
+                            user.Nome = reader["Nome"] == DBNull.Value ? string.Empty : reader["Nome"].ToString();
+                            user.Login = reader["Login"] == DBNull.Value ? string.Empty : reader["Login"].ToString();
+                            user.Password = reader["Password"] == DBNull.Value ? string.Empty : reader["Password"].ToString();
+                            userList.Add(user);
+                        }
+                    }
+                }
+            }
+            return userList;
         }
     }
 }
